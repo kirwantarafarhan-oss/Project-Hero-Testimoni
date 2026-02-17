@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>H.E.R.O - Highschool Entrepreneur Race OSIS</title>
+    <title>H.E.R.O - Admin Race Center</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -403,596 +403,8 @@
             }
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-header {
-                gap: 0.75rem;
-                margin-bottom: 2rem;
-            }
-        }
-
-        .section-icon {
-            padding: 0.5rem;
-            background-color: #FFB800;
-            color: white;
-            border-radius: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-icon {
-                padding: 0.75rem;
-                border-radius: 0.75rem;
-            }
-        }
-
-        .section-icon i {
-            width: 1rem;
-            height: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-icon i {
-                width: 1.25rem;
-                height: 1.25rem;
-            }
-        }
-
-        .section-title {
-            font-size: 0.625rem;
-            font-weight: 900;
-            color: #1e293b;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-style: italic;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 0.875rem;
-            }
-        }
-
-        .live-indicator {
-            width: 0.5rem;
-            height: 0.5rem;
-            background-color: #10b981;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* Podium Grid */
-        .podium-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.375rem;
-            align-items: end;
-            padding: 0 0.125rem;
-        }
-
-        @media (min-width: 768px) {
-            .podium-grid {
-                gap: 2rem;
-                padding: 0;
-            }
-        }
-
-        /* Podium Cards */
-        .podium-card {
-            background-color: white;
-            padding: 0.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            border-bottom-width: 2px;
-            border-bottom-style: solid;
-        }
-
-        @media (min-width: 768px) {
-            .podium-card {
-                padding: 2rem;
-                border-radius: 2.5rem;
-                border-bottom-width: 4px;
-            }
-        }
-
-        .podium-card:hover {
-            transform: translateY(-0.5rem);
-        }
-
-        .podium-card.silver {
-            border-bottom-color: #cbd5e1;
-        }
-
-        .podium-card.gold {
-            background: linear-gradient(135deg, #121212, #000000);
-            border-bottom-color: #FFB800;
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        .podium-card.bronze {
-            border-bottom-color: #b45309;
-        }
-
-        .podium-bg-icon {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 0.5rem;
-            opacity: 0.05;
-            transition: opacity 0.3s;
-        }
-
-        @media (min-width: 768px) {
-            .podium-bg-icon {
-                padding: 1.5rem;
-                opacity: 0.1;
-            }
-        }
-
-        .podium-card:hover .podium-bg-icon {
-            opacity: 0.2;
-        }
-
-        .podium-bg-icon i {
-            font-size: 2.5rem;
-            color: #94a3b8;
-        }
-
-        @media (min-width: 768px) {
-            .podium-bg-icon i {
-                font-size: 5rem;
-            }
-        }
-
-        .podium-rank {
-            width: 1.5rem;
-            height: 1.5rem;
-            background-color: #f1f5f9;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-weight: 900;
-            font-size: 0.625rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid #e2e8f0;
-        }
-
-        @media (min-width: 768px) {
-            .podium-rank {
-                width: 3.5rem;
-                height: 3.5rem;
-                border-radius: 1rem;
-                font-size: 1.25rem;
-                margin-bottom: 1.5rem;
-            }
-        }
-
-        .gold .podium-rank {
-            background-color: #FFB800;
-            color: white;
-            box-shadow: 0 10px 15px -3px rgba(255,184,0,0.3);
-            border: none;
-        }
-
-        .gold .podium-rank i {
-            font-size: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .gold .podium-rank i {
-                font-size: 2rem;
-            }
-        }
-
-        .rank-number {
-            display: block;
-        }
-
-        .gold .rank-number {
-            display: none;
-        }
-
-        .crown-icon {
-            display: none;
-        }
-
-        .gold .crown-icon {
-            display: block;
-        }
-
-        .podium-school-name {
-            font-size: 0.5rem;
-            font-weight: 900;
-            color: #1e293b;
-            line-height: 1.2;
-            margin-bottom: 0.25rem;
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media (min-width: 768px) {
-            .podium-school-name {
-                font-size: 1.25rem;
-                margin-bottom: 0.5rem;
-            }
-        }
-
-        .gold .podium-school-name {
-            color: white;
-        }
-
-        .podium-region {
-            font-size: 0.375rem;
-            font-weight: 700;
-            color: #94a3b8;
-            margin-bottom: 0.5rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media (min-width: 768px) {
-            .podium-region {
-                font-size: 0.75rem;
-                margin-bottom: 1.5rem;
-            }
-        }
-
-        .gold .podium-region {
-            color: #94a3b8;
-        }
-
-        .podium-footer {
-            padding-top: 0.5rem;
-            border-top: 1px solid #f8fafc;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        @media (min-width: 768px) {
-            .podium-footer {
-                padding-top: 1.5rem;
-            }
-        }
-
-        .gold .podium-footer {
-            border-top-color: rgba(255,255,255,0.1);
-        }
-
-        .revenue-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .revenue-label {
-            font-size: 0.3125rem;
-            font-weight: 900;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.125rem;
-        }
-
-        @media (min-width: 768px) {
-            .revenue-label {
-                font-size: 0.625rem;
-                margin-bottom: 0.25rem;
-            }
-        }
-
-        .gold .revenue-label {
-            color: #FFB800;
-        }
-
-        .revenue-value {
-            font-size: 0.5rem;
-            font-weight: 900;
-            color: #0F0F0F;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media (min-width: 768px) {
-            .revenue-value {
-                font-size: 1.125rem;
-            }
-        }
-
-        .gold .revenue-value {
-            color: white;
-        }
-
-        .podium-chevron {
-            color: #e2e8f0;
-            transition: all 0.3s;
-            font-size: 0.75rem;
-        }
-
-        @media (min-width: 768px) {
-            .podium-chevron {
-                font-size: 1.25rem;
-            }
-        }
-
-        .podium-card:hover .podium-chevron {
-            color: #EC0000;
-            transform: translateX(0.25rem);
-        }
-
-        .gold .podium-chevron {
-            color: rgba(255,255,255,0.2);
-        }
-
-        .gold:hover .podium-chevron {
-            color: #EC0000;
-        }
-
-        .gold-sparkle {
-            background-color: #EC0000;
-            padding: 0.25rem;
-            border-radius: 0.375rem;
-            color: white;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            margin-left: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .gold-sparkle {
-                padding: 0.75rem;
-                border-radius: 1rem;
-            }
-        }
-
-        .gold-sparkle i {
-            font-size: 0.75rem;
-        }
-
-        @media (min-width: 768px) {
-            .gold-sparkle i {
-                font-size: 1.25rem;
-            }
-        }
-
-        .ping-dot {
-            position: absolute;
-            top: -0.25rem;
-            right: -0.25rem;
-            width: 0.75rem;
-            height: 0.75rem;
-            background-color: #EC0000;
-            border-radius: 50%;
-            border: 2px solid black;
-            animation: ping 1.5s infinite;
-        }
-
-        @keyframes ping {
-            75%, 100% { transform: scale(2); opacity: 0; }
-        }
-
-        /* Table Section */
-        .table-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .table-icon {
-            padding: 0.625rem;
-            background-color: #0F0F0F;
-            color: white;
-            border-radius: 0.75rem;
-        }
-
-        .table-icon i {
-            font-size: 1.25rem;
-        }
-
-        .table-title {
-            font-size: 0.875rem;
-            font-weight: 900;
-            color: #1e293b;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-style: italic;
-        }
-
-        .table-container {
-            background-color: white;
-            border-radius: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(148,163,184,0.4);
-            border: 1px solid #f1f5f9;
-            overflow: hidden;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f8fafc;
-            color: #94a3b8;
-            font-size: 0.625rem;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            padding: 1.5rem 1rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        @media (min-width: 768px) {
-            th {
-                padding: 1.5rem 2.5rem;
-                font-size: 0.75rem;
-            }
-        }
-
-        td {
-            padding: 1.5rem 1rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        @media (min-width: 768px) {
-            td {
-                padding: 1.5rem 2.5rem;
-            }
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr {
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        tr:hover {
-            background-color: #f8fafc;
-        }
-
-        .rank-number-cell {
-            font-size: 0.875rem;
-            font-weight: 900;
-            color: #cbd5e1;
-            transition: color 0.3s;
-        }
-
-        tr:hover .rank-number-cell {
-            color: #EC0000;
-        }
-
-        .school-name {
-            font-weight: 900;
-            color: #1e293b;
-            font-size: 0.75rem;
-            transition: color 0.3s;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 120px;
-        }
-
-        @media (min-width: 768px) {
-            .school-name {
-                font-size: 1rem;
-                max-width: none;
-            }
-        }
-
-        tr:hover .school-name {
-            color: #EC0000;
-        }
-
-        .school-meta {
-            font-size: 0.5rem;
-            color: #94a3b8;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        @media (min-width: 768px) {
-            .school-meta {
-                font-size: 0.625rem;
-            }
-        }
-
-        .revenue-cell {
-            text-align: right;
-        }
-
-        .revenue-amount {
-            font-family: monospace;
-            font-weight: 900;
-            color: #0F0F0F;
-            font-size: 0.75rem;
-        }
-
-        @media (min-width: 768px) {
-            .revenue-amount {
-                font-size: 1rem;
-            }
-        }
-
-        .sales-count {
-            font-size: 0.5625rem;
-            color: #EC0000;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .trend-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.625rem;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        .trend-up {
-            background-color: #ecfdf5;
-            color: #059669;
-            border: 1px solid #d1fae5;
-        }
-
-        .trend-stable {
-            background-color: #f8fafc;
-            color: #64748b;
-            border: 1px solid #f1f5f9;
-        }
-
-        /* Data Management Section */
+        /* Data Management Section - Redesigned */
         .management-section {
-            display: none;
-        }
-
-        .management-section.active {
-            display: block;
-        }
-
-        .dashboard-section.active {
-            display: block;
-        }
-
-        .dashboard-section {
-            display: none;
-        }
-
-        .dashboard-section.active {
             display: block;
         }
 
@@ -1026,16 +438,222 @@
             color: #EC0000;
         }
 
-        .management-card {
-            background-color: white;
-            border-radius: 2rem;
-            padding: 2rem;
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            margin-bottom: 1.5rem;
+        /* Admin Race Center Layout */
+        .admin-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
-        .card-title {
+        @media (min-width: 1024px) {
+            .admin-container {
+                grid-template-columns: 320px 1fr;
+            }
+        }
+
+        /* Left Panel - School List */
+        .school-list-panel {
+            background-color: white;
+            border-radius: 2rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            overflow: hidden;
+            height: fit-content;
+        }
+
+        .panel-header {
+            background: linear-gradient(135deg, #0F0F0F, #1F1F1F);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .panel-header h3 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.025em;
+        }
+
+        .panel-header p {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .school-search {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #EC0000;
+            ring: 2px solid #EC0000;
+        }
+
+        .school-items {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+
+        .school-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 0.25rem;
+        }
+
+        .school-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .school-item.active {
+            background: linear-gradient(135deg, #FFF1F1, #FFF9F9);
+            border-left: 4px solid #EC0000;
+        }
+
+        .school-item-number {
+            width: 28px;
+            height: 28px;
+            background-color: #f1f5f9;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+
+        .school-item.active .school-item-number {
+            background-color: #EC0000;
+            color: white;
+        }
+
+        .school-item-info h4 {
+            font-size: 0.875rem;
+            font-weight: 900;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .school-item-info p {
+            font-size: 0.625rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .school-item.active .school-item-info h4 {
+            color: #EC0000;
+        }
+
+        /* Right Panel - School Profile */
+        .school-profile-panel {
+            background-color: white;
+            border-radius: 2rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #0F0F0F, #1F1F1F);
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0.05;
+            font-size: 8rem;
+            transform: rotate(10deg);
+        }
+
+        .profile-school-name {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .profile-school-id {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #94a3b8;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .profile-school-id i {
+            color: #FFB800;
+        }
+
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 0 1.5rem;
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .profile-tab {
+            padding: 1.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .profile-tab.active {
+            color: #EC0000;
+            border-bottom-color: #EC0000;
+        }
+
+        .profile-tab i {
+            margin-right: 0.5rem;
+        }
+
+        .profile-content {
+            padding: 2rem;
+        }
+
+        /* Profile Sections */
+        .profile-section {
+            display: none;
+        }
+
+        .profile-section.active {
+            display: block;
+        }
+
+        .section-title {
             font-size: 0.875rem;
             font-weight: 900;
             color: #1e293b;
@@ -1045,42 +663,236 @@
             gap: 0.5rem;
         }
 
-        .card-title i {
+        .section-title i {
             color: #EC0000;
         }
 
-        .sync-input-group {
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            background: linear-gradient(135deg, #f8fafc, white);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid #f1f5f9;
+        }
+
+        .info-label {
+            font-size: 0.625rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #1e293b;
+        }
+
+        .info-value.small {
+            font-size: 1rem;
+        }
+
+        .info-desc {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        /* Stats Cards */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8fafc, white);
+            padding: 1.25rem;
+            border-radius: 1rem;
+            border: 1px solid #f1f5f9;
+        }
+
+        .stat-card i {
+            font-size: 1.25rem;
+            color: #EC0000;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.625rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #1e293b;
+            margin-top: 0.25rem;
+        }
+
+        /* Table Styles for Rekap */
+        .rekap-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .rekap-table th {
+            text-align: left;
+            padding: 1rem;
+            font-size: 0.625rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #94a3b8;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .rekap-table td {
+            padding: 1rem;
+            font-size: 0.875rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .rekap-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .rekap-table .amount {
+            font-weight: 900;
+            color: #EC0000;
+        }
+
+        /* Top Customer */
+        .customer-list {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
 
-        @media (min-width: 768px) {
-            .sync-input-group {
-                flex-direction: row;
-            }
-        }
-
-        .sync-input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: 1px solid #e2e8f0;
+        .customer-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8fafc, white);
             border-radius: 1rem;
-            font-weight: 700;
-            font-size: 0.875rem;
-            outline: none;
+            border: 1px solid #f1f5f9;
         }
 
-        .sync-input:focus {
-            ring: 2px solid #EC0000;
-            border-color: transparent;
-        }
-
-        .sync-btn {
+        .customer-rank {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #FFB800;
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.75rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        .customer-info {
+            flex: 1;
+        }
+
+        .customer-name {
+            font-weight: 900;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .customer-class {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 700;
+        }
+
+        .customer-amount {
+            font-weight: 900;
+            color: #EC0000;
+        }
+
+        /* Market Share */
+        .market-share-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .share-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .share-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .share-label {
+            color: #475569;
+        }
+
+        .share-value {
+            color: #EC0000;
+            font-weight: 900;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 0.75rem;
+            background-color: #f1f5f9;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 9999px;
+        }
+
+        .fill-telkomsel {
+            background-color: #EC0000;
+        }
+
+        .fill-indosat {
+            background-color: #FFB800;
+        }
+
+        .fill-xl {
+            background-color: #10b981;
+        }
+
+        .fill-three {
+            background-color: #8b5cf6;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .btn-primary {
             padding: 1rem 2rem;
             background-color: #EC0000;
             color: white;
@@ -1089,132 +901,48 @@
             font-weight: 900;
             font-size: 0.875rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 10px 15px -3px rgba(236,0,0,0.3);
-        }
-
-        .sync-btn:hover:not(:disabled) {
-            background-color: #CC0000;
-            transform: scale(1.05);
-        }
-
-        .sync-btn:active:not(:disabled) {
-            transform: scale(0.95);
-        }
-
-        .sync-btn:disabled {
-            background-color: #e2e8f0;
-            color: #94a3b8;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .sync-note {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #94a3b8;
-            margin-top: 1rem;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .grid-2 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .export-card, .import-card {
-            background-color: white;
-            border-radius: 2rem;
-            padding: 2rem;
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-        }
-
-        .export-title, .import-title {
-            font-size: 0.875rem;
-            font-weight: 900;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .export-title i {
-            color: #10b981;
+        .btn-primary:hover {
+            background-color: #CC0000;
+            transform: scale(1.05);
         }
 
-        .import-title i {
-            color: #FFB800;
-        }
-
-        .card-description {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #94a3b8;
-            margin-bottom: 1.5rem;
-        }
-
-        .export-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 1rem 1.5rem;
-            background-color: #10b981;
-            color: white;
-            border: none;
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background-color: white;
+            color: #1e293b;
+            border: 2px solid #e2e8f0;
             border-radius: 1rem;
             font-weight: 900;
             font-size: 0.875rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: #EC0000;
+            color: #EC0000;
+        }
+
+        /* Import Excel Button */
+        .import-excel-btn {
+            background-color: #10b981;
             box-shadow: 0 10px 15px -3px rgba(16,185,129,0.3);
         }
 
-        .export-btn:hover {
+        .import-excel-btn:hover {
             background-color: #059669;
-            transform: scale(1.05);
-        }
-
-        .import-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 1rem 1.5rem;
-            background-color: #FFB800;
-            color: white;
-            border: none;
-            border-radius: 1rem;
-            font-weight: 900;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 15px -3px rgba(255,184,0,0.3);
-        }
-
-        .import-btn:hover {
-            background-color: #E5A600;
-            transform: scale(1.05);
-        }
-
-        .hidden-input {
-            display: none;
         }
 
         /* Modal */
@@ -1300,187 +1028,6 @@
         .modal-body {
             padding: 1.5rem;
         }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #f8fafc, white);
-            padding: 1.25rem;
-            border-radius: 1rem;
-            border: 1px solid #f1f5f9;
-        }
-
-        .stat-card i {
-            font-size: 1.25rem;
-            color: #EC0000;
-            margin-bottom: 0.75rem;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #0F0F0F;
-            margin-top: 0.25rem;
-        }
-
-        .stat-trend {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-
-        .trend-up-text {
-            color: #10b981;
-        }
-
-        .trend-down-text {
-            color: #ef4444;
-        }
-
-        .student-stats {
-            background: linear-gradient(135deg, #f8fafc, white);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            border: 1px solid #f1f5f9;
-            margin-bottom: 1.5rem;
-        }
-
-        .student-stats-title {
-            font-weight: 900;
-            font-size: 0.875rem;
-            color: #1e293b;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .student-stats-title i {
-            color: #EC0000;
-        }
-
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .student-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .student-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #94a3b8;
-        }
-
-        .student-value {
-            font-size: 1.125rem;
-            font-weight: 900;
-            color: #0F0F0F;
-        }
-
-        .student-name {
-            font-size: 1rem;
-            font-weight: 900;
-            color: #EC0000;
-        }
-
-        .carrier-stats {
-            background: linear-gradient(135deg, #f8fafc, white);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            border: 1px solid #f1f5f9;
-        }
-
-        .carrier-title {
-            font-weight: 900;
-            font-size: 0.875rem;
-            color: #1e293b;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .carrier-title i {
-            color: #FFB800;
-        }
-
-        .carrier-bar {
-            margin-bottom: 0.75rem;
-        }
-
-        .carrier-bar-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .carrier-bar-label {
-            color: #475569;
-        }
-
-        .carrier-bar-value {
-            color: #0F0F0F;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 0.5rem;
-            background-color: #f1f5f9;
-            border-radius: 9999px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 9999px;
-        }
-
-        .fill-telkomsel {
-            background-color: #EC0000;
-        }
-
-        .fill-indosat {
-            background-color: #FFB800;
-        }
-
-        .fill-xl {
-            background-color: #10b981;
-        }
-
-        .last-update {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #94a3b8;
-            background-color: #f8fafc;
-            padding: 0.75rem;
-            border-radius: 0.75rem;
-            margin-top: 1.5rem;
-        }
     </style>
 </head>
 <body>
@@ -1498,11 +1045,11 @@
             </div>
 
             <nav class="nav-menu">
-                <button class="nav-item active" data-tab="dashboard">
+                <button class="nav-item" data-tab="dashboard">
                     <i class="fas fa-chart-pie"></i>
                     <span>Race Board</span>
                 </button>
-                <button class="nav-item" data-tab="management">
+                <button class="nav-item active" data-tab="management">
                     <i class="fas fa-cog"></i>
                     <span>Data Master</span>
                 </button>
@@ -1524,7 +1071,7 @@
             <!-- Header -->
             <header class="dashboard-header">
                 <div class="header-left">
-                    <h2 class="header-title">Race <span>Monitoring</span></h2>
+                    <h2 class="header-title"><span>ADMIN</span> RACE CENTER</h2>
                     <div class="update-badge" id="updateBadge">
                         <i class="far fa-clock"></i> UPDATE: <span id="lastUpdated">Just now</span>
                     </div>
@@ -1539,115 +1086,41 @@
                 </div>
             </header>
 
-            <!-- Dashboard Section (Active by default) -->
-            <div id="dashboardSection" class="dashboard-section active">
-                <!-- Podium Section -->
-                <section class="dashboard-section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3 class="section-title">
-                            Podium Jawara H.E.R.O
-                            <span class="live-indicator"></span>
-                        </h3>
-                    </div>
-
-                    <div class="podium-grid" id="podiumContainer">
-                        <!-- Will be filled by JavaScript -->
-                    </div>
-                </section>
-
-                <!-- Table Section -->
-                <div class="table-section">
-                    <div class="table-header">
-                        <div class="table-icon">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <h3 class="table-title">Tabel Klasemen Harian</h3>
-                    </div>
-
-                    <div class="table-container">
-                        <div class="table-responsive">
-                            <table id="leaderboardTable">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th>Nama Sekolah</th>
-                                        <th class="text-right">Total Omzet</th>
-                                        <th class="text-center">Trend</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableBody">
-                                    <!-- Will be filled by JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Data Management Section -->
+            <!-- Data Management Section (Active) -->
             <div id="managementSection" class="management-section">
                 <div class="management-header">
                     <div class="management-header-icon">
                         <i class="fas fa-database"></i>
                     </div>
-                    <h2 class="management-header-title">DATA <span>MANAGEMENT</span></h2>
+                    <h2 class="management-header-title">SIMPAN <span>PERMANEN</span></h2>
                 </div>
 
-                <!-- Sync Google Sheet -->
-                <div class="management-card">
-                    <h3 class="card-title">
-                        <i class="fas fa-link"></i>
-                        SYNC FROM GOOGLE SHEETS
-                    </h3>
-                    <div class="sync-input-group">
-                        <input type="url" id="syncUrl" class="sync-input" placeholder="https://docs.google.com/spreadsheets/d/...">
-                        <button class="sync-btn" id="syncBtn">
-                            <i class="fas fa-upload"></i>
-                            SYNC NOW
-                        </button>
-                    </div>
-                    <p class="sync-note">
-                        Format Google Sheet harus memiliki kolom: ID Digipos, Nama Sekolah, Revenue, Siswa, Siswa Terbaik, Kelas
-                    </p>
-                </div>
-
-                <!-- Import/Export Grid -->
-                <div class="grid-2">
-                    <!-- Export -->
-                    <div class="export-card">
-                        <h3 class="export-title">
-                            <i class="fas fa-download"></i>
-                            EXPORT DATA
-                        </h3>
-                        <p class="card-description">Download semua data dalam format JSON backup</p>
-                        <button class="export-btn" id="exportBtn">
-                            <i class="fas fa-save"></i>
-                            EXPORT JSON
-                        </button>
+                <!-- Admin Race Center Layout -->
+                <div class="admin-container">
+                    <!-- Left Panel - School List -->
+                    <div class="school-list-panel">
+                        <div class="panel-header">
+                            <h3>PILIH SEKOLAH</h3>
+                            <p>{{totalSchools}} Sekolah Terdaftar</p>
+                        </div>
+                        <div class="school-search">
+                            <input type="text" class="search-input" id="schoolSearch" placeholder="Cari sekolah...">
+                        </div>
+                        <div class="school-items" id="schoolList">
+                            <!-- Will be filled by JavaScript -->
+                        </div>
                     </div>
 
-                    <!-- Import -->
-                    <div class="import-card">
-                        <h3 class="import-title">
-                            <i class="fas fa-upload"></i>
-                            IMPORT DATA
-                        </h3>
-                        <p class="card-description">Import file JSON hasil export sebelumnya</p>
-                        <label class="import-btn">
-                            <i class="fas fa-file-import"></i>
-                            PILIH FILE
-                            <input type="file" id="importFile" class="hidden-input" accept=".json">
-                        </label>
+                    <!-- Right Panel - School Profile -->
+                    <div class="school-profile-panel" id="schoolProfilePanel">
+                        <!-- Will be filled by JavaScript -->
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Modal will be inserted here -->
+    <!-- Modal Container -->
     <div id="modalContainer"></div>
 
     <script>
@@ -1655,115 +1128,267 @@
         const SCHOOLS_DATA = [
             {
                 id: "1",
-                idDigipos: "SMA001-MLG",
-                name: "SMA NEGERI 1 MALANG",
+                idDigipos: "DIGI-8000",
+                name: "SMKN 1 KEPANJEN",
+                region: "Kab. Malang",
+                studentCount: 1250,
+                teacherCount: 45,
                 revenue: 18750000,
                 prevRevenue: 15200000,
                 salesCount: 156,
                 lastSale: "2 menit lalu",
                 trend: "up",
-                region: "Malang Kota",
                 topProducts: ["Paket Data 10GB", "Pulsa 50K", "Voucher Game"],
                 totalTransactions: 156,
-                studentCount: 1250,
                 topStudentName: "Ahmad Fauzi",
-                teacherCount: 45,
-                topClass: "XI MIPA 1",
-                carrierStats: { telkomsel: 75, indosat: 18, xl: 7 }
+                topStudentClass: "XI TKJ 1",
+                topStudentAmount: 2500000,
+                topClass: "XI TKJ 1",
+                carrierStats: { telkomsel: 75, indosat: 18, xl: 7 },
+                monthlyData: [
+                    { month: "Jan", revenue: 12500000 },
+                    { month: "Feb", revenue: 14200000 },
+                    { month: "Mar", revenue: 16800000 },
+                    { month: "Apr", revenue: 18750000 }
+                ],
+                topCustomers: [
+                    { name: "Ahmad Fauzi", class: "XI TKJ 1", amount: 2500000 },
+                    { name: "Siti Nurhaliza", class: "XI TKJ 2", amount: 2100000 },
+                    { name: "Budi Santoso", class: "XII RPL 1", amount: 1850000 }
+                ]
             },
             {
                 id: "2",
-                idDigipos: "SMA002-MLG",
-                name: "SMA KATOLIK ST. ALBERTUS",
+                idDigipos: "DIGI-8001",
+                name: "SMKN 13 MALANG",
+                region: "Kota Malang",
+                studentCount: 1450,
+                teacherCount: 52,
                 revenue: 16320000,
                 prevRevenue: 14800000,
                 salesCount: 134,
                 lastSale: "5 menit lalu",
                 trend: "up",
-                region: "Malang Kota",
                 topProducts: ["Paket Data 5GB", "Pulsa 25K"],
                 totalTransactions: 134,
-                studentCount: 980,
-                topStudentName: "Maria Goretti",
-                teacherCount: 38,
-                topClass: "XII IPS 2",
-                carrierStats: { telkomsel: 68, indosat: 22, xl: 10 }
+                topStudentName: "Rizky Pratama",
+                topStudentClass: "XII RPL 2",
+                topStudentAmount: 2150000,
+                topClass: "XII RPL 2",
+                carrierStats: { telkomsel: 68, indosat: 22, xl: 10 },
+                monthlyData: [
+                    { month: "Jan", revenue: 11500000 },
+                    { month: "Feb", revenue: 13200000 },
+                    { month: "Mar", revenue: 14800000 },
+                    { month: "Apr", revenue: 16320000 }
+                ],
+                topCustomers: [
+                    { name: "Rizky Pratama", class: "XII RPL 2", amount: 2150000 },
+                    { name: "Dewi Lestari", class: "XII RPL 1", amount: 1950000 },
+                    { name: "M. Rizki", class: "XI RPL 3", amount: 1750000 }
+                ]
             },
             {
                 id: "3",
-                idDigipos: "SMK003-MLG",
-                name: "SMK NEGERI 4 MALANG",
+                idDigipos: "DIGI-8002",
+                name: "SMANG MALANG",
+                region: "Kota Malang",
+                studentCount: 980,
+                teacherCount: 38,
                 revenue: 15450000,
                 prevRevenue: 15900000,
                 salesCount: 145,
                 lastSale: "15 menit lalu",
                 trend: "down",
-                region: "Malang Selatan",
                 topProducts: ["Paket Data 3GB", "Pulsa 10K"],
                 totalTransactions: 145,
-                studentCount: 1450,
-                topStudentName: "Rizky Pratama",
-                teacherCount: 52,
-                topClass: "XII RPL 1",
-                carrierStats: { telkomsel: 72, indosat: 20, xl: 8 }
+                topStudentName: "Maria Goretti",
+                topStudentClass: "XII IPS 2",
+                topStudentAmount: 1850000,
+                topClass: "XII IPS 2",
+                carrierStats: { telkomsel: 72, indosat: 20, xl: 8 },
+                monthlyData: [
+                    { month: "Jan", revenue: 14200000 },
+                    { month: "Feb", revenue: 15100000 },
+                    { month: "Mar", revenue: 15900000 },
+                    { month: "Apr", revenue: 15450000 }
+                ],
+                topCustomers: [
+                    { name: "Maria Goretti", class: "XII IPS 2", amount: 1850000 },
+                    { name: "Yohanes", class: "XII IPS 1", amount: 1650000 },
+                    { name: "Agnes Monica", class: "XI IPS 3", amount: 1450000 }
+                ]
             },
             {
                 id: "4",
-                idDigipos: "SMA004-MLG",
-                name: "SMA NEGERI 8 MALANG",
+                idDigipos: "DIGI-8003",
+                name: "SMKN 1 PUJON",
+                region: "Kab. Malang",
+                studentCount: 1150,
+                teacherCount: 42,
                 revenue: 14200000,
                 prevRevenue: 13500000,
                 salesCount: 118,
                 lastSale: "25 menit lalu",
                 trend: "up",
-                region: "Malang Timur",
                 topProducts: ["Paket Data 7GB", "Pulsa 20K"],
                 totalTransactions: 118,
-                studentCount: 1150,
                 topStudentName: "Dian Purnama",
-                teacherCount: 42,
+                topStudentClass: "XI IPA 3",
+                topStudentAmount: 1550000,
                 topClass: "XI IPA 3",
-                carrierStats: { telkomsel: 70, indosat: 19, xl: 11 }
+                carrierStats: { telkomsel: 70, indosat: 19, xl: 11 },
+                monthlyData: [
+                    { month: "Jan", revenue: 9800000 },
+                    { month: "Feb", revenue: 11200000 },
+                    { month: "Mar", revenue: 13500000 },
+                    { month: "Apr", revenue: 14200000 }
+                ],
+                topCustomers: [
+                    { name: "Dian Purnama", class: "XI IPA 3", amount: 1550000 },
+                    { name: "Putri Amalia", class: "XI IPA 1", amount: 1350000 },
+                    { name: "Andi Kurniawan", class: "XII IPA 2", amount: 1250000 }
+                ]
             },
             {
                 id: "5",
-                idDigipos: "SMA005-BTL",
-                name: "SMA NEGERI 1 BATU",
+                idDigipos: "DIGI-8004",
+                name: "SMKN 8 MALANG",
+                region: "Kota Malang",
+                studentCount: 1350,
+                teacherCount: 48,
                 revenue: 13800000,
                 prevRevenue: 14200000,
                 salesCount: 112,
                 lastSale: "32 menit lalu",
                 trend: "down",
-                region: "Batu",
                 topProducts: ["Paket Data 5GB", "Voucher Game"],
                 totalTransactions: 112,
-                studentCount: 980,
                 topStudentName: "Citra Lestari",
-                teacherCount: 36,
-                topClass: "XII IPS 1",
-                carrierStats: { telkomsel: 65, indosat: 25, xl: 10 }
+                topStudentClass: "XII AK 1",
+                topStudentAmount: 1450000,
+                topClass: "XII AK 1",
+                carrierStats: { telkomsel: 65, indosat: 25, xl: 10 },
+                monthlyData: [
+                    { month: "Jan", revenue: 12500000 },
+                    { month: "Feb", revenue: 13800000 },
+                    { month: "Mar", revenue: 14200000 },
+                    { month: "Apr", revenue: 13800000 }
+                ],
+                topCustomers: [
+                    { name: "Citra Lestari", class: "XII AK 1", amount: 1450000 },
+                    { name: "Dian Sastro", class: "XII AK 2", amount: 1250000 },
+                    { name: "Rina Melati", class: "XI AK 3", amount: 1150000 }
+                ]
+            },
+            {
+                id: "6",
+                idDigipos: "DIGI-8005",
+                name: "SMKING MALANG",
+                region: "Kota Malang",
+                studentCount: 880,
+                teacherCount: 35,
+                revenue: 12500000,
+                prevRevenue: 11800000,
+                salesCount: 98,
+                lastSale: "45 menit lalu",
+                trend: "up",
+                topProducts: ["Paket Data", "Pulsa"],
+                totalTransactions: 98,
+                topStudentName: "Budi Setiawan",
+                topStudentClass: "XII MIPA 1",
+                topStudentAmount: 1250000,
+                topClass: "XII MIPA 1",
+                carrierStats: { telkomsel: 78, indosat: 15, xl: 7 },
+                monthlyData: [
+                    { month: "Jan", revenue: 9500000 },
+                    { month: "Feb", revenue: 10500000 },
+                    { month: "Mar", revenue: 11800000 },
+                    { month: "Apr", revenue: 12500000 }
+                ],
+                topCustomers: [
+                    { name: "Budi Setiawan", class: "XII MIPA 1", amount: 1250000 },
+                    { name: "Sari Indah", class: "XII MIPA 2", amount: 1050000 },
+                    { name: "Joko Susilo", class: "XI MIPA 1", amount: 950000 }
+                ]
+            },
+            {
+                id: "7",
+                idDigipos: "DIGI-8006",
+                name: "SMAN 1 LAWANG",
+                region: "Kab. Malang",
+                studentCount: 1050,
+                teacherCount: 40,
+                revenue: 11200000,
+                prevRevenue: 10800000,
+                salesCount: 85,
+                lastSale: "1 jam lalu",
+                trend: "up",
+                topProducts: ["Paket Data", "Pulsa"],
+                totalTransactions: 85,
+                topStudentName: "Eko Prasetyo",
+                topStudentClass: "XI IPA 2",
+                topStudentAmount: 950000,
+                topClass: "XI IPA 2",
+                carrierStats: { telkomsel: 72, indosat: 20, xl: 8 },
+                monthlyData: [
+                    { month: "Jan", revenue: 8500000 },
+                    { month: "Feb", revenue: 9500000 },
+                    { month: "Mar", revenue: 10800000 },
+                    { month: "Apr", revenue: 11200000 }
+                ],
+                topCustomers: [
+                    { name: "Eko Prasetyo", class: "XI IPA 2", amount: 950000 },
+                    { name: "Ratna Dewi", class: "XI IPA 1", amount: 850000 },
+                    { name: "Hendra Gunawan", class: "XII IPA 3", amount: 750000 }
+                ]
+            },
+            {
+                id: "8",
+                idDigipos: "DIGI-8007",
+                name: "SMANS MALANG",
+                region: "Kota Malang",
+                studentCount: 1150,
+                teacherCount: 43,
+                revenue: 9800000,
+                prevRevenue: 10200000,
+                salesCount: 72,
+                lastSale: "2 jam lalu",
+                trend: "down",
+                topProducts: ["Pulsa", "Voucher"],
+                totalTransactions: 72,
+                topStudentName: "Maya Sari",
+                topStudentClass: "X IPS 3",
+                topStudentAmount: 750000,
+                topClass: "X IPS 3",
+                carrierStats: { telkomsel: 68, indosat: 22, xl: 10 },
+                monthlyData: [
+                    { month: "Jan", revenue: 8800000 },
+                    { month: "Feb", revenue: 9500000 },
+                    { month: "Mar", revenue: 10200000 },
+                    { month: "Apr", revenue: 9800000 }
+                ],
+                topCustomers: [
+                    { name: "Maya Sari", class: "X IPS 3", amount: 750000 },
+                    { name: "Adi Nugroho", class: "X IPS 1", amount: 650000 },
+                    { name: "Nina Wulandari", class: "XI IPS 2", amount: 550000 }
+                ]
             }
         ];
 
         // ========== STATE ==========
         let schools = [...SCHOOLS_DATA];
-        let selectedSchool = null;
-        let isSyncing = false;
+        let selectedSchool = schools[0]; // Default to first school
+        let activeProfileTab = 'profil';
 
         // ========== DOM ELEMENTS ==========
-        const dashboardSection = document.getElementById('dashboardSection');
-        const managementSection = document.getElementById('managementSection');
         const navItems = document.querySelectorAll('.nav-item');
-        const podiumContainer = document.getElementById('podiumContainer');
-        const tableBody = document.getElementById('tableBody');
         const lastUpdatedSpan = document.getElementById('lastUpdated');
         const refreshBtn = document.getElementById('refreshBtn');
         const currentPeriodSpan = document.getElementById('currentPeriod').querySelector('span');
-        const syncUrl = document.getElementById('syncUrl');
-        const syncBtn = document.getElementById('syncBtn');
-        const exportBtn = document.getElementById('exportBtn');
-        const importFile = document.getElementById('importFile');
-        const modalContainer = document.getElementById('modalContainer');
+        const schoolList = document.getElementById('schoolList');
+        const schoolProfilePanel = document.getElementById('schoolProfilePanel');
+        const schoolSearch = document.getElementById('schoolSearch');
 
         // ========== HELPER FUNCTIONS ==========
         function formatRupiah(number) {
@@ -1782,141 +1407,303 @@
         }
 
         // ========== RENDER FUNCTIONS ==========
-        function renderPodium() {
-            const sorted = [...schools].sort((a, b) => b.revenue - a.revenue);
-            const topThree = sorted.slice(0, 3);
-            
+        function renderSchoolList(filterText = '') {
+            const filtered = schools.filter(school => 
+                school.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                school.region.toLowerCase().includes(filterText.toLowerCase())
+            );
+
             let html = '';
-            
-            // Silver (Rank 2)
-            if (topThree[1]) {
+            filtered.forEach((school, index) => {
+                const isActive = selectedSchool && selectedSchool.id === school.id;
                 html += `
-                    <div class="podium-card silver" data-id="${topThree[1].id}">
-                        <div class="podium-bg-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="podium-rank">2</div>
-                        <h4 class="podium-school-name">${topThree[1].name}</h4>
-                        <p class="podium-region">${topThree[1].region}</p>
-                        <div class="podium-footer">
-                            <div class="revenue-info">
-                                <p class="revenue-label">Realtime Revenue</p>
-                                <p class="revenue-value">Rp${formatRupiah(topThree[1].revenue)}</p>
-                            </div>
-                            <i class="fas fa-chevron-right podium-chevron"></i>
+                    <div class="school-item ${isActive ? 'active' : ''}" data-id="${school.id}">
+                        <div class="school-item-number">${index + 1}</div>
+                        <div class="school-item-info">
+                            <h4>${school.name}</h4>
+                            <p>${school.idDigipos} • ${school.region}</p>
                         </div>
                     </div>
                 `;
-            }
+            });
 
-            // Gold (Rank 1)
-            if (topThree[0]) {
-                html += `
-                    <div class="podium-card gold" data-id="${topThree[0].id}">
-                        <div class="podium-bg-icon" style="color: #FFB800;">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <div class="podium-rank">
-                            <span class="rank-number">1</span>
-                            <i class="fas fa-trophy crown-icon"></i>
-                        </div>
-                        <div class="ping-dot"></div>
-                        <h4 class="podium-school-name">${topThree[0].name}</h4>
-                        <p class="podium-region">${topThree[0].region}</p>
-                        <div class="podium-footer">
-                            <div class="revenue-info">
-                                <p class="revenue-label">Leader Revenue (Live)</p>
-                                <p class="revenue-value">Rp${formatRupiah(topThree[0].revenue)}</p>
-                            </div>
-                            <div class="gold-sparkle">
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
+            schoolList.innerHTML = html;
 
-            // Bronze (Rank 3)
-            if (topThree[2]) {
-                html += `
-                    <div class="podium-card bronze" data-id="${topThree[2].id}">
-                        <div class="podium-bg-icon">
-                            <i class="fas fa-trophy" style="color: #b45309;"></i>
-                        </div>
-                        <div class="podium-rank">3</div>
-                        <h4 class="podium-school-name">${topThree[2].name}</h4>
-                        <p class="podium-region">${topThree[2].region}</p>
-                        <div class="podium-footer">
-                            <div class="revenue-info">
-                                <p class="revenue-label">Realtime Revenue</p>
-                                <p class="revenue-value">Rp${formatRupiah(topThree[2].revenue)}</p>
-                            </div>
-                            <i class="fas fa-chevron-right podium-chevron"></i>
-                        </div>
-                    </div>
-                `;
-            }
-
-            podiumContainer.innerHTML = html;
-
-            // Add click listeners to podium cards
-            document.querySelectorAll('.podium-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const id = card.dataset.id;
+            // Add click listeners
+            document.querySelectorAll('.school-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const id = item.dataset.id;
                     const school = schools.find(s => s.id === id);
-                    if (school) openModal(school);
+                    if (school) {
+                        selectedSchool = school;
+                        renderSchoolList(schoolSearch.value);
+                        renderSchoolProfile();
+                    }
                 });
             });
         }
 
-        function renderTable() {
-            const sorted = [...schools].sort((a, b) => b.revenue - a.revenue);
+        function renderSchoolProfile() {
+            if (!selectedSchool) return;
+
+            const school = selectedSchool;
             
-            let html = '';
-            sorted.forEach((school, index) => {
-                const trendIcon = school.trend === 'up' ? 'fa-arrow-up' : 'fa-minus';
-                const trendClass = school.trend === 'up' ? 'trend-up' : 'trend-stable';
-                const trendText = school.trend === 'up' ? 'Naik' : 'Stable';
-                
-                html += `
-                    <tr data-id="${school.id}">
-                        <td class="text-center">
-                            <span class="rank-number-cell">${index + 1}</span>
-                        </td>
-                        <td>
-                            <p class="school-name">${school.name}</p>
-                            <p class="school-meta">${school.region} • ${school.idDigipos}</p>
-                        </td>
-                        <td class="revenue-cell">
-                            <p class="revenue-amount">Rp${formatRupiah(school.revenue)}</p>
-                            <p class="sales-count">${school.salesCount} ITEMS SOLD</p>
-                        </td>
-                        <td class="text-center">
-                            <div class="trend-badge ${trendClass}">
-                                <i class="fas ${trendIcon}"></i> ${trendText}
+            const profileHTML = `
+                <div class="profile-header">
+                    <div class="profile-header-bg">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h2 class="profile-school-name">${school.name}</h2>
+                    <div class="profile-school-id">
+                        <i class="fas fa-id-card"></i>
+                        ${school.idDigipos} • ${school.region}
+                    </div>
+                </div>
+
+                <div class="profile-tabs">
+                    <div class="profile-tab active" data-tab="profil">
+                        <i class="fas fa-user"></i> PROFIL
+                    </div>
+                    <div class="profile-tab" data-tab="import">
+                        <i class="fas fa-file-excel"></i> IMPORT EXCEL
+                    </div>
+                    <div class="profile-tab" data-tab="rekap">
+                        <i class="fas fa-chart-line"></i> REKAP & OMZET
+                    </div>
+                    <div class="profile-tab" data-tab="top">
+                        <i class="fas fa-star"></i> TOP CUSTOMER
+                    </div>
+                    <div class="profile-tab" data-tab="market">
+                        <i class="fas fa-chart-pie"></i> MARKET SHARE
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <!-- Profil Section -->
+                    <div class="profile-section active" id="profil-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-building"></i>
+                            IDENTITAS & WILAYAH
+                        </h3>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Nama Sekolah</div>
+                                <div class="info-value small">${school.name}</div>
                             </div>
-                        </td>
-                    </tr>
-                `;
-            });
+                            <div class="info-item">
+                                <div class="info-label">ID Digipos</div>
+                                <div class="info-value small">${school.idDigipos}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Wilayah</div>
+                                <div class="info-value small">${school.region}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Kelas Jawara</div>
+                                <div class="info-value small">${school.topClass}</div>
+                            </div>
+                        </div>
 
-            tableBody.innerHTML = html;
+                        <h3 class="section-title" style="margin-top: 2rem;">
+                            <i class="fas fa-users"></i>
+                            STATISTIK
+                        </h3>
 
-            // Add click listeners to table rows
-            document.querySelectorAll('#leaderboardTable tbody tr').forEach(row => {
-                row.addEventListener('click', () => {
-                    const id = row.dataset.id;
-                    const school = schools.find(s => s.id === id);
-                    if (school) openModal(school);
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <i class="fas fa-user-graduate"></i>
+                                <div class="stat-label">Total Siswa</div>
+                                <div class="stat-value">${school.studentCount}</div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <div class="stat-label">Total Reseller</div>
+                                <div class="stat-value">${school.teacherCount}</div>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-wallet"></i>
+                                <div class="stat-label">Total Omzet</div>
+                                <div class="stat-value">Rp${formatRupiah(school.revenue)}</div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn-primary" onclick="openSchoolModal('${school.id}')">
+                                <i class="fas fa-eye"></i> LIHAT DETAIL
+                            </button>
+                            <button class="btn-primary import-excel-btn" onclick="simulateImport('${school.id}')">
+                                <i class="fas fa-file-excel"></i> IMPORT EXCEL
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Import Excel Section -->
+                    <div class="profile-section" id="import-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-file-excel"></i>
+                            IMPORT DATA EXCEL
+                        </h3>
+                        
+                        <div style="background: linear-gradient(135deg, #f8fafc, white); padding: 2rem; border-radius: 1.5rem; border: 1px solid #f1f5f9; text-align: center;">
+                            <i class="fas fa-file-excel" style="font-size: 4rem; color: #10b981; margin-bottom: 1rem;"></i>
+                            <h4 style="font-weight: 900; margin-bottom: 1rem;">Upload File Excel</h4>
+                            <p style="color: #94a3b8; margin-bottom: 2rem; font-size: 0.875rem;">Format: .xlsx, .xls (Maks 5MB)</p>
+                            
+                            <label class="btn-primary" style="display: inline-flex; cursor: pointer;">
+                                <i class="fas fa-upload"></i>
+                                PILIH FILE
+                                <input type="file" accept=".xlsx,.xls" style="display: none;" onchange="handleFileUpload(this, '${school.id}')">
+                            </label>
+                            
+                            <p style="margin-top: 1rem; font-size: 0.75rem; color: #94a3b8;">
+                                <i class="fas fa-info-circle"></i> 
+                                File harus memiliki kolom: Nama Siswa, Kelas, Jumlah Penjualan
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Rekap & Omzet Section -->
+                    <div class="profile-section" id="rekap-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-chart-line"></i>
+                            REKAP OMZET BULANAN
+                        </h3>
+
+                        <div style="margin-bottom: 2rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <span style="font-weight: 700; color: #475569;">Total Kumulatif Omzet</span>
+                                <span style="font-size: 2rem; font-weight: 900; color: #EC0000;">Rp${formatRupiah(school.revenue)}</span>
+                            </div>
+                            
+                            <table class="rekap-table">
+                                <thead>
+                                    <tr>
+                                        <th>Bulan</th>
+                                        <th>Omzet</th>
+                                        <th>Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${school.monthlyData.map((item, index) => {
+                                        const prevMonth = index > 0 ? school.monthlyData[index-1].revenue : item.revenue;
+                                        const trend = item.revenue > prevMonth ? 'up' : (item.revenue < prevMonth ? 'down' : 'stable');
+                                        const trendIcon = trend === 'up' ? 'fa-arrow-up text-green' : (trend === 'down' ? 'fa-arrow-down text-red' : 'fa-minus text-gray');
+                                        const trendColor = trend === 'up' ? '#10b981' : (trend === 'down' ? '#ef4444' : '#94a3b8');
+                                        return `
+                                            <tr>
+                                                <td>${item.month}</td>
+                                                <td class="amount">Rp${formatRupiah(item.revenue)}</td>
+                                                <td><i class="fas ${trendIcon}" style="color: ${trendColor}"></i></td>
+                                            </tr>
+                                        `;
+                                    }).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Top Customer Section -->
+                    <div class="profile-section" id="top-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-star"></i>
+                            TOP CUSTOMER
+                        </h3>
+
+                        <div class="customer-list">
+                            ${school.topCustomers.map((customer, index) => `
+                                <div class="customer-item">
+                                    <div class="customer-rank">${index + 1}</div>
+                                    <div class="customer-info">
+                                        <div class="customer-name">${customer.name}</div>
+                                        <div class="customer-class">${customer.class}</div>
+                                    </div>
+                                    <div class="customer-amount">Rp${formatRupiah(customer.amount)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-weight: 700;">Siswa Terbaik:</span>
+                                <span style="font-weight: 900; color: #EC0000;">${school.topStudentName} (${school.topStudentClass})</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Market Share Section -->
+                    <div class="profile-section" id="market-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-chart-pie"></i>
+                            MARKET SHARE OPERATOR
+                        </h3>
+
+                        <div class="market-share-container">
+                            <div class="share-item">
+                                <div class="share-header">
+                                    <span class="share-label">Telkomsel</span>
+                                    <span class="share-value">${school.carrierStats.telkomsel}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-telkomsel" style="width: ${school.carrierStats.telkomsel}%"></div>
+                                </div>
+                            </div>
+
+                            <div class="share-item">
+                                <div class="share-header">
+                                    <span class="share-label">Indosat</span>
+                                    <span class="share-value">${school.carrierStats.indosat}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-indosat" style="width: ${school.carrierStats.indosat}%"></div>
+                                </div>
+                            </div>
+
+                            <div class="share-item">
+                                <div class="share-header">
+                                    <span class="share-label">XL</span>
+                                    <span class="share-value">${school.carrierStats.xl}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-xl" style="width: ${school.carrierStats.xl}%"></div>
+                                </div>
+                            </div>
+
+                            <div class="share-item">
+                                <div class="share-header">
+                                    <span class="share-label">Tri/Three</span>
+                                    <span class="share-value">${100 - school.carrierStats.telkomsel - school.carrierStats.indosat - school.carrierStats.xl}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-three" style="width: ${100 - school.carrierStats.telkomsel - school.carrierStats.indosat - school.carrierStats.xl}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            schoolProfilePanel.innerHTML = profileHTML;
+
+            // Add tab click listeners
+            document.querySelectorAll('.profile-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    const tabName = tab.dataset.tab;
+                    document.querySelectorAll('.profile-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.getElementById(`${tabName}-section`).classList.add('active');
                 });
             });
         }
 
-        function openModal(school) {
-            const trendPercent = ((school.revenue - school.prevRevenue) / school.prevRevenue * 100).toFixed(1);
-            const trendClass = school.trend === 'up' ? 'trend-up-text' : 'trend-down-text';
-            const trendIcon = school.trend === 'up' ? 'fa-arrow-up' : 'fa-arrow-down';
-            const trendSymbol = school.trend === 'up' ? '+' : '-';
+        // ========== MODAL FUNCTIONS ==========
+        function openSchoolModal(schoolId) {
+            const school = schools.find(s => s.id === schoolId);
+            if (!school) return;
 
             const modalHTML = `
                 <div class="modal-overlay" id="modalOverlay">
@@ -1924,7 +1711,7 @@
                         <div class="modal-header">
                             <div class="modal-header-left">
                                 <div class="modal-header-icon">
-                                    <i class="fas fa-crown"></i>
+                                    <i class="fas fa-school"></i>
                                 </div>
                                 <div class="modal-header-text">
                                     <h2>${school.name}</h2>
@@ -1937,84 +1724,41 @@
                         </div>
 
                         <div class="modal-body">
-                            <div class="stats-grid">
+                            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem;">
                                 <div class="stat-card">
                                     <i class="fas fa-dollar-sign"></i>
                                     <p class="stat-label">Total Revenue</p>
                                     <p class="stat-value">Rp${formatRupiah(school.revenue)}</p>
-                                    <div class="stat-trend ${trendClass}">
-                                        <i class="fas ${trendIcon}"></i>
-                                        <span>${trendSymbol}${Math.abs(trendPercent)}%</span>
-                                    </div>
                                 </div>
                                 <div class="stat-card">
                                     <i class="fas fa-users"></i>
                                     <p class="stat-label">Total Transaksi</p>
                                     <p class="stat-value">${school.totalTransactions}</p>
-                                    <p class="stat-trend" style="color: #94a3b8;">${school.salesCount} produk terjual</p>
                                 </div>
                             </div>
 
-                            <div class="student-stats">
-                                <h3 class="student-stats-title">
-                                    <i class="fas fa-award"></i>
-                                    STATISTIK SISWA
+                            <div class="student-stats" style="background: linear-gradient(135deg, #f8fafc, white); padding: 1.5rem; border-radius: 1rem; margin: 1.5rem 0;">
+                                <h3 style="font-weight: 900; font-size: 0.875rem; margin-bottom: 1rem;">
+                                    <i class="fas fa-award" style="color: #EC0000;"></i> STATISTIK SISWA
                                 </h3>
-                                <div class="student-grid">
+                                <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem;">
                                     <div>
-                                        <p class="student-label">Total Siswa</p>
-                                        <p class="student-value">${school.studentCount}</p>
+                                        <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Total Siswa</p>
+                                        <p style="font-size: 1.125rem; font-weight: 900;">${school.studentCount}</p>
                                     </div>
                                     <div>
-                                        <p class="student-label">Total Guru/Reseller</p>
-                                        <p class="student-value">${school.teacherCount}</p>
+                                        <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Total Reseller</p>
+                                        <p style="font-size: 1.125rem; font-weight: 900;">${school.teacherCount}</p>
                                     </div>
                                     <div style="grid-column: span 2;">
-                                        <p class="student-label">Siswa Terbaik</p>
-                                        <p class="student-name">${school.topStudentName}</p>
-                                        <p class="student-label" style="margin-top: 0.25rem;">Kelas: ${school.topClass}</p>
+                                        <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Siswa Terbaik</p>
+                                        <p style="font-size: 1rem; font-weight: 900; color: #EC0000;">${school.topStudentName}</p>
+                                        <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Kelas: ${school.topStudentClass}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="carrier-stats">
-                                <h3 class="carrier-title">
-                                    <i class="fas fa-mobile-alt"></i>
-                                    DISTRIBUSI OPERATOR
-                                </h3>
-                                
-                                <div class="carrier-bar">
-                                    <div class="carrier-bar-header">
-                                        <span class="carrier-bar-label">Telkomsel</span>
-                                        <span class="carrier-bar-value">${school.carrierStats.telkomsel}%</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill fill-telkomsel" style="width: ${school.carrierStats.telkomsel}%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carrier-bar">
-                                    <div class="carrier-bar-header">
-                                        <span class="carrier-bar-label">Indosat</span>
-                                        <span class="carrier-bar-value">${school.carrierStats.indosat}%</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill fill-indosat" style="width: ${school.carrierStats.indosat}%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carrier-bar">
-                                    <div class="carrier-bar-header">
-                                        <span class="carrier-bar-label">XL</span>
-                                        <span class="carrier-bar-value">${school.carrierStats.xl}%</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill fill-xl" style="width: ${school.carrierStats.xl}%"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="last-update">
+                            <div class="last-update" style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #94a3b8;">
                                 <i class="far fa-clock"></i>
                                 Update terakhir: ${school.lastSale}
                             </div>
@@ -2023,72 +1767,31 @@
                 </div>
             `;
 
-            modalContainer.innerHTML = modalHTML;
+            document.getElementById('modalContainer').innerHTML = modalHTML;
 
-            // Close modal when clicking overlay or close button
             document.getElementById('modalOverlay').addEventListener('click', (e) => {
                 if (e.target.id === 'modalOverlay') {
-                    modalContainer.innerHTML = '';
+                    document.getElementById('modalContainer').innerHTML = '';
                 }
             });
 
             document.getElementById('closeModal').addEventListener('click', () => {
-                modalContainer.innerHTML = '';
+                document.getElementById('modalContainer').innerHTML = '';
             });
         }
 
-        // ========== DATA MANAGEMENT FUNCTIONS ==========
-        function exportData() {
-            const exportData = {
-                schools: schools,
-                exportedAt: new Date().toISOString()
-            };
-
-            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `hero-data-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
+        // ========== UTILITY FUNCTIONS ==========
+        function simulateImport(schoolId) {
+            alert(`Demo: Import Excel untuk sekolah ID ${schoolId} akan diproses. Data akan diupdate.`);
+            // In real implementation, this would process the Excel file
         }
 
-        function importData(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const imported = JSON.parse(e.target.result);
-                    if (imported.schools && Array.isArray(imported.schools)) {
-                        schools = imported.schools;
-                        renderPodium();
-                        renderTable();
-                        updateLastUpdated();
-                        alert('Data berhasil diimport!');
-                    } else {
-                        alert('Format file tidak valid');
-                    }
-                } catch (error) {
-                    alert('Error membaca file');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        async function syncFromSheet(url) {
-            // This is a mock function - in real implementation, you'd need a backend proxy
-            // because CORS prevents direct fetch to Google Sheets
-            alert('Demo: Fitur sync memerlukan backend proxy. Data akan menggunakan data dummy.');
-            
-            // Simulate successful sync with random data adjustments
-            schools = schools.map(school => ({
-                ...school,
-                revenue: school.revenue + Math.floor(Math.random() * 1000000),
-                salesCount: school.salesCount + Math.floor(Math.random() * 10)
-            }));
-            
-            renderPodium();
-            renderTable();
-            updateLastUpdated();
+        function handleFileUpload(input, schoolId) {
+            if (input.files.length > 0) {
+                alert(`File ${input.files[0].name} berhasil dipilih. Demo: import akan diproses.`);
+                // Reset input
+                input.value = '';
+            }
         }
 
         // ========== EVENT LISTENERS ==========
@@ -2101,12 +1804,9 @@
 
                 const tab = item.dataset.tab;
                 if (tab === 'dashboard') {
-                    dashboardSection.classList.add('active');
-                    managementSection.classList.remove('active');
-                } else {
-                    dashboardSection.classList.remove('active');
-                    managementSection.classList.add('active');
+                    window.location.href = 'dashboard.html'; // Navigate to dashboard page
                 }
+                // Data Master is current page
             });
         });
 
@@ -2115,51 +1815,29 @@
             updateLastUpdated();
         });
 
-        // Export
-        exportBtn.addEventListener('click', exportData);
-
-        // Import
-        importFile.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                importData(e.target.files[0]);
-            }
-            e.target.value = ''; // Reset file input
-        });
-
-        // Sync
-        syncBtn.addEventListener('click', async () => {
-            if (!syncUrl.value) {
-                alert('Masukkan URL Google Sheet terlebih dahulu');
-                return;
-            }
-
-            if (isSyncing) return;
-
-            isSyncing = true;
-            syncBtn.disabled = true;
-            syncBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SYNCING...';
-
-            await syncFromSheet(syncUrl.value);
-
-            isSyncing = false;
-            syncBtn.disabled = false;
-            syncBtn.innerHTML = '<i class="fas fa-upload"></i> SYNC NOW';
+        // Search functionality
+        schoolSearch.addEventListener('input', (e) => {
+            renderSchoolList(e.target.value);
         });
 
         // ========== INITIALIZATION ==========
         function init() {
             updateCurrentPeriod();
             updateLastUpdated();
-            renderPodium();
-            renderTable();
+            
+            // Update total schools in header
+            document.querySelector('.panel-header p').textContent = `${schools.length} Sekolah Terdaftar`;
+            
+            renderSchoolList();
+            renderSchoolProfile();
 
             // Load from localStorage if available
             const saved = localStorage.getItem('hero_schools');
             if (saved) {
                 try {
                     schools = JSON.parse(saved);
-                    renderPodium();
-                    renderTable();
+                    renderSchoolList();
+                    renderSchoolProfile();
                 } catch (e) {
                     console.error('Error loading from localStorage');
                 }
@@ -2170,6 +1848,11 @@
                 localStorage.setItem('hero_schools', JSON.stringify(schools));
             }, 5000);
         }
+
+        // Make functions global for onclick handlers
+        window.openSchoolModal = openSchoolModal;
+        window.simulateImport = simulateImport;
+        window.handleFileUpload = handleFileUpload;
 
         init();
     </script>
