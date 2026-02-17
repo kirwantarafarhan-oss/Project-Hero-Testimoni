@@ -1,1510 +1,776 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>H.E.R.O - Highschool Entrepreneur Race OSIS</title>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        /* ... (semua style sebelumnya tetap sama, tambahkan style baru di bawah) ... */
-        
-        /* Form Edit Styles */
-        .edit-form {
-            background: white;
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            border: 2px solid #f1f5f9;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group.full-width {
-            grid-column: span 2;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #64748b;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.875rem 1.25rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 1rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #1e293b;
-            transition: all 0.3s;
-            outline: none;
-        }
-
-        .form-control:focus {
-            border-color: #EC0000;
-            box-shadow: 0 0 0 3px rgba(236,0,0,0.1);
-        }
-
-        .form-control.error {
-            border-color: #ef4444;
-        }
-
-        .error-message {
-            font-size: 0.75rem;
-            color: #ef4444;
-            margin-top: 0.25rem;
-            font-weight: 600;
-        }
-
-        .edit-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid #f1f5f9;
-        }
-
-        .btn-edit {
-            padding: 0.875rem 1.75rem;
-            background-color: #FFB800;
-            color: #1e293b;
-            border: none;
-            border-radius: 1rem;
-            font-weight: 900;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 15px -3px rgba(255,184,0,0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-edit:hover {
-            background-color: #E5A600;
-            transform: scale(1.05);
-        }
-
-        .btn-save {
-            padding: 0.875rem 1.75rem;
-            background-color: #10b981;
-            color: white;
-            border: none;
-            border-radius: 1rem;
-            font-weight: 900;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 15px -3px rgba(16,185,129,0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-save:hover {
-            background-color: #059669;
-            transform: scale(1.05);
-        }
-
-        .btn-cancel {
-            padding: 0.875rem 1.75rem;
-            background-color: white;
-            color: #64748b;
-            border: 2px solid #e2e8f0;
-            border-radius: 1rem;
-            font-weight: 900;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-cancel:hover {
-            border-color: #EC0000;
-            color: #EC0000;
-        }
-
-        .view-mode {
-            position: relative;
-        }
-
-        .edit-toggle {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 2rem;
-            padding: 0.5rem 1rem;
-            font-size: 0.75rem;
-            font-weight: 900;
-            color: #64748b;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            z-index: 10;
-        }
-
-        .edit-toggle:hover {
-            background-color: #FFB800;
-            color: white;
-            border-color: #FFB800;
-        }
-
-        .edit-toggle i {
-            font-size: 0.875rem;
-        }
-
-        .info-value.editable {
-            cursor: pointer;
-            transition: all 0.2s;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.5rem;
-            display: inline-block;
-        }
-
-        .info-value.editable:hover {
-            background-color: #f1f5f9;
-            color: #EC0000;
-        }
-
-        .info-value.editable i {
-            font-size: 0.875rem;
-            margin-left: 0.5rem;
-            opacity: 0.5;
-            color: #94a3b8;
-        }
-
-        .info-value.editable:hover i {
-            opacity: 1;
-            color: #EC0000;
-        }
-
-        .toast-notification {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: #10b981;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 1rem;
-            font-weight: 700;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
-            transform: translateY(200%);
-            transition: transform 0.3s ease;
-            z-index: 100;
-        }
-
-        .toast-notification.show {
-            transform: translateY(0);
-        }
-
-        .toast-notification.error {
-            background-color: #ef4444;
-        }
-
-        .toast-notification i {
-            margin-right: 0.5rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>H.E.R.O - Highschool Entrepreneur Race OSIS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    * { font-family: 'Inter', sans-serif; }
+    .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+    .hover-scale { transition: transform 0.2s; }
+    .hover-scale:hover { transform: scale(1.02); }
+    .truncate-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <div class="hero-dashboard" id="heroDashboard">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo-container">
-                <div class="logo-wrapper">
-                    <div class="logo-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <div class="logo-text">H.E.R.O</div>
-                </div>
-                <p class="logo-subtitle">Highschool Entrepreneur<br>Race OSIS</p>
-            </div>
+<body class="bg-[#F7F8FA] min-h-screen">
 
-            <nav class="nav-menu">
-                <button class="nav-item active" data-tab="dashboard">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>Race Board</span>
-                </button>
-                <button class="nav-item" data-tab="management">
-                    <i class="fas fa-cog"></i>
-                    <span>Data Master</span>
-                </button>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="footer-card">
-                    <div class="card-header">
-                        <i class="fas fa-trophy"></i>
-                        <span>Telkomsel OSIS Race</span>
-                    </div>
-                    <p>Monitoring Penjualan Sekolah Mitra.</p>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="dashboard-header">
-                <div class="header-left">
-                    <h2 class="header-title" id="headerTitle">Race <span>Monitoring</span></h2>
-                    <div class="update-badge" id="updateBadge">
-                        <i class="far fa-clock"></i> UPDATE: <span id="lastUpdated">Just now</span>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="period-badge" id="currentPeriod">
-                        <i class="far fa-calendar-alt"></i> <span></span>
-                    </div>
-                    <button class="refresh-btn" id="refreshBtn">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                </div>
-            </header>
-
-            <!-- Dashboard Section (Race Board) -->
-            <div id="dashboardSection" class="dashboard-section active">
-                <!-- Podium Section -->
-                <section class="dashboard-section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h3 class="section-title">
-                            Podium Jawara H.E.R.O
-                            <span class="live-indicator"></span>
-                        </h3>
-                    </div>
-
-                    <div class="podium-grid" id="podiumContainer">
-                        <!-- Will be filled by JavaScript -->
-                    </div>
-                </section>
-
-                <!-- Table Section -->
-                <div class="table-section">
-                    <div class="table-header">
-                        <div class="table-icon">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <h3 class="table-title">Tabel Klasemen Harian</h3>
-                    </div>
-
-                    <div class="table-container">
-                        <div class="table-responsive">
-                            <table id="leaderboardTable">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th>Nama Sekolah</th>
-                                        <th class="text-right">Total Omzet</th>
-                                        <th class="text-center">Trend</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableBody">
-                                    <!-- Will be filled by JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Data Management Section -->
-            <div id="managementSection" class="management-section">
-                <div class="management-header">
-                    <div class="management-header-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h2 class="management-header-title">SIMPAN <span>PERMANEN</span></h2>
-                </div>
-
-                <!-- Admin Race Center Layout -->
-                <div class="admin-container">
-                    <!-- Left Panel - School List -->
-                    <div class="school-list-panel">
-                        <div class="panel-header">
-                            <h3>PILIH SEKOLAH</h3>
-                            <p id="totalSchools">0 Sekolah Terdaftar</p>
-                        </div>
-                        <div class="school-search">
-                            <input type="text" class="search-input" id="schoolSearch" placeholder="Cari sekolah...">
-                        </div>
-                        <div class="school-items" id="schoolList">
-                            <!-- Will be filled by JavaScript -->
-                        </div>
-                    </div>
-
-                    <!-- Right Panel - School Profile -->
-                    <div class="school-profile-panel" id="schoolProfilePanel">
-                        <!-- Will be filled by JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal Container -->
-    <div id="modalContainer"></div>
+  <!-- Main Container -->
+  <div class="min-h-screen flex flex-col md:flex-row bg-[#F7F8FA]" id="app">
     
-    <!-- Toast Notification -->
-    <div id="toastNotification" class="toast-notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Data berhasil disimpan</span>
+    <!-- Sidebar -->
+    <aside class="w-full md:w-20 lg:w-64 bg-[#0F0F0F] text-white p-6 flex flex-col gap-8 md:flex hidden sticky top-0 h-screen border-r border-white/5 shadow-2xl">
+      <div class="flex flex-col gap-1 items-center lg:items-start">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-gradient-to-br from-[#EC0000] to-[#800000] rounded-2xl flex items-center justify-center shadow-xl shadow-red-600/20 border border-white/10">
+            <i class="fa-solid fa-rocket text-white text-2xl"></i>
+          </div>
+          <div class="hidden lg:block">
+            <h1 class="font-black text-2xl tracking-tighter bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent uppercase">
+              H.E.R.O
+            </h1>
+          </div>
+        </div>
+        <p class="text-[9px] uppercase font-bold text-slate-500 leading-tight mt-6 tracking-[0.15em] hidden lg:block opacity-60">
+          Highschool Entrepreneur<br>Race OSIS
+        </p>
+      </div>
+
+      <nav class="flex flex-col gap-3 mt-4">
+        <button id="dashboardTab" class="flex items-center gap-4 p-4 rounded-2xl font-bold transition-all duration-300 bg-gradient-to-r from-[#EC0000] to-[#FF4D4D] text-white shadow-lg shadow-red-500/30">
+          <i class="fa-solid fa-chart-pie w-5"></i> <span class="hidden lg:block text-sm">Race Board</span>
+        </button>
+        <button id="managementTab" class="flex items-center gap-4 p-4 rounded-2xl font-bold transition-all duration-300 text-slate-500 hover:text-white hover:bg-white/5">
+          <i class="fa-solid fa-gear w-5"></i> <span class="hidden lg:block text-sm">Data Master</span>
+        </button>
+      </nav>
+
+      <div class="mt-auto hidden lg:block">
+        <div class="bg-gradient-to-br from-[#1F1F1F] to-[#0A0A0A] p-5 rounded-[1.5rem] border border-white/5 shadow-2xl relative overflow-hidden">
+           <div class="flex items-center gap-2 text-[#FFB800] mb-2">
+             <i class="fa-solid fa-trophy text-sm"></i>
+             <span class="text-[10px] font-black uppercase tracking-[0.15em]">Telkomsel OSIS Race</span>
+           </div>
+           <p class="text-[11px] text-slate-400 leading-relaxed font-medium">Monitoring Penjualan Sekolah Mitra.</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Sidebar Toggle (Visible on mobile only) -->
+    <div class="md:hidden bg-[#0F0F0F] text-white p-4 flex justify-between items-center sticky top-0 z-50">
+      <div class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-gradient-to-br from-[#EC0000] to-[#800000] rounded-xl flex items-center justify-center">
+          <i class="fa-solid fa-rocket text-white"></i>
+        </div>
+        <h1 class="font-black text-xl">H.E.R.O</h1>
+      </div>
+      <div class="flex gap-2">
+        <button id="mobileDashboard" class="p-2 bg-[#EC0000] rounded-lg text-white">
+          <i class="fa-solid fa-chart-pie"></i>
+        </button>
+        <button id="mobileManagement" class="p-2 bg-white/10 rounded-lg text-white">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
     </div>
 
-    <script>
-        // ========== DATA ==========
-        const SCHOOLS_DATA = [
-            {
-                id: "1",
-                idDigipos: "DIGI-8000",
-                name: "SMKN 1 KEPANJEN",
-                region: "Kab. Malang",
-                studentCount: 1250,
-                teacherCount: 45,
-                revenue: 18750000,
-                prevRevenue: 15200000,
-                salesCount: 156,
-                lastSale: "2 menit lalu",
-                trend: "up",
-                topProducts: ["Paket Data 10GB", "Pulsa 50K", "Voucher Game"],
-                totalTransactions: 156,
-                topStudentName: "Ahmad Fauzi",
-                topStudentClass: "XI TKJ 1",
-                topStudentAmount: 2500000,
-                topClass: "XI TKJ 1",
-                carrierStats: { telkomsel: 75, indosat: 18, xl: 7 },
-                monthlyData: [
-                    { month: "Jan", revenue: 12500000 },
-                    { month: "Feb", revenue: 14200000 },
-                    { month: "Mar", revenue: 16800000 },
-                    { month: "Apr", revenue: 18750000 }
-                ],
-                topCustomers: [
-                    { name: "Ahmad Fauzi", class: "XI TKJ 1", amount: 2500000 },
-                    { name: "Siti Nurhaliza", class: "XI TKJ 2", amount: 2100000 },
-                    { name: "Budi Santoso", class: "XII RPL 1", amount: 1850000 }
-                ]
-            },
-            {
-                id: "2",
-                idDigipos: "DIGI-8001",
-                name: "SMKN 13 MALANG",
-                region: "Kota Malang",
-                studentCount: 1450,
-                teacherCount: 52,
-                revenue: 16320000,
-                prevRevenue: 14800000,
-                salesCount: 134,
-                lastSale: "5 menit lalu",
-                trend: "up",
-                topProducts: ["Paket Data 5GB", "Pulsa 25K"],
-                totalTransactions: 134,
-                topStudentName: "Rizky Pratama",
-                topStudentClass: "XII RPL 2",
-                topStudentAmount: 2150000,
-                topClass: "XII RPL 2",
-                carrierStats: { telkomsel: 68, indosat: 22, xl: 10 },
-                monthlyData: [
-                    { month: "Jan", revenue: 11500000 },
-                    { month: "Feb", revenue: 13200000 },
-                    { month: "Mar", revenue: 14800000 },
-                    { month: "Apr", revenue: 16320000 }
-                ],
-                topCustomers: [
-                    { name: "Rizky Pratama", class: "XII RPL 2", amount: 2150000 },
-                    { name: "Dewi Lestari", class: "XII RPL 1", amount: 1950000 },
-                    { name: "M. Rizki", class: "XI RPL 3", amount: 1750000 }
-                ]
-            },
-            {
-                id: "3",
-                idDigipos: "DIGI-8002",
-                name: "SMANG MALANG",
-                region: "Kota Malang",
-                studentCount: 980,
-                teacherCount: 38,
-                revenue: 15450000,
-                prevRevenue: 15900000,
-                salesCount: 145,
-                lastSale: "15 menit lalu",
-                trend: "down",
-                topProducts: ["Paket Data 3GB", "Pulsa 10K"],
-                totalTransactions: 145,
-                topStudentName: "Maria Goretti",
-                topStudentClass: "XII IPS 2",
-                topStudentAmount: 1850000,
-                topClass: "XII IPS 2",
-                carrierStats: { telkomsel: 72, indosat: 20, xl: 8 },
-                monthlyData: [
-                    { month: "Jan", revenue: 14200000 },
-                    { month: "Feb", revenue: 15100000 },
-                    { month: "Mar", revenue: 15900000 },
-                    { month: "Apr", revenue: 15450000 }
-                ],
-                topCustomers: [
-                    { name: "Maria Goretti", class: "XII IPS 2", amount: 1850000 },
-                    { name: "Yohanes", class: "XII IPS 1", amount: 1650000 },
-                    { name: "Agnes Monica", class: "XI IPS 3", amount: 1450000 }
-                ]
-            },
-            {
-                id: "4",
-                idDigipos: "DIGI-8003",
-                name: "SMKN 1 PUJON",
-                region: "Kab. Malang",
-                studentCount: 1150,
-                teacherCount: 42,
-                revenue: 14200000,
-                prevRevenue: 13500000,
-                salesCount: 118,
-                lastSale: "25 menit lalu",
-                trend: "up",
-                topProducts: ["Paket Data 7GB", "Pulsa 20K"],
-                totalTransactions: 118,
-                topStudentName: "Dian Purnama",
-                topStudentClass: "XI IPA 3",
-                topStudentAmount: 1550000,
-                topClass: "XI IPA 3",
-                carrierStats: { telkomsel: 70, indosat: 19, xl: 11 },
-                monthlyData: [
-                    { month: "Jan", revenue: 9800000 },
-                    { month: "Feb", revenue: 11200000 },
-                    { month: "Mar", revenue: 13500000 },
-                    { month: "Apr", revenue: 14200000 }
-                ],
-                topCustomers: [
-                    { name: "Dian Purnama", class: "XI IPA 3", amount: 1550000 },
-                    { name: "Putri Amalia", class: "XI IPA 1", amount: 1350000 },
-                    { name: "Andi Kurniawan", class: "XII IPA 2", amount: 1250000 }
-                ]
-            },
-            {
-                id: "5",
-                idDigipos: "DIGI-8004",
-                name: "SMKN 8 MALANG",
-                region: "Kota Malang",
-                studentCount: 1350,
-                teacherCount: 48,
-                revenue: 13800000,
-                prevRevenue: 14200000,
-                salesCount: 112,
-                lastSale: "32 menit lalu",
-                trend: "down",
-                topProducts: ["Paket Data 5GB", "Voucher Game"],
-                totalTransactions: 112,
-                topStudentName: "Citra Lestari",
-                topStudentClass: "XII AK 1",
-                topStudentAmount: 1450000,
-                topClass: "XII AK 1",
-                carrierStats: { telkomsel: 65, indosat: 25, xl: 10 },
-                monthlyData: [
-                    { month: "Jan", revenue: 12500000 },
-                    { month: "Feb", revenue: 13800000 },
-                    { month: "Mar", revenue: 14200000 },
-                    { month: "Apr", revenue: 13800000 }
-                ],
-                topCustomers: [
-                    { name: "Citra Lestari", class: "XII AK 1", amount: 1450000 },
-                    { name: "Dian Sastro", class: "XII AK 2", amount: 1250000 },
-                    { name: "Rina Melati", class: "XI AK 3", amount: 1150000 }
-                ]
-            },
-            {
-                id: "6",
-                idDigipos: "DIGI-8005",
-                name: "SMKING MALANG",
-                region: "Kota Malang",
-                studentCount: 880,
-                teacherCount: 35,
-                revenue: 12500000,
-                prevRevenue: 11800000,
-                salesCount: 98,
-                lastSale: "45 menit lalu",
-                trend: "up",
-                topProducts: ["Paket Data", "Pulsa"],
-                totalTransactions: 98,
-                topStudentName: "Budi Setiawan",
-                topStudentClass: "XII MIPA 1",
-                topStudentAmount: 1250000,
-                topClass: "XII MIPA 1",
-                carrierStats: { telkomsel: 78, indosat: 15, xl: 7 },
-                monthlyData: [
-                    { month: "Jan", revenue: 9500000 },
-                    { month: "Feb", revenue: 10500000 },
-                    { month: "Mar", revenue: 11800000 },
-                    { month: "Apr", revenue: 12500000 }
-                ],
-                topCustomers: [
-                    { name: "Budi Setiawan", class: "XII MIPA 1", amount: 1250000 },
-                    { name: "Sari Indah", class: "XII MIPA 2", amount: 1050000 },
-                    { name: "Joko Susilo", class: "XI MIPA 1", amount: 950000 }
-                ]
-            },
-            {
-                id: "7",
-                idDigipos: "DIGI-8006",
-                name: "SMAN 1 LAWANG",
-                region: "Kab. Malang",
-                studentCount: 1050,
-                teacherCount: 40,
-                revenue: 11200000,
-                prevRevenue: 10800000,
-                salesCount: 85,
-                lastSale: "1 jam lalu",
-                trend: "up",
-                topProducts: ["Paket Data", "Pulsa"],
-                totalTransactions: 85,
-                topStudentName: "Eko Prasetyo",
-                topStudentClass: "XI IPA 2",
-                topStudentAmount: 950000,
-                topClass: "XI IPA 2",
-                carrierStats: { telkomsel: 72, indosat: 20, xl: 8 },
-                monthlyData: [
-                    { month: "Jan", revenue: 8500000 },
-                    { month: "Feb", revenue: 9500000 },
-                    { month: "Mar", revenue: 10800000 },
-                    { month: "Apr", revenue: 11200000 }
-                ],
-                topCustomers: [
-                    { name: "Eko Prasetyo", class: "XI IPA 2", amount: 950000 },
-                    { name: "Ratna Dewi", class: "XI IPA 1", amount: 850000 },
-                    { name: "Hendra Gunawan", class: "XII IPA 3", amount: 750000 }
-                ]
-            },
-            {
-                id: "8",
-                idDigipos: "DIGI-8007",
-                name: "SMANS MALANG",
-                region: "Kota Malang",
-                studentCount: 1150,
-                teacherCount: 43,
-                revenue: 9800000,
-                prevRevenue: 10200000,
-                salesCount: 72,
-                lastSale: "2 jam lalu",
-                trend: "down",
-                topProducts: ["Pulsa", "Voucher"],
-                totalTransactions: 72,
-                topStudentName: "Maya Sari",
-                topStudentClass: "X IPS 3",
-                topStudentAmount: 750000,
-                topClass: "X IPS 3",
-                carrierStats: { telkomsel: 68, indosat: 22, xl: 10 },
-                monthlyData: [
-                    { month: "Jan", revenue: 8800000 },
-                    { month: "Feb", revenue: 9500000 },
-                    { month: "Mar", revenue: 10200000 },
-                    { month: "Apr", revenue: 9800000 }
-                ],
-                topCustomers: [
-                    { name: "Maya Sari", class: "X IPS 3", amount: 750000 },
-                    { name: "Adi Nugroho", class: "X IPS 1", amount: 650000 },
-                    { name: "Nina Wulandari", class: "XI IPS 2", amount: 550000 }
-                ]
-            }
-        ];
-
-        // ========== STATE ==========
-        let schools = [...SCHOOLS_DATA];
-        let selectedSchool = schools[0];
-        let activeProfileTab = 'profil';
-        let isEditing = false;
-
-        // ========== DOM ELEMENTS ==========
-        const navItems = document.querySelectorAll('.nav-item');
-        const dashboardSection = document.getElementById('dashboardSection');
-        const managementSection = document.getElementById('managementSection');
-        const headerTitle = document.getElementById('headerTitle');
-        const lastUpdatedSpan = document.getElementById('lastUpdated');
-        const refreshBtn = document.getElementById('refreshBtn');
-        const currentPeriodSpan = document.getElementById('currentPeriod').querySelector('span');
-        const podiumContainer = document.getElementById('podiumContainer');
-        const tableBody = document.getElementById('tableBody');
-        const schoolList = document.getElementById('schoolList');
-        const schoolProfilePanel = document.getElementById('schoolProfilePanel');
-        const schoolSearch = document.getElementById('schoolSearch');
-        const totalSchoolsSpan = document.getElementById('totalSchools');
-        const toastNotification = document.getElementById('toastNotification');
-        const toastMessage = document.getElementById('toastMessage');
-
-        // ========== HELPER FUNCTIONS ==========
-        function formatRupiah(number) {
-            return new Intl.NumberFormat('id-ID').format(number);
-        }
-
-        function parseRupiah(value) {
-            return parseInt(value.replace(/[^0-9]/g, '')) || 0;
-        }
-
-        function updateLastUpdated() {
-            const now = new Date();
-            lastUpdatedSpan.textContent = now.toLocaleTimeString('id-ID');
-        }
-
-        function updateCurrentPeriod() {
-            const now = new Date();
-            const options = { month: 'long', year: 'numeric' };
-            currentPeriodSpan.textContent = now.toLocaleDateString('id-ID', options);
-        }
-
-        function showToast(message, isError = false) {
-            toastMessage.textContent = message;
-            toastNotification.classList.add('show');
-            if (isError) {
-                toastNotification.classList.add('error');
-            } else {
-                toastNotification.classList.remove('error');
-            }
-            
-            setTimeout(() => {
-                toastNotification.classList.remove('show');
-            }, 3000);
-        }
-
-        // ========== RACE BOARD FUNCTIONS ==========
-        function renderPodium() {
-            const sorted = [...schools].sort((a, b) => b.revenue - a.revenue);
-            const topThree = sorted.slice(0, 3);
-            
-            let html = '';
-            
-            // Silver (Rank 2)
-            if (topThree[1]) {
-                html += `
-                    <div class="podium-card silver" data-id="${topThree[1].id}">
-                        <div class="podium-bg-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="podium-rank">2</div>
-                        <h4 class="podium-school-name">${topThree[1].name}</h4>
-                        <p class="podium-region">${topThree[1].region}</p>
-                        <div class="podium-footer">
-                            <div class="revenue-info">
-                                <p class="revenue-label">Realtime Revenue</p>
-                                <p class="revenue-value">Rp${formatRupiah(topThree[1].revenue)}</p>
-                            </div>
-                            <i class="fas fa-chevron-right podium-chevron"></i>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // Gold (Rank 1)
-            if (topThree[0]) {
-                html += `
-                    <div class="podium-card gold" data-id="${topThree[0].id}">
-                        <div class="podium-bg-icon" style="color: #FFB800;">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <div class="podium-rank">
-                            <span class="rank-number">1</span>
-                            <i class="fas fa-trophy crown-icon"></i>
-                        </div>
-                        <div class="ping-dot"></div>
-                        <h4 class="podium-school-name">${topThree[0].name}</h4>
-                        <p class="podium-region">${topThree[0].region}</p>
-                        <div class="podium-footer">
-                            <div class="revenue-info">
-                                <p class="revenue-label">Leader Revenue (Live)</p>
-                                <p class="revenue-value">Rp${formatRupiah(topThree[0].revenue)}</p>
-                            </div>
-                            <div class="gold-sparkle">
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // Bronze (Rank 3)
-            if (topThree[2]) {
-                html += `
-                    <div class="podium-card bronze" data-id="${topThree[2].id}">
-                        <div class="podium-bg-icon">
-                            <i class="fas fa-trophy" style="color: #b45309;"></i>
-                        </div>
-                        <div class="podium-rank">3</div>
-                        <h4 class="podium-school-name">${topThree[2].name}</h4>
-                        <p class="podium-region">${topThree[2].region}</p>
-                        <div class="podium-footer">
-                            <div class="revenue-info">
-                                <p class="revenue-label">Realtime Revenue</p>
-                                <p class="revenue-value">Rp${formatRupiah(topThree[2].revenue)}</p>
-                            </div>
-                            <i class="fas fa-chevron-right podium-chevron"></i>
-                        </div>
-                    </div>
-                `;
-            }
-
-            podiumContainer.innerHTML = html;
-
-            // Add click listeners to podium cards
-            document.querySelectorAll('.podium-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const id = card.dataset.id;
-                    const school = schools.find(s => s.id === id);
-                    if (school) openModal(school);
-                });
-            });
-        }
-
-        function renderTable() {
-            const sorted = [...schools].sort((a, b) => b.revenue - a.revenue);
-            
-            let html = '';
-            sorted.forEach((school, index) => {
-                const trendIcon = school.trend === 'up' ? 'fa-arrow-up' : (school.trend === 'down' ? 'fa-arrow-down' : 'fa-minus');
-                const trendClass = school.trend === 'up' ? 'trend-up' : (school.trend === 'down' ? 'trend-down' : 'trend-stable');
-                const trendText = school.trend === 'up' ? 'Naik' : (school.trend === 'down' ? 'Turun' : 'Stable');
-                
-                html += `
-                    <tr data-id="${school.id}">
-                        <td class="text-center">
-                            <span class="rank-number-cell">${index + 1}</span>
-                        </td>
-                        <td>
-                            <p class="school-name">${school.name}</p>
-                            <p class="school-meta">${school.region} • ${school.idDigipos}</p>
-                        </td>
-                        <td class="revenue-cell">
-                            <p class="revenue-amount">Rp${formatRupiah(school.revenue)}</p>
-                            <p class="sales-count">${school.salesCount} ITEMS SOLD</p>
-                        </td>
-                        <td class="text-center">
-                            <div class="trend-badge ${trendClass}">
-                                <i class="fas ${trendIcon}"></i> ${trendText}
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            tableBody.innerHTML = html;
-
-            // Add click listeners to table rows
-            document.querySelectorAll('#leaderboardTable tbody tr').forEach(row => {
-                row.addEventListener('click', () => {
-                    const id = row.dataset.id;
-                    const school = schools.find(s => s.id === id);
-                    if (school) openModal(school);
-                });
-            });
-        }
-
-        // ========== EDIT FUNCTIONS ==========
-        function enableEditMode() {
-            isEditing = true;
-            renderSchoolProfile();
-        }
-
-        function cancelEdit() {
-            isEditing = false;
-            renderSchoolProfile();
-        }
-
-        function saveSchoolData(formData) {
-            // Validasi form
-            const errors = [];
-            
-            if (!formData.name || formData.name.trim() === '') {
-                errors.push('Nama sekolah harus diisi');
-            }
-            
-            if (!formData.idDigipos || formData.idDigipos.trim() === '') {
-                errors.push('ID Digipos harus diisi');
-            }
-            
-            if (!formData.region || formData.region.trim() === '') {
-                errors.push('Wilayah harus diisi');
-            }
-            
-            if (formData.studentCount < 0) {
-                errors.push('Jumlah siswa tidak valid');
-            }
-            
-            if (formData.teacherCount < 0) {
-                errors.push('Jumlah reseller tidak valid');
-            }
-            
-            if (errors.length > 0) {
-                showToast(errors.join(', '), true);
-                return false;
-            }
-            
-            // Update data sekolah
-            const schoolIndex = schools.findIndex(s => s.id === selectedSchool.id);
-            if (schoolIndex !== -1) {
-                schools[schoolIndex] = {
-                    ...schools[schoolIndex],
-                    name: formData.name,
-                    idDigipos: formData.idDigipos,
-                    region: formData.region,
-                    studentCount: formData.studentCount,
-                    teacherCount: formData.teacherCount,
-                    topClass: formData.topClass
-                };
-                
-                selectedSchool = schools[schoolIndex];
-                
-                // Update semua tampilan
-                renderPodium();
-                renderTable();
-                renderSchoolList(schoolSearch.value);
-                
-                showToast('Data sekolah berhasil disimpan!');
-                
-                // Simpan ke localStorage
-                localStorage.setItem('hero_schools', JSON.stringify(schools));
-                
-                return true;
-            }
-            
-            return false;
-        }
-
-        function handleEditSubmit(event) {
-            event.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('editName').value,
-                idDigipos: document.getElementById('editIdDigipos').value,
-                region: document.getElementById('editRegion').value,
-                studentCount: parseInt(document.getElementById('editStudentCount').value) || 0,
-                teacherCount: parseInt(document.getElementById('editTeacherCount').value) || 0,
-                topClass: document.getElementById('editTopClass').value
-            };
-            
-            if (saveSchoolData(formData)) {
-                isEditing = false;
-                renderSchoolProfile();
-            }
-        }
-
-        // ========== DATA MASTER FUNCTIONS ==========
-        function renderSchoolList(filterText = '') {
-            const filtered = schools.filter(school => 
-                school.name.toLowerCase().includes(filterText.toLowerCase()) ||
-                school.region.toLowerCase().includes(filterText.toLowerCase())
-            );
-
-            let html = '';
-            filtered.forEach((school, index) => {
-                const isActive = selectedSchool && selectedSchool.id === school.id;
-                html += `
-                    <div class="school-item ${isActive ? 'active' : ''}" data-id="${school.id}">
-                        <div class="school-item-number">${index + 1}</div>
-                        <div class="school-item-info">
-                            <h4>${school.name}</h4>
-                            <p>${school.idDigipos} • ${school.region}</p>
-                        </div>
-                    </div>
-                `;
-            });
-
-            schoolList.innerHTML = html;
-
-            // Add click listeners
-            document.querySelectorAll('.school-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const id = item.dataset.id;
-                    const school = schools.find(s => s.id === id);
-                    if (school) {
-                        selectedSchool = school;
-                        isEditing = false;
-                        renderSchoolList(schoolSearch.value);
-                        renderSchoolProfile();
-                    }
-                });
-            });
-        }
-
-        function renderSchoolProfile() {
-            if (!selectedSchool) return;
-
-            const school = selectedSchool;
-            
-            let profileHTML = '';
-            
-            if (isEditing) {
-                // Mode Edit
-                profileHTML = `
-                    <div class="profile-header">
-                        <div class="profile-header-bg">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <h2 class="profile-school-name">EDIT DATA SEKOLAH</h2>
-                        <div class="profile-school-id">
-                            <i class="fas fa-edit"></i>
-                            ${school.idDigipos} • ${school.region}
-                        </div>
-                    </div>
-
-                    <div class="profile-content">
-                        <form id="editSchoolForm" onsubmit="handleEditSubmit(event)">
-                            <div class="edit-form">
-                                <h3 class="section-title">
-                                    <i class="fas fa-building"></i>
-                                    IDENTITAS & WILAYAH
-                                </h3>
-
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label class="form-label">Nama Sekolah</label>
-                                        <input type="text" class="form-control" id="editName" value="${school.name}" placeholder="Contoh: SMKN 1 KEPANJEN" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">ID Digipos</label>
-                                        <input type="text" class="form-control" id="editIdDigipos" value="${school.idDigipos}" placeholder="Contoh: DIGI-8000" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Wilayah</label>
-                                        <input type="text" class="form-control" id="editRegion" value="${school.region}" placeholder="Contoh: Kab. Malang" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Kelas Jawara</label>
-                                        <input type="text" class="form-control" id="editTopClass" value="${school.topClass}" placeholder="Contoh: XI TKJ 1">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Jumlah Siswa</label>
-                                        <input type="number" class="form-control" id="editStudentCount" value="${school.studentCount}" min="0" step="1" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Jumlah Reseller</label>
-                                        <input type="number" class="form-control" id="editTeacherCount" value="${school.teacherCount}" min="0" step="1" required>
-                                    </div>
-                                </div>
-
-                                <div class="edit-actions">
-                                    <button type="submit" class="btn-save">
-                                        <i class="fas fa-save"></i>
-                                        SIMPAN PERMANEN
-                                    </button>
-                                    <button type="button" class="btn-cancel" onclick="cancelEdit()">
-                                        <i class="fas fa-times"></i>
-                                        BATAL
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                        <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 1rem; text-align: center;">
-                            <i class="fas fa-info-circle" style="color: #FFB800;"></i>
-                            <span style="font-size: 0.875rem; color: #64748b; margin-left: 0.5rem;">
-                                Data akan tersimpan secara permanen dan muncul di Race Board
-                            </span>
-                        </div>
-                    </div>
-                `;
-            } else {
-                // Mode View
-                profileHTML = `
-                    <div class="profile-header">
-                        <div class="profile-header-bg">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <h2 class="profile-school-name">${school.name}</h2>
-                        <div class="profile-school-id">
-                            <i class="fas fa-id-card"></i>
-                            ${school.idDigipos} • ${school.region}
-                        </div>
-                    </div>
-
-                    <div class="profile-tabs">
-                        <div class="profile-tab active" data-tab="profil">
-                            <i class="fas fa-user"></i> PROFIL
-                        </div>
-                        <div class="profile-tab" data-tab="import">
-                            <i class="fas fa-file-excel"></i> IMPORT EXCEL
-                        </div>
-                        <div class="profile-tab" data-tab="rekap">
-                            <i class="fas fa-chart-line"></i> REKAP & OMZET
-                        </div>
-                        <div class="profile-tab" data-tab="top">
-                            <i class="fas fa-star"></i> TOP CUSTOMER
-                        </div>
-                        <div class="profile-tab" data-tab="market">
-                            <i class="fas fa-chart-pie"></i> MARKET SHARE
-                        </div>
-                    </div>
-
-                    <div class="profile-content">
-                        <!-- Profil Section -->
-                        <div class="profile-section active" id="profil-section">
-                            <div class="view-mode">
-                                <button class="edit-toggle" onclick="enableEditMode()">
-                                    <i class="fas fa-edit"></i>
-                                    EDIT DATA
-                                </button>
-
-                                <h3 class="section-title">
-                                    <i class="fas fa-building"></i>
-                                    IDENTITAS & WILAYAH
-                                </h3>
-
-                                <div class="info-grid">
-                                    <div class="info-item">
-                                        <div class="info-label">Nama Sekolah</div>
-                                        <div class="info-value small">${school.name}</div>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="info-label">ID Digipos</div>
-                                        <div class="info-value small">${school.idDigipos}</div>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="info-label">Wilayah</div>
-                                        <div class="info-value small">${school.region}</div>
-                                    </div>
-                                    <div class="info-item">
-                                        <div class="info-label">Kelas Jawara</div>
-                                        <div class="info-value small">${school.topClass}</div>
-                                    </div>
-                                </div>
-
-                                <h3 class="section-title" style="margin-top: 2rem;">
-                                    <i class="fas fa-users"></i>
-                                    STATISTIK
-                                </h3>
-
-                                <div class="stats-cards">
-                                    <div class="stat-card">
-                                        <i class="fas fa-user-graduate"></i>
-                                        <div class="stat-label">Total Siswa</div>
-                                        <div class="stat-value">${school.studentCount}</div>
-                                    </div>
-                                    <div class="stat-card">
-                                        <i class="fas fa-chalkboard-teacher"></i>
-                                        <div class="stat-label">Total Reseller</div>
-                                        <div class="stat-value">${school.teacherCount}</div>
-                                    </div>
-                                    <div class="stat-card">
-                                        <i class="fas fa-wallet"></i>
-                                        <div class="stat-label">Total Omzet</div>
-                                        <div class="stat-value">Rp${formatRupiah(school.revenue)}</div>
-                                    </div>
-                                </div>
-
-                                <div class="action-buttons">
-                                    <button class="btn-primary" onclick="openSchoolModal('${school.id}')">
-                                        <i class="fas fa-eye"></i> LIHAT DETAIL
-                                    </button>
-                                    <button class="btn-primary import-excel-btn" onclick="simulateImport('${school.id}')">
-                                        <i class="fas fa-file-excel"></i> IMPORT EXCEL
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Import Excel Section -->
-                        <div class="profile-section" id="import-section">
-                            <h3 class="section-title">
-                                <i class="fas fa-file-excel"></i>
-                                IMPORT DATA EXCEL
-                            </h3>
-                            
-                            <div style="background: linear-gradient(135deg, #f8fafc, white); padding: 2rem; border-radius: 1.5rem; border: 1px solid #f1f5f9; text-align: center;">
-                                <i class="fas fa-file-excel" style="font-size: 4rem; color: #10b981; margin-bottom: 1rem;"></i>
-                                <h4 style="font-weight: 900; margin-bottom: 1rem;">Upload File Excel</h4>
-                                <p style="color: #94a3b8; margin-bottom: 2rem; font-size: 0.875rem;">Format: .xlsx, .xls (Maks 5MB)</p>
-                                
-                                <label class="btn-primary" style="display: inline-flex; cursor: pointer;">
-                                    <i class="fas fa-upload"></i>
-                                    PILIH FILE
-                                    <input type="file" accept=".xlsx,.xls" style="display: none;" onchange="handleFileUpload(this, '${school.id}')">
-                                </label>
-                                
-                                <p style="margin-top: 1rem; font-size: 0.75rem; color: #94a3b8;">
-                                    <i class="fas fa-info-circle"></i> 
-                                    File harus memiliki kolom: Nama Siswa, Kelas, Jumlah Penjualan
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Rekap & Omzet Section -->
-                        <div class="profile-section" id="rekap-section">
-                            <h3 class="section-title">
-                                <i class="fas fa-chart-line"></i>
-                                REKAP OMZET BULANAN
-                            </h3>
-
-                            <div style="margin-bottom: 2rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                    <span style="font-weight: 700; color: #475569;">Total Kumulatif Omzet</span>
-                                    <span style="font-size: 2rem; font-weight: 900; color: #EC0000;">Rp${formatRupiah(school.revenue)}</span>
-                                </div>
-                                
-                                <table class="rekap-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Bulan</th>
-                                            <th>Omzet</th>
-                                            <th>Trend</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${school.monthlyData.map((item, index) => {
-                                            const prevMonth = index > 0 ? school.monthlyData[index-1].revenue : item.revenue;
-                                            const trend = item.revenue > prevMonth ? 'up' : (item.revenue < prevMonth ? 'down' : 'stable');
-                                            const trendIcon = trend === 'up' ? 'fa-arrow-up' : (trend === 'down' ? 'fa-arrow-down' : 'fa-minus');
-                                            const trendColor = trend === 'up' ? '#10b981' : (trend === 'down' ? '#ef4444' : '#94a3b8');
-                                            return `
-                                                <tr>
-                                                    <td>${item.month}</td>
-                                                    <td class="amount">Rp${formatRupiah(item.revenue)}</td>
-                                                    <td><i class="fas ${trendIcon}" style="color: ${trendColor}"></i></td>
-                                                </tr>
-                                            `;
-                                        }).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Top Customer Section -->
-                        <div class="profile-section" id="top-section">
-                            <h3 class="section-title">
-                                <i class="fas fa-star"></i>
-                                TOP CUSTOMER
-                            </h3>
-
-                            <div class="customer-list">
-                                ${school.topCustomers.map((customer, index) => `
-                                    <div class="customer-item">
-                                        <div class="customer-rank">${index + 1}</div>
-                                        <div class="customer-info">
-                                            <div class="customer-name">${customer.name}</div>
-                                            <div class="customer-class">${customer.class}</div>
-                                        </div>
-                                        <div class="customer-amount">Rp${formatRupiah(customer.amount)}</div>
-                                    </div>
-                                `).join('')}
-                            </div>
-
-                            <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 1rem;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-weight: 700;">Siswa Terbaik:</span>
-                                    <span style="font-weight: 900; color: #EC0000;">${school.topStudentName} (${school.topStudentClass})</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Market Share Section -->
-                        <div class="profile-section" id="market-section">
-                            <h3 class="section-title">
-                                <i class="fas fa-chart-pie"></i>
-                                MARKET SHARE OPERATOR
-                            </h3>
-
-                            <div class="market-share-container">
-                                <div class="share-item">
-                                    <div class="share-header">
-                                        <span class="share-label">Telkomsel</span>
-                                        <span class="share-value">${school.carrierStats.telkomsel}%</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill fill-telkomsel" style="width: ${school.carrierStats.telkomsel}%"></div>
-                                    </div>
-                                </div>
-
-                                <div class="share-item">
-                                    <div class="share-header">
-                                        <span class="share-label">Indosat</span>
-                                        <span class="share-value">${school.carrierStats.indosat}%</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill fill-indosat" style="width: ${school.carrierStats.indosat}%"></div>
-                                    </div>
-                                </div>
-
-                                <div class="share-item">
-                                    <div class="share-header">
-                                        <span class="share-label">XL</span>
-                                        <span class="share-value">${school.carrierStats.xl}%</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill fill-xl" style="width: ${school.carrierStats.xl}%"></div>
-                                    </div>
-                                </div>
-
-                                <div class="share-item">
-                                    <div class="share-header">
-                                        <span class="share-label">Tri/Three</span>
-                                        <span class="share-value">${100 - school.carrierStats.telkomsel - school.carrierStats.indosat - school.carrierStats.xl}%</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill fill-three" style="width: ${100 - school.carrierStats.telkomsel - school.carrierStats.indosat - school.carrierStats.xl}%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            schoolProfilePanel.innerHTML = profileHTML;
-
-            if (!isEditing) {
-                // Add tab click listeners
-                document.querySelectorAll('.profile-tab').forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
-                        tab.classList.add('active');
-
-                        const tabName = tab.dataset.tab;
-                        document.querySelectorAll('.profile-section').forEach(section => {
-                            section.classList.remove('active');
-                        });
-                        document.getElementById(`${tabName}-section`).classList.add('active');
-                    });
-                });
-            }
-        }
-
-        // ========== MODAL FUNCTIONS ==========
-        function openModal(school) {
-            const modalHTML = `
-                <div class="modal-overlay" id="modalOverlay">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-header-left">
-                                <div class="modal-header-icon">
-                                    <i class="fas fa-crown"></i>
-                                </div>
-                                <div class="modal-header-text">
-                                    <h2>${school.name}</h2>
-                                    <p>${school.idDigipos} • ${school.region}</p>
-                                </div>
-                            </div>
-                            <button class="modal-close" id="closeModal">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin-bottom: 1.5rem;">
-                                <div style="background: linear-gradient(135deg, #f8fafc, white); padding: 1.25rem; border-radius: 1rem;">
-                                    <i class="fas fa-dollar-sign" style="color: #EC0000; margin-bottom: 0.75rem;"></i>
-                                    <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Total Revenue</p>
-                                    <p style="font-size: 1.5rem; font-weight: 900;">Rp${formatRupiah(school.revenue)}</p>
-                                </div>
-                                <div style="background: linear-gradient(135deg, #f8fafc, white); padding: 1.25rem; border-radius: 1rem;">
-                                    <i class="fas fa-users" style="color: #EC0000; margin-bottom: 0.75rem;"></i>
-                                    <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Total Transaksi</p>
-                                    <p style="font-size: 1.5rem; font-weight: 900;">${school.totalTransactions}</p>
-                                </div>
-                            </div>
-
-                            <div style="background: linear-gradient(135deg, #f8fafc, white); padding: 1.5rem; border-radius: 1rem; margin-bottom: 1.5rem;">
-                                <h3 style="font-weight: 900; font-size: 0.875rem; margin-bottom: 1rem;">
-                                    <i class="fas fa-award" style="color: #EC0000;"></i> STATISTIK SISWA
-                                </h3>
-                                <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem;">
-                                    <div>
-                                        <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Total Siswa</p>
-                                        <p style="font-size: 1.125rem; font-weight: 900;">${school.studentCount}</p>
-                                    </div>
-                                    <div>
-                                        <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Total Reseller</p>
-                                        <p style="font-size: 1.125rem; font-weight: 900;">${school.teacherCount}</p>
-                                    </div>
-                                    <div style="grid-column: span 2;">
-                                        <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Siswa Terbaik</p>
-                                        <p style="font-size: 1rem; font-weight: 900; color: #EC0000;">${school.topStudentName}</p>
-                                        <p style="font-size: 0.75rem; font-weight: 700; color: #94a3b8;">Kelas: ${school.topStudentClass}</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="background: linear-gradient(135deg, #f8fafc, white); padding: 1.5rem; border-radius: 1rem;">
-                                <h3 style="font-weight: 900; font-size: 0.875rem; margin-bottom: 1rem;">
-                                    <i class="fas fa-mobile-alt" style="color: #FFB800;"></i> DISTRIBUSI OPERATOR
-                                </h3>
-                                
-                                <div style="margin-bottom: 1rem;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                        <span style="font-size: 0.875rem; font-weight: 700;">Telkomsel</span>
-                                        <span style="font-size: 0.875rem; font-weight: 900; color: #EC0000;">${school.carrierStats.telkomsel}%</span>
-                                    </div>
-                                    <div style="width: 100%; height: 0.5rem; background-color: #f1f5f9; border-radius: 9999px; overflow: hidden;">
-                                        <div style="height: 100%; background-color: #EC0000; width: ${school.carrierStats.telkomsel}%;"></div>
-                                    </div>
-                                </div>
-                                
-                                <div style="margin-bottom: 1rem;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                        <span style="font-size: 0.875rem; font-weight: 700;">Indosat</span>
-                                        <span style="font-size: 0.875rem; font-weight: 900; color: #FFB800;">${school.carrierStats.indosat}%</span>
-                                    </div>
-                                    <div style="width: 100%; height: 0.5rem; background-color: #f1f5f9; border-radius: 9999px; overflow: hidden;">
-                                        <div style="height: 100%; background-color: #FFB800; width: ${school.carrierStats.indosat}%;"></div>
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                        <span style="font-size: 0.875rem; font-weight: 700;">XL</span>
-                                        <span style="font-size: 0.875rem; font-weight: 900; color: #10b981;">${school.carrierStats.xl}%</span>
-                                    </div>
-                                    <div style="width: 100%; height: 0.5rem; background-color: #f1f5f9; border-radius: 9999px; overflow: hidden;">
-                                        <div style="height: 100%; background-color: #10b981; width: ${school.carrierStats.xl}%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #94a3b8; margin-top: 1.5rem;">
-                                <i class="far fa-clock"></i>
-                                Update terakhir: ${school.lastSale}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('modalContainer').innerHTML = modalHTML;
-
-            document.getElementById('modalOverlay').addEventListener('click', (e) => {
-                if (e.target.id === 'modalOverlay') {
-                    document.getElementById('modalContainer').innerHTML = '';
-                }
-            });
-
-            document.getElementById('closeModal').addEventListener('click', () => {
-                document.getElementById('modalContainer').innerHTML = '';
-            });
-        }
-
-        function openSchoolModal(schoolId) {
-            const school = schools.find(s => s.id === schoolId);
-            if (school) openModal(school);
-        }
-
-        // ========== UTILITY FUNCTIONS ==========
-        function simulateImport(schoolId) {
-            alert(`Demo: Import Excel untuk sekolah ID ${schoolId} akan diproses. Data akan diupdate.`);
-        }
-
-        function handleFileUpload(input, schoolId) {
-            if (input.files.length > 0) {
-                alert(`File ${input.files[0].name} berhasil dipilih. Demo: import akan diproses.`);
-                input.value = '';
-            }
-        }
-
-        // ========== EVENT LISTENERS ==========
+    <!-- Main Content -->
+    <main class="flex-1 p-3 md:p-8 lg:p-12 overflow-y-auto">
+      <!-- Header -->
+      <header class="mb-8 md:mb-12 flex flex-col lg:flex-row justify-between items-center gap-4 md:gap-6">
+        <div class="flex items-center gap-4 md:gap-6">
+          <h2 class="text-xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase">Race <span class="text-[#EC0000]">Monitoring</span></h2>
+          <div class="flex items-center gap-2 md:gap-3 text-[8px] md:text-[10px] font-black text-slate-400 bg-white px-3 md:px-5 py-1.5 md:py-2.5 rounded-xl md:rounded-2xl border border-slate-200 shadow-sm">
+            <i class="fa-regular fa-clock text-[#EC0000] text-xs"></i> UPDATE: <span id="lastUpdated">19:30:45</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 md:gap-3">
+           <div class="bg-white px-3 md:px-5 py-1.5 md:py-2.5 rounded-xl md:rounded-2xl border border-slate-200 text-[10px] md:text-xs font-bold text-slate-600 shadow-sm flex items-center gap-2">
+              <i class="fa-regular fa-calendar text-[#FFB800]"></i> <span id="currentPeriod">Maret 2025</span>
+           </div>
+           <button id="refreshTimestamp" class="p-2 md:p-3 bg-white border border-slate-200 text-slate-400 hover:text-[#EC0000] rounded-xl md:rounded-2xl transition-all shadow-sm">
+              <i class="fa-solid fa-rotate-right"></i>
+           </button>
+        </div>
+      </header>
+
+      <!-- Dashboard View -->
+      <div id="dashboardView" class="space-y-10 md:space-y-16 pb-12">
         
-        // Tab switching
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navItems.forEach(nav => nav.classList.remove('active'));
-                item.classList.add('active');
+        <!-- AI Insight Bar -->
+        <section class="bg-white border border-slate-200 p-8 rounded-[2.5rem] shadow-sm relative overflow-hidden group">
+           <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+              <i class="fa-solid fa-brain text-[#EC0000] text-8xl"></i>
+           </div>
+           <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 relative z-10">
+              <div class="space-y-4 flex-1">
+                 <div class="flex items-center gap-3">
+                    <div class="p-2 bg-red-50 text-[#EC0000] rounded-xl">
+                       <i class="fa-solid fa-sparkles"></i>
+                    </div>
+                    <h3 class="text-sm font-black uppercase tracking-widest text-slate-800">Analisis Strategi AI</h3>
+                 </div>
+                 <div id="aiInsightsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- AI Insights will be injected here -->
+                    <div class="col-span-3 py-4 flex items-center gap-3 text-slate-400">
+                      <i class="fa-solid fa-circle-exclamation"></i>
+                      <p class="text-xs font-black uppercase tracking-widest">Klik Refresh AI Analysis untuk memulai.</p>
+                    </div>
+                 </div>
+              </div>
+              <button id="refreshAI" class="flex items-center gap-3 px-8 py-5 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all bg-slate-900 text-white hover:bg-black shadow-xl shadow-black/10 hover:scale-105 active:scale-95">
+                 <i class="fa-solid fa-brain"></i>
+                 Refresh AI Analysis
+              </button>
+           </div>
+        </section>
+        
+        <!-- PODIUM SECTION -->
+        <section>
+          <div class="flex items-center justify-between mb-6 md:mb-8">
+            <div class="flex items-center gap-2 md:gap-3">
+              <div class="p-2 bg-[#FFB800] text-white rounded-lg md:rounded-xl">
+                <i class="fa-solid fa-trophy"></i>
+              </div>
+              <h3 class="text-[10px] md:text-sm font-black text-slate-800 uppercase tracking-widest italic flex items-center gap-2">
+                Podium Jawara H.E.R.O <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse ml-2"></span>
+              </h3>
+            </div>
+          </div>
 
-                const tab = item.dataset.tab;
-                if (tab === 'dashboard') {
-                    dashboardSection.classList.add('active');
-                    managementSection.classList.remove('active');
-                    headerTitle.innerHTML = 'Race <span>Monitoring</span>';
-                } else {
-                    dashboardSection.classList.remove('active');
-                    managementSection.classList.add('active');
-                    headerTitle.innerHTML = 'ADMIN <span>RACE CENTER</span>';
-                    
-                    // Reset edit mode when switching to data master
-                    isEditing = false;
-                    
-                    // Refresh data master display
-                    totalSchoolsSpan.textContent = `${schools.length} Sekolah Terdaftar`;
-                    renderSchoolList();
-                    renderSchoolProfile();
-                }
-            });
+          <div id="podiumContainer" class="grid grid-cols-3 gap-1.5 md:gap-8 items-end px-0.5 md:px-0">
+            <!-- Podium will be dynamically populated -->
+          </div>
+        </section>
+
+        <!-- FULL LEADERBOARD TABLE -->
+        <div class="space-y-8">
+          <div class="flex items-center gap-4 mb-2">
+             <div class="p-2.5 bg-slate-900 text-white rounded-xl">
+               <i class="fa-solid fa-school"></i>
+             </div>
+             <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest italic">Tabel Klasemen Harian</h3>
+          </div>
+
+          <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/40 border border-slate-100 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50/50 text-slate-400 text-[10px] uppercase font-black tracking-widest border-b border-slate-100">
+                    <th class="px-6 md:px-10 py-6 text-center">No</th>
+                    <th class="px-6 md:px-10 py-6">Nama Sekolah</th>
+                    <th class="px-6 md:px-10 py-6 text-right">Total Omzet</th>
+                    <th class="px-6 md:px-10 py-6 text-center">Trend</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboardBody" class="divide-y divide-slate-100">
+                  <!-- Leaderboard rows will be populated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Management View (Hidden by default) -->
+      <div id="managementView" class="hidden space-y-8">
+        <div class="bg-white rounded-[2.5rem] p-8 shadow-xl">
+          <h3 class="text-xl font-black mb-6">Data Master</h3>
+          
+          <!-- Sync Section -->
+          <div class="mb-8">
+            <label class="block text-sm font-bold mb-2">URL Google Sheet</label>
+            <div class="flex gap-2">
+              <input type="url" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." class="flex-1 p-3 border rounded-xl">
+              <button id="syncButton" class="bg-[#EC0000] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#cc0000] transition-all flex items-center gap-2">
+                <i class="fa-solid fa-rotate"></i> Sinkron
+              </button>
+            </div>
+          </div>
+
+          <!-- Header Labels Configuration -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div>
+              <label class="block text-xs font-bold mb-1">Nama Sekolah</label>
+              <input type="text" id="headerSchool" value="Nama Sekolah" class="w-full p-2 border rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Siswa (Angka)</label>
+              <input type="text" id="headerStudent" value="Siswa (Angka)" class="w-full p-2 border rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Siswa Terbaik (Teks)</label>
+              <input type="text" id="headerTopStudent" value="Siswa Terbaik (Teks)" class="w-full p-2 border rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Kelas</label>
+              <input type="text" id="headerClass" value="Kelas" class="w-full p-2 border rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs font-bold mb-1">Revenue (Rp)</label>
+              <input type="text" id="headerRevenue" value="Revenue (Rp)" class="w-full p-2 border rounded-lg">
+            </div>
+          </div>
+
+          <button id="saveHeaders" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition-all">
+            Simpan Perubahan
+          </button>
+        </div>
+
+        <!-- Schools List for Management -->
+        <div class="bg-white rounded-[2.5rem] p-8 shadow-xl">
+          <h4 class="font-black mb-4">Daftar Sekolah</h4>
+          <div id="schoolsManagementList" class="space-y-2">
+            <!-- Will be populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- School Detail Modal -->
+  <div id="schoolModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-[2.5rem] max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-8">
+        <div class="flex justify-between items-start mb-6">
+          <h3 id="modalSchoolName" class="text-2xl font-black">Nama Sekolah</h3>
+          <button id="closeModal" class="p-2 hover:bg-slate-100 rounded-full">
+            <i class="fa-solid fa-times"></i>
+          </button>
+        </div>
+        <div id="modalContent" class="space-y-4">
+          <!-- Modal content will be populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Constants
+    const SCHOOLS_DATA = [
+      {
+        id: "1",
+        idDigipos: "SMA001",
+        name: "SMA NEGERI 1 MALANG",
+        revenue: 125000000,
+        prevRevenue: 100000000,
+        salesCount: 1250,
+        lastSale: "2024-03-15",
+        trend: "up",
+        region: "Malang",
+        topProducts: ["Kuota 10GB", "Pulsa 20k"],
+        totalTransactions: 1250,
+        studentCount: 1200,
+        topStudentName: "Budi Santoso",
+        teacherCount: 65,
+        topClass: "XI IPA 1",
+        topActiveStudents: [],
+        carrierStats: { telkomsel: 70, indosat: 20, xl: 10 },
+        dailySales: []
+      },
+      {
+        id: "2",
+        idDigipos: "SMA002",
+        name: "SMA KRISTEN 2 SURABAYA",
+        revenue: 98000000,
+        prevRevenue: 95000000,
+        salesCount: 980,
+        lastSale: "2024-03-15",
+        trend: "up",
+        region: "Surabaya",
+        topProducts: ["Paket Belajar"],
+        totalTransactions: 980,
+        studentCount: 900,
+        topStudentName: "Maria Wijaya",
+        teacherCount: 55,
+        topClass: "XII IPS 2",
+        topActiveStudents: [],
+        carrierStats: { telkomsel: 60, indosat: 30, xl: 10 },
+        dailySales: []
+      },
+      {
+        id: "3",
+        idDigipos: "SMA003",
+        name: "SMA MUHAMMADIYAH 3 JAKARTA",
+        revenue: 87500000,
+        prevRevenue: 88000000,
+        salesCount: 875,
+        lastSale: "2024-03-14",
+        trend: "stable",
+        region: "Jakarta",
+        topProducts: ["Pulsa 50k"],
+        totalTransactions: 875,
+        studentCount: 1100,
+        topStudentName: "Ahmad Fauzi",
+        teacherCount: 70,
+        topClass: "XI IPA 2",
+        topActiveStudents: [],
+        carrierStats: { telkomsel: 75, indosat: 15, xl: 10 },
+        dailySales: []
+      },
+      {
+        id: "4",
+        idDigipos: "SMA004",
+        name: "SMA KATOLIK ST. ALBERTUS",
+        revenue: 72000000,
+        prevRevenue: 75000000,
+        salesCount: 720,
+        lastSale: "2024-03-13",
+        trend: "down",
+        region: "Malang",
+        topProducts: ["Kuota 5GB"],
+        totalTransactions: 720,
+        studentCount: 800,
+        topStudentName: "Kevin Alexander",
+        teacherCount: 48,
+        topClass: "X IPA 3",
+        topActiveStudents: [],
+        carrierStats: { telkomsel: 65, indosat: 25, xl: 10 },
+        dailySales: []
+      },
+      {
+        id: "5",
+        idDigipos: "SMA005",
+        name: "SMA NEGERI 5 BANDUNG",
+        revenue: 65000000,
+        prevRevenue: 62000000,
+        salesCount: 650,
+        lastSale: "2024-03-15",
+        trend: "up",
+        region: "Bandung",
+        topProducts: ["Paket Data"],
+        totalTransactions: 650,
+        studentCount: 950,
+        topStudentName: "Rina Wijayanti",
+        teacherCount: 62,
+        topClass: "XII MIPA 1",
+        topActiveStudents: [],
+        carrierStats: { telkomsel: 80, indosat: 12, xl: 8 },
+        dailySales: []
+      }
+    ];
+
+    // State variables
+    let schools = [...SCHOOLS_DATA];
+    let activeTab = 'dashboard';
+    let aiInsights = [];
+    let isAiLoading = false;
+    let lastUpdated = new Date().toLocaleTimeString('id-ID');
+    let selectedSchool = null;
+    let headerLabels = {
+      schoolName: 'Nama Sekolah',
+      studentCount: 'Siswa (Angka)',
+      topStudent: 'Siswa Terbaik (Teks)',
+      className: 'Kelas',
+      revenue: 'Revenue (Rp)'
+    };
+
+    // DOM Elements
+    const dashboardView = document.getElementById('dashboardView');
+    const managementView = document.getElementById('managementView');
+    const dashboardTab = document.getElementById('dashboardTab');
+    const managementTab = document.getElementById('managementTab');
+    const mobileDashboard = document.getElementById('mobileDashboard');
+    const mobileManagement = document.getElementById('mobileManagement');
+    const refreshTimestamp = document.getElementById('refreshTimestamp');
+    const lastUpdatedSpan = document.getElementById('lastUpdated');
+    const currentPeriodSpan = document.getElementById('currentPeriod');
+    const refreshAI = document.getElementById('refreshAI');
+    const aiInsightsContainer = document.getElementById('aiInsightsContainer');
+    const podiumContainer = document.getElementById('podiumContainer');
+    const leaderboardBody = document.getElementById('leaderboardBody');
+    const schoolModal = document.getElementById('schoolModal');
+    const closeModal = document.getElementById('closeModal');
+    const syncButton = document.getElementById('syncButton');
+    const sheetUrl = document.getElementById('sheetUrl');
+    const saveHeaders = document.getElementById('saveHeaders');
+    const schoolsManagementList = document.getElementById('schoolsManagementList');
+
+    // Header input elements
+    const headerSchool = document.getElementById('headerSchool');
+    const headerStudent = document.getElementById('headerStudent');
+    const headerTopStudent = document.getElementById('headerTopStudent');
+    const headerClass = document.getElementById('headerClass');
+    const headerRevenue = document.getElementById('headerRevenue');
+
+    // Initialize header inputs
+    headerSchool.value = headerLabels.schoolName;
+    headerStudent.value = headerLabels.studentCount;
+    headerTopStudent.value = headerLabels.topStudent;
+    headerClass.value = headerLabels.className;
+    headerRevenue.value = headerLabels.revenue;
+
+    // Helper Functions
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('id-ID').format(amount);
+    }
+
+    function updateLastUpdated() {
+      lastUpdated = new Date().toLocaleTimeString('id-ID');
+      lastUpdatedSpan.textContent = lastUpdated;
+    }
+
+    function getCurrentPeriod() {
+      const date = new Date();
+      return new Intl.DateTimeFormat('id-ID', { month: 'long', year: 'numeric' }).format(date);
+    }
+
+    // Set current period
+    currentPeriodSpan.textContent = getCurrentPeriod();
+
+    // Sort schools by revenue
+    function getSortedSchools() {
+      return [...schools].sort((a, b) => b.revenue - a.revenue);
+    }
+
+    // Get top 3 schools
+    function getTopThree() {
+      const sorted = getSortedSchools();
+      return sorted.slice(0, 3);
+    }
+
+    // Render Podium
+    function renderPodium() {
+      const topThree = getTopThree();
+      let html = '';
+
+      // Default podium if less than 3 schools
+      while (topThree.length < 3) {
+        topThree.push({
+          id: `empty-${topThree.length}`,
+          name: '-',
+          region: '-',
+          revenue: 0
         });
+      }
 
-        // Refresh button
-        refreshBtn.addEventListener('click', () => {
-            updateLastUpdated();
+      // Silver (2nd)
+      if (topThree[1]) {
+        html += `
+          <div onclick="openSchoolModal('${topThree[1].id}')" class="bg-white border-b-2 md:border-b-4 border-slate-300 p-2 md:p-8 rounded-xl md:rounded-[2.5rem] shadow-lg md:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-2 md:p-6 opacity-5 md:opacity-10 group-hover:opacity-20 transition-opacity">
+              <i class="fa-solid fa-trophy text-4xl md:text-7xl text-slate-400"></i>
+            </div>
+            <div class="w-6 h-6 md:w-14 md:h-14 bg-slate-100 rounded-lg md:rounded-2xl flex items-center justify-center text-slate-400 font-black text-[10px] md:text-xl mb-2 md:mb-6 border border-slate-200">2</div>
+            <h4 class="text-[8px] md:text-xl font-black text-slate-800 leading-tight mb-1 md:mb-2 uppercase group-hover:text-[#EC0000] transition-colors truncate">${topThree[1].name}</h4>
+            <p class="text-[6px] md:text-xs font-bold text-slate-400 mb-2 md:mb-6 truncate">${topThree[1].region}</p>
+            <div class="pt-2 md:pt-6 border-t border-slate-50 flex justify-between items-end">
+              <div class="flex-1 min-w-0">
+                <p class="text-[5px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5 md:mb-1">Realtime Revenue</p>
+                <p class="text-[8px] md:text-lg font-black text-slate-900 truncate">Rp${formatCurrency(topThree[1].revenue)}</p>
+              </div>
+              <i class="fa-solid fa-chevron-right text-slate-200 group-hover:text-[#EC0000] transform group-hover:translate-x-1 transition-all text-xs md:text-base"></i>
+            </div>
+          </div>
+        `;
+      }
+
+      // Gold (1st)
+      html += `
+        <div onclick="openSchoolModal('${topThree[0].id}')" class="bg-gradient-to-br from-[#121212] to-[#000000] p-3 md:p-10 rounded-2xl md:rounded-[3rem] shadow-2xl hover:-translate-y-4 transition-all cursor-pointer group relative overflow-hidden z-10 scale-105 border-b-4 md:border-b-8 border-[#FFB800]">
+          <div class="absolute top-0 right-0 p-3 md:p-8 text-[#FFB800] opacity-10 md:opacity-20">
+            <i class="fa-solid fa-crown text-5xl md:text-8xl"></i>
+          </div>
+          <div class="w-8 h-8 md:w-16 md:h-16 bg-[#FFB800] rounded-lg md:rounded-2xl flex items-center justify-center text-white font-black text-xs md:text-2xl mb-3 md:mb-8 shadow-lg shadow-yellow-500/30 relative">
+            <i class="fa-solid fa-trophy text-white text-sm md:text-2xl"></i>
+            <div class="absolute -top-1 -right-1 w-3 h-3 bg-[#EC0000] rounded-full border-2 border-black animate-ping"></div>
+          </div>
+          <h4 class="text-[10px] md:text-2xl font-black text-white leading-tight mb-1 md:mb-3 uppercase tracking-tighter truncate">${topThree[0].name}</h4>
+          <p class="text-[7px] md:text-sm font-bold text-slate-400 mb-3 md:mb-8 truncate">${topThree[0].region}</p>
+          <div class="pt-3 md:pt-8 border-t border-white/10 flex justify-between items-end">
+            <div class="overflow-hidden flex-1">
+              <p class="text-[5px] md:text-[10px] font-black text-[#FFB800] uppercase tracking-widest mb-0.5 md:mb-1">Leader Revenue (Live)</p>
+              <p class="text-[10px] md:text-2xl font-black text-white tracking-tighter truncate">Rp${formatCurrency(topThree[0].revenue)}</p>
+            </div>
+            <div class="bg-[#EC0000] p-1 md:p-3 rounded-md md:rounded-2xl text-white shadow-lg shrink-0 ml-2">
+              <i class="fa-solid fa-sparkles text-xs md:text-base"></i>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Bronze (3rd)
+      if (topThree[2]) {
+        html += `
+          <div onclick="openSchoolModal('${topThree[2].id}')" class="bg-white border-b-2 md:border-b-4 border-amber-600 p-2 md:p-8 rounded-xl md:rounded-[2.5rem] shadow-lg md:shadow-xl hover:-translate-y-2 transition-all cursor-pointer group relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-2 md:p-6 opacity-5 md:opacity-10">
+              <i class="fa-solid fa-trophy text-4xl md:text-7xl text-amber-700"></i>
+            </div>
+            <div class="w-6 h-6 md:w-14 md:h-14 bg-amber-50 rounded-lg md:rounded-2xl flex items-center justify-center text-amber-700 font-black text-[10px] md:text-xl mb-2 md:mb-6 border border-amber-100">3</div>
+            <h4 class="text-[8px] md:text-xl font-black text-slate-800 leading-tight mb-1 md:mb-2 uppercase group-hover:text-[#EC0000] transition-colors truncate">${topThree[2].name}</h4>
+            <p class="text-[6px] md:text-xs font-bold text-slate-400 mb-2 md:mb-6 truncate">${topThree[2].region}</p>
+            <div class="pt-2 md:pt-6 border-t border-slate-50 flex justify-between items-end">
+              <div class="flex-1 min-w-0">
+                <p class="text-[5px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5 md:mb-1">Realtime Revenue</p>
+                <p class="text-[8px] md:text-lg font-black text-slate-900 truncate">Rp${formatCurrency(topThree[2].revenue)}</p>
+              </div>
+              <i class="fa-solid fa-chevron-right text-slate-200 group-hover:text-[#EC0000] transform group-hover:translate-x-1 transition-all text-xs md:text-base"></i>
+            </div>
+          </div>
+        `;
+      }
+
+      podiumContainer.innerHTML = html;
+    }
+
+    // Render Leaderboard Table
+    function renderLeaderboard() {
+      const sorted = getSortedSchools();
+      let html = '';
+
+      sorted.forEach((school, index) => {
+        const trendIcon = school.trend === 'up' 
+          ? '<i class="fa-solid fa-trend-up"></i>' 
+          : school.trend === 'down' 
+            ? '<i class="fa-solid fa-trend-down"></i>' 
+            : '<i class="fa-solid fa-minus"></i>';
+        
+        const trendClass = school.trend === 'up' 
+          ? 'text-emerald-600 bg-emerald-50' 
+          : school.trend === 'down' 
+            ? 'text-red-600 bg-red-50' 
+            : 'text-slate-400 bg-slate-50';
+
+        html += `
+          <tr onclick="openSchoolModal('${school.id}')" class="hover:bg-slate-50 transition-all group cursor-pointer">
+            <td class="px-6 md:px-10 py-6 text-center">
+              <span class="text-sm font-black text-slate-300 group-hover:text-[#EC0000] transition-colors">${index + 1}</span>
+            </td>
+            <td class="px-6 md:px-10 py-6">
+              <p class="font-black text-slate-800 text-xs md:text-base group-hover:text-[#EC0000] transition-colors uppercase tracking-tighter truncate max-w-[120px] md:max-w-none">${school.name}</p>
+              <p class="text-[8px] text-slate-400 font-bold uppercase">${school.region} • ${school.idDigipos}</p>
+            </td>
+            <td class="px-6 md:px-10 py-6 text-right">
+              <p class="font-mono font-black text-slate-900 text-xs md:text-base">Rp${formatCurrency(school.revenue)}</p>
+              <p class="text-[9px] text-[#EC0000] font-black uppercase tracking-widest">${school.salesCount} ITEMS SOLD</p>
+            </td>
+            <td class="px-6 md:px-10 py-6 text-center">
+               <div class="inline-flex items-center gap-1 ${trendClass} px-3 py-1 rounded-full text-[10px] font-black border uppercase">
+                  ${trendIcon} ${school.trend === 'up' ? 'Naik' : school.trend === 'down' ? 'Turun' : 'Stable'}
+               </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      leaderboardBody.innerHTML = html;
+    }
+
+    // Render Schools Management List
+    function renderSchoolsManagement() {
+      let html = '';
+      schools.forEach((school, index) => {
+        html += `
+          <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+            <div>
+              <p class="font-bold">${school.name}</p>
+              <p class="text-xs text-slate-500">ID: ${school.idDigipos} | Revenue: Rp${formatCurrency(school.revenue)}</p>
+            </div>
+            <button onclick="editSchool('${school.id}')" class="text-[#EC0000] hover:text-[#cc0000]">
+              <i class="fa-solid fa-edit"></i>
+            </button>
+          </div>
+        `;
+      });
+      schoolsManagementList.innerHTML = html;
+    }
+
+    // Load AI Insights
+    async function loadInsights() {
+      isAiLoading = true;
+      refreshAI.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
+      refreshAI.disabled = true;
+
+      // Simulate AI analysis
+      setTimeout(() => {
+        aiInsights = [
+          'SMA Negeri 1 Malang unggul 27% dari pesaing terdekat. Fokus pada produk Kuota 10GB.',
+          'SMA Kristen 2 Surabaya menunjukkan pertumbuhan konsisten 3% per minggu.',
+          'SMA Muhammadiyah 3 Jakarta perlu revitalisasi strategi penjualan untuk kelas XII.'
+        ];
+        
+        renderAIInsights();
+        
+        isAiLoading = false;
+        refreshAI.innerHTML = '<i class="fa-solid fa-brain"></i> Refresh AI Analysis';
+        refreshAI.disabled = false;
+      }, 1500);
+    }
+
+    // Render AI Insights
+    function renderAIInsights() {
+      if (aiInsights.length > 0) {
+        let html = '';
+        aiInsights.forEach((insight, idx) => {
+          html += `
+            <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100 flex gap-3">
+              <div class="w-5 h-5 bg-[#EC0000] text-white rounded-full flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">${idx + 1}</div>
+              <p class="text-[11px] leading-relaxed font-bold text-slate-600">${insight}</p>
+            </div>
+          `;
         });
+        aiInsightsContainer.innerHTML = html;
+      }
+    }
 
-        // Search functionality
-        schoolSearch.addEventListener('input', (e) => {
-            renderSchoolList(e.target.value);
-        });
+    // Open School Modal
+    window.openSchoolModal = function(schoolId) {
+      const school = schools.find(s => s.id === schoolId);
+      if (!school) return;
 
-        // ========== INITIALIZATION ==========
-        function init() {
-            updateCurrentPeriod();
-            updateLastUpdated();
-            
-            // Initialize Race Board
-            renderPodium();
-            renderTable();
+      selectedSchool = school;
+      document.getElementById('modalSchoolName').textContent = school.name;
+      
+      const modalContent = document.getElementById('modalContent');
+      modalContent.innerHTML = `
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 bg-slate-50 rounded-xl">
+              <p class="text-xs text-slate-500">ID Digipos</p>
+              <p class="font-bold">${school.idDigipos}</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl">
+              <p class="text-xs text-slate-500">Region</p>
+              <p class="font-bold">${school.region}</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl">
+              <p class="text-xs text-slate-500">Revenue</p>
+              <p class="font-bold text-[#EC0000]">Rp${formatCurrency(school.revenue)}</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl">
+              <p class="text-xs text-slate-500">Total Transaksi</p>
+              <p class="font-bold">${school.totalTransactions}</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl">
+              <p class="text-xs text-slate-500">Jumlah Siswa</p>
+              <p class="font-bold">${school.studentCount}</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl">
+              <p class="text-xs text-slate-500">Jumlah Guru</p>
+              <p class="font-bold">${school.teacherCount}</p>
+            </div>
+          </div>
+          
+          <div class="p-4 bg-slate-50 rounded-xl">
+            <p class="text-xs text-slate-500 mb-2">Siswa Terbaik</p>
+            <p class="font-bold">${school.topStudentName}</p>
+          </div>
+          
+          <div class="p-4 bg-slate-50 rounded-xl">
+            <p class="text-xs text-slate-500 mb-2">Kelas Jawara</p>
+            <p class="font-bold">${school.topClass}</p>
+          </div>
+        </div>
+      `;
+      
+      schoolModal.classList.remove('hidden');
+    };
 
-            // Initialize Data Master
-            totalSchoolsSpan.textContent = `${schools.length} Sekolah Terdaftar`;
-            renderSchoolList();
-            renderSchoolProfile();
+    // Close Modal
+    closeModal.addEventListener('click', () => {
+      schoolModal.classList.add('hidden');
+      selectedSchool = null;
+    });
 
-            // Load from localStorage if available
-            const saved = localStorage.getItem('hero_schools');
-            if (saved) {
-                try {
-                    schools = JSON.parse(saved);
-                    selectedSchool = schools[0];
-                    renderPodium();
-                    renderTable();
-                    renderSchoolList();
-                    renderSchoolProfile();
-                } catch (e) {
-                    console.error('Error loading from localStorage');
-                }
-            }
+    // Click outside to close
+    schoolModal.addEventListener('click', (e) => {
+      if (e.target === schoolModal) {
+        schoolModal.classList.add('hidden');
+        selectedSchool = null;
+      }
+    });
 
-            // Save to localStorage when data changes
-            setInterval(() => {
-                localStorage.setItem('hero_schools', JSON.stringify(schools));
-            }, 5000);
-        }
+    // Tab Switching
+    function switchTab(tab) {
+      activeTab = tab;
+      
+      if (tab === 'dashboard') {
+        dashboardView.classList.remove('hidden');
+        managementView.classList.add('hidden');
+        dashboardTab.classList.add('bg-gradient-to-r', 'from-[#EC0000]', 'to-[#FF4D4D]', 'text-white', 'shadow-lg', 'shadow-red-500/30');
+        dashboardTab.classList.remove('text-slate-500', 'hover:text-white', 'hover:bg-white/5');
+        managementTab.classList.remove('bg-gradient-to-r', 'from-[#EC0000]', 'to-[#FF4D4D]', 'text-white', 'shadow-lg', 'shadow-red-500/30');
+        managementTab.classList.add('text-slate-500', 'hover:text-white', 'hover:bg-white/5');
+      } else {
+        dashboardView.classList.add('hidden');
+        managementView.classList.remove('hidden');
+        managementTab.classList.add('bg-gradient-to-r', 'from-[#EC0000]', 'to-[#FF4D4D]', 'text-white', 'shadow-lg', 'shadow-red-500/30');
+        managementTab.classList.remove('text-slate-500', 'hover:text-white', 'hover:bg-white/5');
+        dashboardTab.classList.remove('bg-gradient-to-r', 'from-[#EC0000]', 'to-[#FF4D4D]', 'text-white', 'shadow-lg', 'shadow-red-500/30');
+        dashboardTab.classList.add('text-slate-500', 'hover:text-white', 'hover:bg-white/5');
+        
+        renderSchoolsManagement();
+      }
+    }
 
-        // Make functions global for onclick handlers
-        window.openSchoolModal = openSchoolModal;
-        window.simulateImport = simulateImport;
-        window.handleFileUpload = handleFileUpload;
-        window.enableEditMode = enableEditMode;
-        window.cancelEdit = cancelEdit;
-        window.handleEditSubmit = handleEditSubmit;
+    dashboardTab.addEventListener('click', () => switchTab('dashboard'));
+    managementTab.addEventListener('click', () => switchTab('management'));
+    mobileDashboard.addEventListener('click', () => switchTab('dashboard'));
+    mobileManagement.addEventListener('click', () => switchTab('management'));
 
-        init();
-    </script>
+    // Refresh Timestamp
+    refreshTimestamp.addEventListener('click', () => {
+      updateLastUpdated();
+    });
+
+    // Refresh AI
+    refreshAI.addEventListener('click', loadInsights);
+
+    // Sync Button
+    syncButton.addEventListener('click', async () => {
+      const url = sheetUrl.value.trim();
+      if (!url) {
+        alert('Masukkan URL Google Sheet terlebih dahulu');
+        return;
+      }
+
+      syncButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyinkronkan...';
+      syncButton.disabled = true;
+
+      // Simulate sync
+      setTimeout(() => {
+        alert('Sinkronisasi berhasil! Data telah diperbarui.');
+        syncButton.innerHTML = '<i class="fa-solid fa-rotate"></i> Sinkron';
+        syncButton.disabled = false;
+        updateLastUpdated();
+        
+        // Update UI
+        renderPodium();
+        renderLeaderboard();
+      }, 2000);
+    });
+
+    // Save Headers
+    saveHeaders.addEventListener('click', () => {
+      headerLabels = {
+        schoolName: headerSchool.value,
+        studentCount: headerStudent.value,
+        topStudent: headerTopStudent.value,
+        className: headerClass.value,
+        revenue: headerRevenue.value
+      };
+      
+      localStorage.setItem('dashboard_header_labels', JSON.stringify(headerLabels));
+      alert('Header labels berhasil disimpan!');
+    });
+
+    // Edit School (placeholder)
+    window.editSchool = function(schoolId) {
+      alert(`Edit school ${schoolId} - Fitur akan segera tersedia`);
+    };
+
+    // Initial Render
+    renderPodium();
+    renderLeaderboard();
+    updateLastUpdated();
+
+    // Auto-refresh every 5 minutes
+    setInterval(() => {
+      updateLastUpdated();
+    }, 300000);
+  </script>
 </body>
 </html>
