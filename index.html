@@ -166,7 +166,7 @@
                     <th class="px-6 md:px-10 py-6 text-right">Total Omzet</th>
                     <th class="px-6 md:px-10 py-6 text-center">Trend</th>
                     <th class="px-6 md:px-10 py-6 text-center">Kelas Jawara</th>
-                    <th class="px-6 md:px-10 py-6 text-center">Top Customer</th>
+                    <th class="px-6 md:px-10 py-6 text-center">Total Qty</th>
                   </tr>
                 </thead>
                 <tbody id="leaderboardBody" class="divide-y divide-slate-100">
@@ -326,6 +326,14 @@
             </div>
           </div>
 
+          <!-- Top 5 Products Management -->
+          <div class="mb-8 p-6 bg-slate-50 rounded-2xl">
+            <h4 class="font-black mb-4">Top 5 Produk Paling Laris</h4>
+            <div id="topProductsManagement" class="space-y-4">
+              <!-- Will be populated dynamically -->
+            </div>
+          </div>
+
           <!-- Top Customers Management -->
           <div class="mb-8 p-6 bg-slate-50 rounded-2xl">
             <h4 class="font-black mb-4">Top 10 Customer</h4>
@@ -354,7 +362,7 @@
 
   <!-- School Detail Modal -->
   <div id="schoolModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden p-4">
-    <div class="bg-white rounded-[2.5rem] max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="bg-white rounded-[2.5rem] max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="p-8">
         <div class="flex justify-between items-start mb-6">
           <h3 id="modalSchoolName" class="text-2xl font-black">Nama Sekolah</h3>
@@ -362,8 +370,9 @@
             <i class="fa-solid fa-times"></i>
           </button>
         </div>
-        <div id="modalContent" class="space-y-4">
-          <!-- Modal content will be populated -->
+        
+        <div id="modalContent" class="space-y-6">
+          <!-- Content will be populated dynamically -->
         </div>
       </div>
     </div>
@@ -382,7 +391,7 @@
         lastSale: "2024-03-15",
         trend: "up",
         region: "Malang",
-        topProducts: ["Kuota 10GB", "Pulsa 20k"],
+        topProducts: ["Kuota 10GB", "Pulsa 20k", "Paket Belajar", "Kuota 5GB", "Pulsa 50k"],
         totalTransactions: 1250,
         studentCount: 1200,
         topStudentName: "Budi Santoso",
@@ -402,7 +411,7 @@
         lastSale: "2024-03-15",
         trend: "up",
         region: "Surabaya",
-        topProducts: ["Paket Belajar"],
+        topProducts: ["Paket Belajar", "Kuota 10GB", "Pulsa 20k", "Paket Data", "Pulsa 50k"],
         totalTransactions: 980,
         studentCount: 900,
         topStudentName: "Maria Wijaya",
@@ -422,7 +431,7 @@
         lastSale: "2024-03-14",
         trend: "stable",
         region: "Jakarta",
-        topProducts: ["Pulsa 50k"],
+        topProducts: ["Pulsa 50k", "Paket Data", "Kuota 10GB", "Pulsa 20k", "Paket Belajar"],
         totalTransactions: 875,
         studentCount: 1100,
         topStudentName: "Ahmad Fauzi",
@@ -442,7 +451,7 @@
         lastSale: "2024-03-13",
         trend: "down",
         region: "Malang",
-        topProducts: ["Kuota 5GB"],
+        topProducts: ["Kuota 5GB", "Pulsa 20k", "Paket Belajar", "Kuota 10GB", "Pulsa 50k"],
         totalTransactions: 720,
         studentCount: 800,
         topStudentName: "Kevin Alexander",
@@ -462,7 +471,7 @@
         lastSale: "2024-03-15",
         trend: "up",
         region: "Bandung",
-        topProducts: ["Paket Data"],
+        topProducts: ["Paket Data", "Kuota 10GB", "Pulsa 20k", "Paket Belajar", "Pulsa 50k"],
         totalTransactions: 650,
         studentCount: 950,
         topStudentName: "Rina Wijayanti",
@@ -544,6 +553,7 @@
     const sheetUrl = document.getElementById('sheetUrl');
     const saveHeaders = document.getElementById('saveHeaders');
     const schoolsManagementList = document.getElementById('schoolsManagementList');
+    const topProductsManagement = document.getElementById('topProductsManagement');
     const topCustomersManagement = document.getElementById('topCustomersManagement');
     const competitorManagement = document.getElementById('competitorManagement');
     const downloadTemplate = document.getElementById('downloadTemplate');
@@ -700,9 +710,6 @@
             ? 'text-red-600 bg-red-50' 
             : 'text-slate-400 bg-slate-50';
 
-        // Find top customer for this school
-        const schoolTopCustomer = topCustomers.find(c => c.school === school.name) || { name: '-' };
-
         html += `
           <tr onclick="openSchoolModal('${school.id}')" class="hover:bg-slate-50 transition-all group cursor-pointer">
             <td class="px-6 md:px-10 py-6 text-center">
@@ -725,7 +732,7 @@
               <p class="font-bold text-xs">${school.topClass}</p>
             </td>
             <td class="px-6 md:px-10 py-6 text-center">
-              <p class="font-bold text-xs">${schoolTopCustomer.name}</p>
+              <p class="font-bold text-xs">${school.salesCount}</p>
             </td>
           </tr>
         `;
@@ -824,19 +831,97 @@
                 <p class="text-[10px] text-slate-500">Revenue</p>
                 <p class="font-black text-[#EC0000]">Rp${formatCurrency(school.revenue)}</p>
               </div>
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <p class="text-[10px] text-slate-500">Total Qty</p>
+                <p class="font-black">${school.salesCount}</p>
+              </div>
             </div>
 
-            <div class="mt-3 flex gap-2">
-              <input type="text" placeholder="Edit Kelas Jawara" class="flex-1 text-sm p-2 border rounded-lg" id="class-${school.id}" value="${school.topClass}">
-              <button onclick="updateSchoolClass('${school.id}')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold">
-                Update
-              </button>
+            <div class="mt-3 grid grid-cols-2 gap-2">
+              <div>
+                <label class="text-xs font-bold">Edit Kelas Jawara</label>
+                <input type="text" id="class-${school.id}" value="${school.topClass}" class="w-full text-sm p-2 border rounded-lg mt-1">
+              </div>
+              <div>
+                <label class="text-xs font-bold">Edit Total Qty</label>
+                <input type="number" id="qty-${school.id}" value="${school.salesCount}" class="w-full text-sm p-2 border rounded-lg mt-1">
+              </div>
             </div>
+            <button onclick="updateSchoolData('${school.id}')" class="mt-3 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold w-full">
+              Update Data Sekolah
+            </button>
           </div>
         `;
       });
       schoolsManagementList.innerHTML = html;
     }
+
+    // Render Top Products Management
+    function renderTopProductsManagement() {
+      let html = '';
+      schools.forEach((school, schoolIndex) => {
+        html += `
+          <div class="bg-white p-4 rounded-xl border border-slate-200 mb-4">
+            <p class="font-black mb-3">${school.name}</p>
+            <div class="space-y-2">
+        `;
+        
+        // Show 5 product inputs
+        for (let i = 0; i < 5; i++) {
+          const productName = school.topProducts[i] || '';
+          html += `
+            <div class="flex gap-2">
+              <span class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-bold">${i+1}</span>
+              <input type="text" id="product-${school.id}-${i}" value="${productName}" placeholder="Nama Produk ${i+1}" class="flex-1 p-2 border rounded-lg text-sm">
+            </div>
+          `;
+        }
+        
+        html += `
+            </div>
+            <button onclick="updateTopProducts('${school.id}')" class="mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold w-full">
+              Simpan Top 5 Produk
+            </button>
+          </div>
+        `;
+      });
+      topProductsManagement.innerHTML = html;
+    }
+
+    // Update Top Products
+    window.updateTopProducts = function(schoolId) {
+      const school = schools.find(s => s.id === schoolId);
+      if (school) {
+        const products = [];
+        for (let i = 0; i < 5; i++) {
+          const input = document.getElementById(`product-${schoolId}-${i}`);
+          if (input && input.value.trim()) {
+            products.push(input.value.trim());
+          }
+        }
+        school.topProducts = products;
+        updateLastUpdated();
+        alert('Top 5 produk berhasil disimpan!');
+      }
+    };
+
+    // Update School Data
+    window.updateSchoolData = function(schoolId) {
+      const school = schools.find(s => s.id === schoolId);
+      if (school) {
+        const classInput = document.getElementById(`class-${schoolId}`);
+        const qtyInput = document.getElementById(`qty-${schoolId}`);
+        
+        if (classInput) school.topClass = classInput.value;
+        if (qtyInput) school.salesCount = parseInt(qtyInput.value) || 0;
+        
+        renderSchoolsManagement();
+        renderLeaderboard();
+        renderPodium();
+        updateLastUpdated();
+        alert('Data sekolah berhasil diupdate!');
+      }
+    };
 
     // Render Top Customers Management
     function renderTopCustomersManagement() {
@@ -871,11 +956,38 @@
                 <p class="font-black text-[#EC0000]">Rp${formatCurrency(customer.totalSpent)}</p>
               </div>
             </div>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <input type="text" id="customer-name-${index}" value="${customer.name}" placeholder="Nama" class="text-sm p-2 border rounded-lg">
+              <input type="text" id="customer-school-${index}" value="${customer.school}" placeholder="Sekolah" class="text-sm p-2 border rounded-lg">
+              <input type="number" id="customer-trans-${index}" value="${customer.transactions}" placeholder="Transaksi" class="text-sm p-2 border rounded-lg">
+              <input type="number" id="customer-spent-${index}" value="${customer.totalSpent}" placeholder="Total Belanja" class="text-sm p-2 border rounded-lg">
+            </div>
+            <button onclick="updateCustomer(${index})" class="mt-2 bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-bold w-full">
+              Update Customer
+            </button>
           </div>
         `;
       });
       topCustomersManagement.innerHTML = html;
     }
+
+    // Update Customer
+    window.updateCustomer = function(index) {
+      const customer = topCustomers[index];
+      const nameInput = document.getElementById(`customer-name-${index}`);
+      const schoolInput = document.getElementById(`customer-school-${index}`);
+      const transInput = document.getElementById(`customer-trans-${index}`);
+      const spentInput = document.getElementById(`customer-spent-${index}`);
+      
+      if (nameInput) customer.name = nameInput.value;
+      if (schoolInput) customer.school = schoolInput.value;
+      if (transInput) customer.transactions = parseInt(transInput.value) || 0;
+      if (spentInput) customer.totalSpent = parseInt(spentInput.value) || 0;
+      
+      renderTopCustomersManagement();
+      renderTopCustomers();
+      updateLastUpdated();
+    };
 
     // Render Competitor Management
     function renderCompetitorManagement() {
@@ -910,43 +1022,171 @@
       competitorManagement.innerHTML = html;
     }
 
-    // Load AI Insights
-    async function loadInsights() {
-      isAiLoading = true;
-      refreshAI.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
-      refreshAI.disabled = true;
+    // Open School Modal with Complete Data
+    window.openSchoolModal = function(schoolId) {
+      const school = schools.find(s => s.id === schoolId);
+      if (!school) return;
 
-      // Simulate AI analysis
-      setTimeout(() => {
-        aiInsights = [
-          'SMA Negeri 1 Malang unggul 27% dari pesaing terdekat. Fokus pada produk Kuota 10GB.',
-          'SMA Kristen 2 Surabaya menunjukkan pertumbuhan konsisten 3% per minggu.',
-          'SMA Muhammadiyah 3 Jakarta perlu revitalisasi strategi penjualan untuk kelas XII.'
-        ];
-        
-        renderAIInsights();
-        
-        isAiLoading = false;
-        refreshAI.innerHTML = '<i class="fa-solid fa-brain"></i> Refresh AI Analysis';
-        refreshAI.disabled = false;
-      }, 1500);
-    }
+      selectedSchool = school;
+      document.getElementById('modalSchoolName').textContent = school.name;
+      
+      // Get school-specific top customers
+      const schoolCustomers = topCustomers.filter(c => c.school === school.name).slice(0, 10);
+      
+      // Get competitor data for this school (simulasi)
+      const schoolCompetitor = {
+        marketShare: competitorData.marketShare,
+        performance: competitorData.performance
+      };
 
-    // Render AI Insights
-    function renderAIInsights() {
-      if (aiInsights.length > 0) {
-        let html = '';
-        aiInsights.forEach((insight, idx) => {
-          html += `
-            <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100 flex gap-3">
-              <div class="w-5 h-5 bg-[#EC0000] text-white rounded-full flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">${idx + 1}</div>
-              <p class="text-[11px] leading-relaxed font-bold text-slate-600">${insight}</p>
+      const modalContent = document.getElementById('modalContent');
+      
+      // Build products list
+      let productsHtml = '';
+      if (school.topProducts && school.topProducts.length > 0) {
+        school.topProducts.forEach((product, idx) => {
+          productsHtml += `
+            <div class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg">
+              <span class="w-6 h-6 bg-[#EC0000] text-white rounded-full flex items-center justify-center text-xs font-black">${idx + 1}</span>
+              <span class="font-bold">${product}</span>
             </div>
           `;
         });
-        aiInsightsContainer.innerHTML = html;
+      } else {
+        productsHtml = '<p class="text-slate-400">Belum ada data produk</p>';
       }
-    }
+
+      // Build customers list
+      let customersHtml = '';
+      if (schoolCustomers.length > 0) {
+        schoolCustomers.forEach((customer, idx) => {
+          customersHtml += `
+            <div class="flex items-center justify-between p-2 bg-slate-50 rounded-lg">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 bg-[#FFB800] text-white rounded-full flex items-center justify-center text-xs font-black">${idx + 1}</span>
+                <span class="font-bold">${customer.name}</span>
+              </div>
+              <div class="text-right">
+                <p class="text-xs">${customer.transactions}x transaksi</p>
+                <p class="text-xs font-bold text-[#EC0000]">Rp${formatCurrency(customer.totalSpent)}</p>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        customersHtml = '<p class="text-slate-400">Belum ada data customer</p>';
+      }
+
+      // Build competitor info
+      let competitorHtml = '';
+      schoolCompetitor.marketShare.forEach(item => {
+        competitorHtml += `
+          <div class="flex justify-between items-center p-2 bg-slate-50 rounded-lg">
+            <span class="font-bold">${item.name}</span>
+            <span class="font-black">${item.share}%</span>
+          </div>
+        `;
+      });
+
+      modalContent.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Left Column -->
+          <div class="space-y-4">
+            <!-- Basic Info -->
+            <div class="bg-slate-50 p-4 rounded-xl">
+              <h4 class="font-black text-sm mb-3 text-[#EC0000]">INFORMASI DASAR</h4>
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-slate-600">ID Digipos:</span>
+                  <span class="font-bold">${school.idDigipos}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-600">Wilayah:</span>
+                  <span class="font-bold">${school.region}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-600">Kelas Jawara:</span>
+                  <span class="font-bold text-[#FFB800]">${school.topClass}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="bg-slate-50 p-4 rounded-xl">
+              <h4 class="font-black text-sm mb-3 text-[#EC0000]">STATISTIK</h4>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white p-3 rounded-lg">
+                  <p class="text-xs text-slate-500">Jumlah Siswa</p>
+                  <p class="font-black text-lg">${school.studentCount}</p>
+                </div>
+                <div class="bg-white p-3 rounded-lg">
+                  <p class="text-xs text-slate-500">Total Qty</p>
+                  <p class="font-black text-lg">${school.salesCount}</p>
+                </div>
+                <div class="bg-white p-3 rounded-lg col-span-2">
+                  <p class="text-xs text-slate-500">Total Revenue/Omset</p>
+                  <p class="font-black text-2xl text-[#EC0000]">Rp${formatCurrency(school.revenue)}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Kompetitor -->
+            <div class="bg-slate-50 p-4 rounded-xl">
+              <h4 class="font-black text-sm mb-3 text-[#EC0000]">INFO KOMPETITOR</h4>
+              <div class="space-y-2">
+                ${competitorHtml}
+              </div>
+              <div class="mt-3 pt-3 border-t border-slate-200">
+                <p class="text-xs font-bold mb-2">Growth Rate:</p>
+                ${schoolCompetitor.performance.map(p => `
+                  <div class="flex justify-between text-sm">
+                    <span>${p.competitor}</span>
+                    <span class="${p.growth > 0 ? 'text-emerald-600' : 'text-red-600'}">
+                      ${p.growth > 0 ? '+' : ''}${p.growth}%
+                    </span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="space-y-4">
+            <!-- Top 5 Products -->
+            <div class="bg-slate-50 p-4 rounded-xl">
+              <h4 class="font-black text-sm mb-3 text-[#EC0000]">TOP 5 PRODUK PALING LARIS</h4>
+              <div class="space-y-2">
+                ${productsHtml}
+              </div>
+            </div>
+
+            <!-- Top 10 Customers -->
+            <div class="bg-slate-50 p-4 rounded-xl">
+              <h4 class="font-black text-sm mb-3 text-[#EC0000]">TOP 10 CUSTOMER</h4>
+              <div class="space-y-2 max-h-60 overflow-y-auto">
+                ${customersHtml}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      schoolModal.classList.remove('hidden');
+    };
+
+    // Close Modal
+    closeModal.addEventListener('click', () => {
+      schoolModal.classList.add('hidden');
+      selectedSchool = null;
+    });
+
+    // Click outside to close
+    schoolModal.addEventListener('click', (e) => {
+      if (e.target === schoolModal) {
+        schoolModal.classList.add('hidden');
+        selectedSchool = null;
+      }
+    });
 
     // Download Excel Template
     downloadTemplate.addEventListener('click', (e) => {
@@ -954,10 +1194,10 @@
       
       // Create template data
       const templateData = [
-        ['ID Digipos', 'Nama Sekolah', 'Wilayah', 'Jumlah Siswa', 'Jumlah Guru', 'Kelas Jawara', 'Revenue', 'Prev Revenue', 'Trend (up/down/stable)'],
-        ['SMA001', 'SMA NEGERI 1 MALANG', 'Malang', '1200', '65', 'XI IPA 1', '125000000', '100000000', 'up'],
-        ['SMA002', 'SMA KRISTEN 2 SURABAYA', 'Surabaya', '900', '55', 'XII IPS 2', '98000000', '95000000', 'up'],
-        ['', '', '', '', '', '', '', '', '']
+        ['ID Digipos', 'Nama Sekolah', 'Wilayah', 'Jumlah Siswa', 'Jumlah Guru', 'Kelas Jawara', 'Revenue', 'Prev Revenue', 'Trend (up/down/stable)', 'Total Qty'],
+        ['SMA001', 'SMA NEGERI 1 MALANG', 'Malang', '1200', '65', 'XI IPA 1', '125000000', '100000000', 'up', '1250'],
+        ['SMA002', 'SMA KRISTEN 2 SURABAYA', 'Surabaya', '900', '55', 'XII IPS 2', '98000000', '95000000', 'up', '980'],
+        ['', '', '', '', '', '', '', '', '', '']
       ];
 
       const wb = XLSX.utils.book_new();
@@ -973,11 +1213,22 @@
         { wch: 15 }, // Kelas Jawara
         { wch: 20 }, // Revenue
         { wch: 20 }, // Prev Revenue
-        { wch: 15 }  // Trend
+        { wch: 15 }, // Trend
+        { wch: 15 }  // Total Qty
       ];
 
       XLSX.utils.book_append_sheet(wb, ws, 'Template Sekolah');
       
+      // Add Top Products sheet
+      const productsSheet = [
+        ['ID Digipos', 'Produk 1', 'Produk 2', 'Produk 3', 'Produk 4', 'Produk 5'],
+        ['SMA001', 'Kuota 10GB', 'Pulsa 20k', 'Paket Belajar', 'Kuota 5GB', 'Pulsa 50k'],
+        ['SMA002', 'Paket Belajar', 'Kuota 10GB', 'Pulsa 20k', 'Paket Data', 'Pulsa 50k'],
+        ['', '', '', '', '', '']
+      ];
+      const ws2 = XLSX.utils.aoa_to_sheet(productsSheet);
+      XLSX.utils.book_append_sheet(wb, ws2, 'Top Products');
+
       // Add Top Customers sheet
       const customerSheet = [
         ['Rank', 'Nama Customer', 'Sekolah', 'Jumlah Transaksi', 'Total Belanja'],
@@ -985,9 +1236,8 @@
         ['2', 'Maria Wijaya', 'SMA KRISTEN 2 SURABAYA', '38', '1900000'],
         ['', '', '', '', '']
       ];
-      const ws2 = XLSX.utils.aoa_to_sheet(customerSheet);
-      ws2['!cols'] = [{ wch: 10 }, { wch: 25 }, { wch: 30 }, { wch: 15 }, { wch: 15 }];
-      XLSX.utils.book_append_sheet(wb, ws2, 'Top Customers');
+      const ws3 = XLSX.utils.aoa_to_sheet(customerSheet);
+      XLSX.utils.book_append_sheet(wb, ws3, 'Top Customers');
 
       XLSX.writeFile(wb, 'hero_dashboard_template.xlsx');
     });
@@ -1026,10 +1276,10 @@
                 revenue: Number(row[6]) || 0,
                 prevRevenue: Number(row[7]) || 0,
                 trend: (row[8] || 'stable').toLowerCase(),
-                salesCount: 0,
+                salesCount: Number(row[9]) || 0,
                 lastSale: '-',
                 topProducts: [],
-                totalTransactions: 0,
+                totalTransactions: Number(row[9]) || 0,
                 topStudentName: '-',
                 topActiveStudents: [],
                 carrierStats: { telkomsel: 70, indosat: 20, xl: 10 },
@@ -1041,9 +1291,31 @@
           if (newSchools.length > 0) {
             schools = newSchools;
             
-            // Import Top Customers if available
+            // Import Top Products if available
             if (workbook.SheetNames.length > 1) {
-              const customerSheet = workbook.Sheets[workbook.SheetNames[1]];
+              const productsSheet = workbook.Sheets[workbook.SheetNames[1]];
+              const productsData = XLSX.utils.sheet_to_json(productsSheet, { header: 1 });
+              
+              for (let i = 1; i < productsData.length; i++) {
+                const row = productsData[i];
+                if (row[0]) {
+                  const school = schools.find(s => s.idDigipos === row[0]);
+                  if (school) {
+                    school.topProducts = [
+                      row[1] || '',
+                      row[2] || '',
+                      row[3] || '',
+                      row[4] || '',
+                      row[5] || ''
+                    ].filter(p => p);
+                  }
+                }
+              }
+            }
+            
+            // Import Top Customers if available
+            if (workbook.SheetNames.length > 2) {
+              const customerSheet = workbook.Sheets[workbook.SheetNames[2]];
               const customerData = XLSX.utils.sheet_to_json(customerSheet, { header: 1 });
               
               const newCustomers = [];
@@ -1069,7 +1341,9 @@
             renderPodium();
             renderLeaderboard();
             renderTopCustomers();
+            renderCompetitorAnalysis();
             renderSchoolsManagement();
+            renderTopProductsManagement();
             renderTopCustomersManagement();
             updateLastUpdated();
             
@@ -1093,7 +1367,7 @@
         ['Laporan Data Penjualan H.E.R.O'],
         [`Periode: ${startDate || 'Semua'} - ${endDate || 'Semua'}`],
         [''],
-        ['Rank', 'Nama Sekolah', 'ID Digipos', 'Wilayah', 'Revenue', 'Total Transaksi', 'Jumlah Siswa', 'Kelas Jawara', 'Trend']
+        ['Rank', 'Nama Sekolah', 'ID Digipos', 'Wilayah', 'Revenue', 'Total Qty', 'Jumlah Siswa', 'Kelas Jawara', 'Trend']
       ];
 
       const sorted = getSortedSchools();
@@ -1104,11 +1378,25 @@
           school.idDigipos,
           school.region,
           school.revenue,
-          school.totalTransactions,
+          school.salesCount,
           school.studentCount,
           school.topClass,
           school.trend
         ]);
+      });
+
+      // Add Top Products
+      exportData.push([''], ['TOP 5 PRODUK PER SEKOLAH']);
+      schools.forEach(school => {
+        exportData.push([`${school.name}`]);
+        if (school.topProducts && school.topProducts.length > 0) {
+          school.topProducts.forEach((product, idx) => {
+            exportData.push([`  ${idx+1}. ${product}`]);
+          });
+        } else {
+          exportData.push(['  Belum ada data']);
+        }
+        exportData.push(['']);
       });
 
       // Add Top Customers
@@ -1131,85 +1419,10 @@
       XLSX.writeFile(wb, filename);
     });
 
-    // Open School Modal
-    window.openSchoolModal = function(schoolId) {
-      const school = schools.find(s => s.id === schoolId);
-      if (!school) return;
-
-      selectedSchool = school;
-      document.getElementById('modalSchoolName').textContent = school.name;
-      
-      const modalContent = document.getElementById('modalContent');
-      modalContent.innerHTML = `
-        <div class="space-y-4">
-          <div class="grid grid-cols-2 gap-4">
-            <div class="p-4 bg-slate-50 rounded-xl">
-              <p class="text-xs text-slate-500">ID Digipos</p>
-              <p class="font-bold">${school.idDigipos}</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl">
-              <p class="text-xs text-slate-500">Region</p>
-              <p class="font-bold">${school.region}</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl">
-              <p class="text-xs text-slate-500">Revenue</p>
-              <p class="font-bold text-[#EC0000]">Rp${formatCurrency(school.revenue)}</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl">
-              <p class="text-xs text-slate-500">Total Transaksi</p>
-              <p class="font-bold">${school.totalTransactions}</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl">
-              <p class="text-xs text-slate-500">Jumlah Siswa</p>
-              <p class="font-bold">${school.studentCount}</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl">
-              <p class="text-xs text-slate-500">Jumlah Guru</p>
-              <p class="font-bold">${school.teacherCount}</p>
-            </div>
-          </div>
-          
-          <div class="p-4 bg-slate-50 rounded-xl">
-            <p class="text-xs text-slate-500 mb-2">Siswa Terbaik</p>
-            <p class="font-bold">${school.topStudentName}</p>
-          </div>
-          
-          <div class="p-4 bg-slate-50 rounded-xl">
-            <p class="text-xs text-slate-500 mb-2">Kelas Jawara</p>
-            <p class="font-bold">${school.topClass}</p>
-          </div>
-
-          <div class="p-4 bg-slate-50 rounded-xl">
-            <p class="text-xs text-slate-500 mb-2">Top Customer</p>
-            <p class="font-bold">${topCustomers.find(c => c.school === school.name)?.name || '-'}</p>
-          </div>
-        </div>
-      `;
-      
-      schoolModal.classList.remove('hidden');
-    };
-
-    // Update School Class
-    window.updateSchoolClass = function(schoolId) {
-      const input = document.getElementById(`class-${schoolId}`);
-      const newClass = input.value.trim();
-      
-      if (newClass) {
-        const school = schools.find(s => s.id === schoolId);
-        if (school) {
-          school.topClass = newClass;
-          renderSchoolsManagement();
-          renderLeaderboard();
-          updateLastUpdated();
-        }
-      }
-    };
-
     // Edit School (placeholder)
     window.editSchool = function(schoolId) {
       const school = schools.find(s => s.id === schoolId);
       if (school) {
-        // Simple prompt for demo
         const newName = prompt('Edit Nama Sekolah:', school.name);
         if (newName) {
           school.name = newName;
@@ -1281,20 +1494,6 @@
       alert('Data kompetitor berhasil disimpan!');
     });
 
-    // Close Modal
-    closeModal.addEventListener('click', () => {
-      schoolModal.classList.add('hidden');
-      selectedSchool = null;
-    });
-
-    // Click outside to close
-    schoolModal.addEventListener('click', (e) => {
-      if (e.target === schoolModal) {
-        schoolModal.classList.add('hidden');
-        selectedSchool = null;
-      }
-    });
-
     // Tab Switching
     function switchTab(tab) {
       activeTab = tab;
@@ -1316,6 +1515,7 @@
         
         // Render management views
         renderSchoolsManagement();
+        renderTopProductsManagement();
         renderTopCustomersManagement();
         renderCompetitorManagement();
       }
@@ -1331,8 +1531,47 @@
       updateLastUpdated();
     });
 
-    // Refresh AI
-    refreshAI.addEventListener('click', loadInsights);
+    // Load AI Insights
+    async function loadInsights() {
+      isAiLoading = true;
+      refreshAI.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
+      refreshAI.disabled = true;
+
+      // Simulate AI analysis based on real data
+      setTimeout(() => {
+        const topSchool = getSortedSchools()[0];
+        const totalRevenue = schools.reduce((sum, s) => sum + s.revenue, 0);
+        const avgRevenue = totalRevenue / schools.length;
+        
+        aiInsights = [
+          `${topSchool.name} memimpin dengan revenue Rp${formatCurrency(topSchool.revenue)}. Fokus pada produk ${topSchool.topProducts[0] || 'unggulan'}.`,
+          `Rata-rata revenue sekolah: Rp${formatCurrency(avgRevenue)}. ${schools.filter(s => s.revenue > avgRevenue).length} sekolah di atas rata-rata.`,
+          `Total transaksi mencapai ${schools.reduce((sum, s) => sum + s.salesCount, 0)} item dengan omzet total Rp${formatCurrency(totalRevenue)}.`
+        ];
+        
+        renderAIInsights();
+        
+        isAiLoading = false;
+        refreshAI.innerHTML = '<i class="fa-solid fa-brain"></i> Refresh AI Analysis';
+        refreshAI.disabled = false;
+      }, 1500);
+    }
+
+    // Render AI Insights
+    function renderAIInsights() {
+      if (aiInsights.length > 0) {
+        let html = '';
+        aiInsights.forEach((insight, idx) => {
+          html += `
+            <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100 flex gap-3">
+              <div class="w-5 h-5 bg-[#EC0000] text-white rounded-full flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">${idx + 1}</div>
+              <p class="text-[11px] leading-relaxed font-bold text-slate-600">${insight}</p>
+            </div>
+          `;
+        });
+        aiInsightsContainer.innerHTML = html;
+      }
+    }
 
     // Sync Button (simulasi)
     syncButton.addEventListener('click', async () => {
