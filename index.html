@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>H.E.R.O - Highschool Entrepreneur Race OSIS</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
     * { font-family: 'Inter', sans-serif; }
@@ -164,12 +165,68 @@
                     <th class="px-6 md:px-10 py-6">Nama Sekolah</th>
                     <th class="px-6 md:px-10 py-6 text-right">Total Omzet</th>
                     <th class="px-6 md:px-10 py-6 text-center">Trend</th>
+                    <th class="px-6 md:px-10 py-6 text-center">Kelas Jawara</th>
+                    <th class="px-6 md:px-10 py-6 text-center">Top Customer</th>
                   </tr>
                 </thead>
                 <tbody id="leaderboardBody" class="divide-y divide-slate-100">
                   <!-- Leaderboard rows will be populated here -->
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top 10 Customers Section -->
+        <div class="space-y-8">
+          <div class="flex items-center gap-4 mb-2">
+             <div class="p-2.5 bg-[#FFB800] text-white rounded-xl">
+               <i class="fa-solid fa-star"></i>
+             </div>
+             <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest italic">TOP 10 CUSTOMER</h3>
+          </div>
+
+          <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/40 border border-slate-100 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50/50 text-slate-400 text-[10px] uppercase font-black tracking-widest border-b border-slate-100">
+                    <th class="px-6 md:px-10 py-6 text-center">Rank</th>
+                    <th class="px-6 md:px-10 py-6">Nama Customer</th>
+                    <th class="px-6 md:px-10 py-6">Sekolah</th>
+                    <th class="px-6 md:px-10 py-6 text-right">Total Transaksi</th>
+                    <th class="px-6 md:px-10 py-6 text-right">Total Belanja</th>
+                  </tr>
+                </thead>
+                <tbody id="topCustomersBody" class="divide-y divide-slate-100">
+                  <!-- Top customers will be populated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Competitor Analysis Section -->
+        <div class="space-y-8">
+          <div class="flex items-center gap-4 mb-2">
+             <div class="p-2.5 bg-purple-600 text-white rounded-xl">
+               <i class="fa-solid fa-chart-simple"></i>
+             </div>
+             <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest italic">ANALISIS KOMPETITOR</h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-xl">
+              <h4 class="font-black text-sm mb-4">Market Share</h4>
+              <div id="marketShareContainer" class="space-y-3">
+                <!-- Market share will be populated -->
+              </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-xl md:col-span-2">
+              <h4 class="font-black text-sm mb-4">Perbandingan Performa</h4>
+              <div id="competitorComparison" class="space-y-4">
+                <!-- Competitor comparison will be populated -->
+              </div>
             </div>
           </div>
         </div>
@@ -180,9 +237,49 @@
         <div class="bg-white rounded-[2.5rem] p-8 shadow-xl">
           <h3 class="text-xl font-black mb-6">Data Master</h3>
           
-          <!-- Sync Section -->
-          <div class="mb-8">
-            <label class="block text-sm font-bold mb-2">URL Google Sheet</label>
+          <!-- Import/Export Section -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Import Excel -->
+            <div class="p-6 bg-slate-50 rounded-2xl">
+              <h4 class="font-black mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-file-excel text-green-600"></i>
+                Import Data Excel
+              </h4>
+              <div class="space-y-4">
+                <a href="#" id="downloadTemplate" class="inline-flex items-center gap-2 text-[#EC0000] hover:underline">
+                  <i class="fa-solid fa-download"></i> Download Template Excel
+                </a>
+                <input type="file" id="excelFile" accept=".xlsx,.xls" class="block w-full text-sm border rounded-lg p-2">
+                <button id="importExcel" class="bg-[#EC0000] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#cc0000] transition-all w-full">
+                  <i class="fa-solid fa-upload"></i> Import Data
+                </button>
+              </div>
+            </div>
+
+            <!-- Export Excel -->
+            <div class="p-6 bg-slate-50 rounded-2xl">
+              <h4 class="font-black mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-file-export text-blue-600"></i>
+                Export Data Excel
+              </h4>
+              <div class="space-y-4">
+                <div class="flex gap-2">
+                  <input type="date" id="exportStartDate" class="flex-1 p-2 border rounded-lg text-sm">
+                  <input type="date" id="exportEndDate" class="flex-1 p-2 border rounded-lg text-sm">
+                </div>
+                <button id="exportExcel" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all w-full">
+                  <i class="fa-solid fa-download"></i> Export Data
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Google Sheet Sync -->
+          <div class="mb-8 p-6 bg-slate-50 rounded-2xl">
+            <h4 class="font-black mb-4 flex items-center gap-2">
+              <i class="fa-brands fa-google text-green-600"></i>
+              Sinkronisasi Google Sheet
+            </h4>
             <div class="flex gap-2">
               <input type="url" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." class="flex-1 p-3 border rounded-xl">
               <button id="syncButton" class="bg-[#EC0000] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#cc0000] transition-all flex items-center gap-2">
@@ -192,39 +289,63 @@
           </div>
 
           <!-- Header Labels Configuration -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div>
-              <label class="block text-xs font-bold mb-1">Nama Sekolah</label>
-              <input type="text" id="headerSchool" value="Nama Sekolah" class="w-full p-2 border rounded-lg">
+          <div class="mb-8 p-6 bg-slate-50 rounded-2xl">
+            <h4 class="font-black mb-4">Konfigurasi Header Label</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold mb-1">Nama Sekolah</label>
+                <input type="text" id="headerSchool" value="Nama Sekolah" class="w-full p-2 border rounded-lg">
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">Siswa (Angka)</label>
+                <input type="text" id="headerStudent" value="Siswa (Angka)" class="w-full p-2 border rounded-lg">
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">Siswa Terbaik (Teks)</label>
+                <input type="text" id="headerTopStudent" value="Siswa Terbaik (Teks)" class="w-full p-2 border rounded-lg">
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">Kelas</label>
+                <input type="text" id="headerClass" value="Kelas" class="w-full p-2 border rounded-lg">
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">Revenue (Rp)</label>
+                <input type="text" id="headerRevenue" value="Revenue (Rp)" class="w-full p-2 border rounded-lg">
+              </div>
             </div>
-            <div>
-              <label class="block text-xs font-bold mb-1">Siswa (Angka)</label>
-              <input type="text" id="headerStudent" value="Siswa (Angka)" class="w-full p-2 border rounded-lg">
-            </div>
-            <div>
-              <label class="block text-xs font-bold mb-1">Siswa Terbaik (Teks)</label>
-              <input type="text" id="headerTopStudent" value="Siswa Terbaik (Teks)" class="w-full p-2 border rounded-lg">
-            </div>
-            <div>
-              <label class="block text-xs font-bold mb-1">Kelas</label>
-              <input type="text" id="headerClass" value="Kelas" class="w-full p-2 border rounded-lg">
-            </div>
-            <div>
-              <label class="block text-xs font-bold mb-1">Revenue (Rp)</label>
-              <input type="text" id="headerRevenue" value="Revenue (Rp)" class="w-full p-2 border rounded-lg">
+            <button id="saveHeaders" class="mt-4 bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-black transition-all">
+              Simpan Perubahan
+            </button>
+          </div>
+
+          <!-- School Profile Management -->
+          <div class="mb-8 p-6 bg-slate-50 rounded-2xl">
+            <h4 class="font-black mb-4">Profil Sekolah</h4>
+            <div id="schoolsManagementList" class="space-y-4">
+              <!-- Will be populated dynamically -->
             </div>
           </div>
 
-          <button id="saveHeaders" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-black transition-all">
-            Simpan Perubahan
-          </button>
-        </div>
+          <!-- Top Customers Management -->
+          <div class="mb-8 p-6 bg-slate-50 rounded-2xl">
+            <h4 class="font-black mb-4">Top 10 Customer</h4>
+            <div id="topCustomersManagement" class="space-y-4">
+              <!-- Will be populated dynamically -->
+            </div>
+            <button id="addCustomerBtn" class="mt-4 bg-green-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-green-700 transition-all">
+              <i class="fa-solid fa-plus"></i> Tambah Customer
+            </button>
+          </div>
 
-        <!-- Schools List for Management -->
-        <div class="bg-white rounded-[2.5rem] p-8 shadow-xl">
-          <h4 class="font-black mb-4">Daftar Sekolah</h4>
-          <div id="schoolsManagementList" class="space-y-2">
-            <!-- Will be populated dynamically -->
+          <!-- Competitor Info Management -->
+          <div class="p-6 bg-slate-50 rounded-2xl">
+            <h4 class="font-black mb-4">Info Kompetitor (%)</h4>
+            <div id="competitorManagement" class="space-y-4">
+              <!-- Will be populated dynamically -->
+            </div>
+            <button id="saveCompetitor" class="mt-4 bg-purple-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-purple-700 transition-all">
+              Simpan Data Kompetitor
+            </button>
           </div>
         </div>
       </div>
@@ -353,8 +474,40 @@
       }
     ];
 
+    // Top Customers Data
+    const TOP_CUSTOMERS_DATA = [
+      { rank: 1, name: "Budi Santoso", school: "SMA NEGERI 1 MALANG", transactions: 45, totalSpent: 2250000 },
+      { rank: 2, name: "Maria Wijaya", school: "SMA KRISTEN 2 SURABAYA", transactions: 38, totalSpent: 1900000 },
+      { rank: 3, name: "Ahmad Fauzi", school: "SMA MUHAMMADIYAH 3 JAKARTA", transactions: 32, totalSpent: 1600000 },
+      { rank: 4, name: "Kevin Alexander", school: "SMA KATOLIK ST. ALBERTUS", transactions: 28, totalSpent: 1400000 },
+      { rank: 5, name: "Rina Wijayanti", school: "SMA NEGERI 5 BANDUNG", transactions: 25, totalSpent: 1250000 },
+      { rank: 6, name: "Dewi Lestari", school: "SMA NEGERI 1 MALANG", transactions: 22, totalSpent: 1100000 },
+      { rank: 7, name: "Rudi Hartono", school: "SMA KRISTEN 2 SURABAYA", transactions: 20, totalSpent: 1000000 },
+      { rank: 8, name: "Siti Aminah", school: "SMA MUHAMMADIYAH 3 JAKARTA", transactions: 18, totalSpent: 900000 },
+      { rank: 9, name: "John Doe", school: "SMA KATOLIK ST. ALBERTUS", transactions: 16, totalSpent: 800000 },
+      { rank: 10, name: "Jane Smith", school: "SMA NEGERI 5 BANDUNG", transactions: 15, totalSpent: 750000 }
+    ];
+
+    // Competitor Data
+    const COMPETITOR_DATA = {
+      marketShare: [
+        { name: "Telkomsel", share: 45, color: "red" },
+        { name: "Indosat", share: 30, color: "yellow" },
+        { name: "XL", share: 15, color: "blue" },
+        { name: "Tri", share: 10, color: "purple" }
+      ],
+      performance: [
+        { competitor: "Telkomsel", growth: 12, marketLeader: true },
+        { competitor: "Indosat", growth: 8, marketLeader: false },
+        { competitor: "XL", growth: 5, marketLeader: false },
+        { competitor: "Tri", growth: 3, marketLeader: false }
+      ]
+    };
+
     // State variables
     let schools = [...SCHOOLS_DATA];
+    let topCustomers = [...TOP_CUSTOMERS_DATA];
+    let competitorData = {...COMPETITOR_DATA};
     let activeTab = 'dashboard';
     let aiInsights = [];
     let isAiLoading = false;
@@ -382,12 +535,25 @@
     const aiInsightsContainer = document.getElementById('aiInsightsContainer');
     const podiumContainer = document.getElementById('podiumContainer');
     const leaderboardBody = document.getElementById('leaderboardBody');
+    const topCustomersBody = document.getElementById('topCustomersBody');
+    const marketShareContainer = document.getElementById('marketShareContainer');
+    const competitorComparison = document.getElementById('competitorComparison');
     const schoolModal = document.getElementById('schoolModal');
     const closeModal = document.getElementById('closeModal');
     const syncButton = document.getElementById('syncButton');
     const sheetUrl = document.getElementById('sheetUrl');
     const saveHeaders = document.getElementById('saveHeaders');
     const schoolsManagementList = document.getElementById('schoolsManagementList');
+    const topCustomersManagement = document.getElementById('topCustomersManagement');
+    const competitorManagement = document.getElementById('competitorManagement');
+    const downloadTemplate = document.getElementById('downloadTemplate');
+    const importExcel = document.getElementById('importExcel');
+    const excelFile = document.getElementById('excelFile');
+    const exportExcel = document.getElementById('exportExcel');
+    const exportStartDate = document.getElementById('exportStartDate');
+    const exportEndDate = document.getElementById('exportEndDate');
+    const addCustomerBtn = document.getElementById('addCustomerBtn');
+    const saveCompetitor = document.getElementById('saveCompetitor');
 
     // Header input elements
     const headerSchool = document.getElementById('headerSchool');
@@ -534,6 +700,9 @@
             ? 'text-red-600 bg-red-50' 
             : 'text-slate-400 bg-slate-50';
 
+        // Find top customer for this school
+        const schoolTopCustomer = topCustomers.find(c => c.school === school.name) || { name: '-' };
+
         html += `
           <tr onclick="openSchoolModal('${school.id}')" class="hover:bg-slate-50 transition-all group cursor-pointer">
             <td class="px-6 md:px-10 py-6 text-center">
@@ -552,6 +721,12 @@
                   ${trendIcon} ${school.trend === 'up' ? 'Naik' : school.trend === 'down' ? 'Turun' : 'Stable'}
                </div>
             </td>
+            <td class="px-6 md:px-10 py-6 text-center">
+              <p class="font-bold text-xs">${school.topClass}</p>
+            </td>
+            <td class="px-6 md:px-10 py-6 text-center">
+              <p class="font-bold text-xs">${schoolTopCustomer.name}</p>
+            </td>
           </tr>
         `;
       });
@@ -559,23 +734,180 @@
       leaderboardBody.innerHTML = html;
     }
 
+    // Render Top Customers
+    function renderTopCustomers() {
+      let html = '';
+      topCustomers.forEach(customer => {
+        html += `
+          <tr class="hover:bg-slate-50 transition-all">
+            <td class="px-6 md:px-10 py-6 text-center font-black">#${customer.rank}</td>
+            <td class="px-6 md:px-10 py-6 font-bold">${customer.name}</td>
+            <td class="px-6 md:px-10 py-6">${customer.school}</td>
+            <td class="px-6 md:px-10 py-6 text-right font-bold">${customer.transactions}x</td>
+            <td class="px-6 md:px-10 py-6 text-right font-bold text-[#EC0000]">Rp${formatCurrency(customer.totalSpent)}</td>
+          </tr>
+        `;
+      });
+      topCustomersBody.innerHTML = html;
+    }
+
+    // Render Competitor Analysis
+    function renderCompetitorAnalysis() {
+      // Market Share
+      let marketShareHtml = '';
+      competitorData.marketShare.forEach(item => {
+        marketShareHtml += `
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="font-bold">${item.name}</span>
+              <span class="font-black">${item.share}%</span>
+            </div>
+            <div class="w-full bg-slate-200 rounded-full h-2">
+              <div class="bg-${item.color}-600 h-2 rounded-full" style="width: ${item.share}%"></div>
+            </div>
+          </div>
+        `;
+      });
+      marketShareContainer.innerHTML = marketShareHtml;
+
+      // Competitor Comparison
+      let comparisonHtml = '';
+      competitorData.performance.forEach(item => {
+        comparisonHtml += `
+          <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl">
+            <div class="flex items-center gap-2">
+              <span class="font-black">${item.competitor}</span>
+              ${item.marketLeader ? '<span class="text-[10px] bg-[#FFB800] text-white px-2 py-0.5 rounded-full">Leader</span>' : ''}
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-sm ${item.growth > 0 ? 'text-emerald-600' : 'text-red-600'}">
+                <i class="fa-solid fa-${item.growth > 0 ? 'arrow-up' : 'arrow-down'}"></i>
+                ${Math.abs(item.growth)}% growth
+              </span>
+            </div>
+          </div>
+        `;
+      });
+      competitorComparison.innerHTML = comparisonHtml;
+    }
+
     // Render Schools Management List
     function renderSchoolsManagement() {
       let html = '';
       schools.forEach((school, index) => {
         html += `
-          <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
-            <div>
-              <p class="font-bold">${school.name}</p>
-              <p class="text-xs text-slate-500">ID: ${school.idDigipos} | Revenue: Rp${formatCurrency(school.revenue)}</p>
+          <div class="bg-white p-4 rounded-xl border border-slate-200">
+            <div class="flex justify-between items-start mb-3">
+              <div>
+                <p class="font-black text-lg">${school.name}</p>
+                <p class="text-xs text-slate-500">ID Digipos: ${school.idDigipos}</p>
+              </div>
+              <button onclick="editSchool('${school.id}')" class="text-[#EC0000] hover:text-[#cc0000]">
+                <i class="fa-solid fa-edit text-xl"></i>
+              </button>
             </div>
-            <button onclick="editSchool('${school.id}')" class="text-[#EC0000] hover:text-[#cc0000]">
-              <i class="fa-solid fa-edit"></i>
-            </button>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <p class="text-[10px] text-slate-500">Jumlah Siswa</p>
+                <p class="font-black">${school.studentCount}</p>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <p class="text-[10px] text-slate-500">Wilayah</p>
+                <p class="font-black">${school.region}</p>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <p class="text-[10px] text-slate-500">Kelas Jawara</p>
+                <p class="font-black">${school.topClass}</p>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <p class="text-[10px] text-slate-500">Revenue</p>
+                <p class="font-black text-[#EC0000]">Rp${formatCurrency(school.revenue)}</p>
+              </div>
+            </div>
+
+            <div class="mt-3 flex gap-2">
+              <input type="text" placeholder="Edit Kelas Jawara" class="flex-1 text-sm p-2 border rounded-lg" id="class-${school.id}" value="${school.topClass}">
+              <button onclick="updateSchoolClass('${school.id}')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold">
+                Update
+              </button>
+            </div>
           </div>
         `;
       });
       schoolsManagementList.innerHTML = html;
+    }
+
+    // Render Top Customers Management
+    function renderTopCustomersManagement() {
+      let html = '';
+      topCustomers.forEach((customer, index) => {
+        html += `
+          <div class="bg-white p-4 rounded-xl border border-slate-200">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-3">
+                <span class="w-8 h-8 bg-[#FFB800] text-white rounded-full flex items-center justify-center font-black">${customer.rank}</span>
+                <div>
+                  <p class="font-black">${customer.name}</p>
+                  <p class="text-xs text-slate-500">${customer.school}</p>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="editCustomer(${index})" class="text-blue-600 hover:text-blue-800">
+                  <i class="fa-solid fa-edit"></i>
+                </button>
+                <button onclick="deleteCustomer(${index})" class="text-red-600 hover:text-red-800">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-2">
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <p class="text-[10px] text-slate-500">Transaksi</p>
+                <p class="font-black">${customer.transactions}x</p>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-lg">
+                <p class="text-[10px] text-slate-500">Total Belanja</p>
+                <p class="font-black text-[#EC0000]">Rp${formatCurrency(customer.totalSpent)}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      topCustomersManagement.innerHTML = html;
+    }
+
+    // Render Competitor Management
+    function renderCompetitorManagement() {
+      let html = '<div class="space-y-4">';
+      
+      // Market Share
+      html += '<div><h5 class="font-bold mb-2">Market Share (%)</h5>';
+      competitorData.marketShare.forEach((item, index) => {
+        html += `
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-20 text-sm">${item.name}</span>
+            <input type="number" id="market-share-${index}" value="${item.share}" min="0" max="100" class="w-20 p-2 border rounded-lg text-center">
+            <span class="text-sm">%</span>
+          </div>
+        `;
+      });
+      html += '</div>';
+
+      // Performance
+      html += '<div class="mt-4"><h5 class="font-bold mb-2">Growth (%)</h5>';
+      competitorData.performance.forEach((item, index) => {
+        html += `
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-20 text-sm">${item.competitor}</span>
+            <input type="number" id="growth-${index}" value="${item.growth}" min="-100" max="100" class="w-20 p-2 border rounded-lg text-center">
+            <span class="text-sm">%</span>
+          </div>
+        `;
+      });
+      html += '</div></div>';
+
+      competitorManagement.innerHTML = html;
     }
 
     // Load AI Insights
@@ -615,6 +947,189 @@
         aiInsightsContainer.innerHTML = html;
       }
     }
+
+    // Download Excel Template
+    downloadTemplate.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Create template data
+      const templateData = [
+        ['ID Digipos', 'Nama Sekolah', 'Wilayah', 'Jumlah Siswa', 'Jumlah Guru', 'Kelas Jawara', 'Revenue', 'Prev Revenue', 'Trend (up/down/stable)'],
+        ['SMA001', 'SMA NEGERI 1 MALANG', 'Malang', '1200', '65', 'XI IPA 1', '125000000', '100000000', 'up'],
+        ['SMA002', 'SMA KRISTEN 2 SURABAYA', 'Surabaya', '900', '55', 'XII IPS 2', '98000000', '95000000', 'up'],
+        ['', '', '', '', '', '', '', '', '']
+      ];
+
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(templateData);
+      
+      // Add column widths
+      ws['!cols'] = [
+        { wch: 15 }, // ID Digipos
+        { wch: 30 }, // Nama Sekolah
+        { wch: 15 }, // Wilayah
+        { wch: 15 }, // Jumlah Siswa
+        { wch: 15 }, // Jumlah Guru
+        { wch: 15 }, // Kelas Jawara
+        { wch: 20 }, // Revenue
+        { wch: 20 }, // Prev Revenue
+        { wch: 15 }  // Trend
+      ];
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Template Sekolah');
+      
+      // Add Top Customers sheet
+      const customerSheet = [
+        ['Rank', 'Nama Customer', 'Sekolah', 'Jumlah Transaksi', 'Total Belanja'],
+        ['1', 'Budi Santoso', 'SMA NEGERI 1 MALANG', '45', '2250000'],
+        ['2', 'Maria Wijaya', 'SMA KRISTEN 2 SURABAYA', '38', '1900000'],
+        ['', '', '', '', '']
+      ];
+      const ws2 = XLSX.utils.aoa_to_sheet(customerSheet);
+      ws2['!cols'] = [{ wch: 10 }, { wch: 25 }, { wch: 30 }, { wch: 15 }, { wch: 15 }];
+      XLSX.utils.book_append_sheet(wb, ws2, 'Top Customers');
+
+      XLSX.writeFile(wb, 'hero_dashboard_template.xlsx');
+    });
+
+    // Import Excel
+    importExcel.addEventListener('click', () => {
+      const file = excelFile.files[0];
+      if (!file) {
+        alert('Pilih file Excel terlebih dahulu');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          
+          // Import Schools
+          const schoolSheet = workbook.Sheets[workbook.SheetNames[0]];
+          const schoolData = XLSX.utils.sheet_to_json(schoolSheet, { header: 1 });
+          
+          // Skip header row
+          const newSchools = [];
+          for (let i = 1; i < schoolData.length; i++) {
+            const row = schoolData[i];
+            if (row[0] && row[1]) { // Has ID and Name
+              newSchools.push({
+                id: String(i),
+                idDigipos: row[0] || '',
+                name: row[1] || '',
+                region: row[2] || 'Malang',
+                studentCount: Number(row[3]) || 0,
+                teacherCount: Number(row[4]) || 0,
+                topClass: row[5] || '-',
+                revenue: Number(row[6]) || 0,
+                prevRevenue: Number(row[7]) || 0,
+                trend: (row[8] || 'stable').toLowerCase(),
+                salesCount: 0,
+                lastSale: '-',
+                topProducts: [],
+                totalTransactions: 0,
+                topStudentName: '-',
+                topActiveStudents: [],
+                carrierStats: { telkomsel: 70, indosat: 20, xl: 10 },
+                dailySales: []
+              });
+            }
+          }
+
+          if (newSchools.length > 0) {
+            schools = newSchools;
+            
+            // Import Top Customers if available
+            if (workbook.SheetNames.length > 1) {
+              const customerSheet = workbook.Sheets[workbook.SheetNames[1]];
+              const customerData = XLSX.utils.sheet_to_json(customerSheet, { header: 1 });
+              
+              const newCustomers = [];
+              for (let i = 1; i < customerData.length; i++) {
+                const row = customerData[i];
+                if (row[1]) { // Has customer name
+                  newCustomers.push({
+                    rank: Number(row[0]) || i,
+                    name: row[1] || '',
+                    school: row[2] || '',
+                    transactions: Number(row[3]) || 0,
+                    totalSpent: Number(row[4]) || 0
+                  });
+                }
+              }
+              
+              if (newCustomers.length > 0) {
+                topCustomers = newCustomers;
+              }
+            }
+            
+            // Update all views
+            renderPodium();
+            renderLeaderboard();
+            renderTopCustomers();
+            renderSchoolsManagement();
+            renderTopCustomersManagement();
+            updateLastUpdated();
+            
+            alert('Import data berhasil!');
+          }
+        } catch (error) {
+          console.error('Import error:', error);
+          alert('Gagal mengimpor data. Periksa format file Anda.');
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    });
+
+    // Export Excel
+    exportExcel.addEventListener('click', () => {
+      const startDate = exportStartDate.value;
+      const endDate = exportEndDate.value;
+      
+      // Filter data based on date range (simplified for demo)
+      const exportData = [
+        ['Laporan Data Penjualan H.E.R.O'],
+        [`Periode: ${startDate || 'Semua'} - ${endDate || 'Semua'}`],
+        [''],
+        ['Rank', 'Nama Sekolah', 'ID Digipos', 'Wilayah', 'Revenue', 'Total Transaksi', 'Jumlah Siswa', 'Kelas Jawara', 'Trend']
+      ];
+
+      const sorted = getSortedSchools();
+      sorted.forEach((school, index) => {
+        exportData.push([
+          index + 1,
+          school.name,
+          school.idDigipos,
+          school.region,
+          school.revenue,
+          school.totalTransactions,
+          school.studentCount,
+          school.topClass,
+          school.trend
+        ]);
+      });
+
+      // Add Top Customers
+      exportData.push([''], ['TOP 10 CUSTOMER'], ['Rank', 'Nama Customer', 'Sekolah', 'Transaksi', 'Total Belanja']);
+      topCustomers.forEach(customer => {
+        exportData.push([
+          customer.rank,
+          customer.name,
+          customer.school,
+          customer.transactions,
+          customer.totalSpent
+        ]);
+      });
+
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(exportData);
+      XLSX.utils.book_append_sheet(wb, ws, 'Laporan H.E.R.O');
+      
+      const filename = `hero_report_${startDate || 'all'}_to_${endDate || 'all'}.xlsx`;
+      XLSX.writeFile(wb, filename);
+    });
 
     // Open School Modal
     window.openSchoolModal = function(schoolId) {
@@ -663,11 +1178,108 @@
             <p class="text-xs text-slate-500 mb-2">Kelas Jawara</p>
             <p class="font-bold">${school.topClass}</p>
           </div>
+
+          <div class="p-4 bg-slate-50 rounded-xl">
+            <p class="text-xs text-slate-500 mb-2">Top Customer</p>
+            <p class="font-bold">${topCustomers.find(c => c.school === school.name)?.name || '-'}</p>
+          </div>
         </div>
       `;
       
       schoolModal.classList.remove('hidden');
     };
+
+    // Update School Class
+    window.updateSchoolClass = function(schoolId) {
+      const input = document.getElementById(`class-${schoolId}`);
+      const newClass = input.value.trim();
+      
+      if (newClass) {
+        const school = schools.find(s => s.id === schoolId);
+        if (school) {
+          school.topClass = newClass;
+          renderSchoolsManagement();
+          renderLeaderboard();
+          updateLastUpdated();
+        }
+      }
+    };
+
+    // Edit School (placeholder)
+    window.editSchool = function(schoolId) {
+      const school = schools.find(s => s.id === schoolId);
+      if (school) {
+        // Simple prompt for demo
+        const newName = prompt('Edit Nama Sekolah:', school.name);
+        if (newName) {
+          school.name = newName;
+          renderSchoolsManagement();
+          renderPodium();
+          renderLeaderboard();
+          updateLastUpdated();
+        }
+      }
+    };
+
+    // Customer Management
+    window.editCustomer = function(index) {
+      const customer = topCustomers[index];
+      const newName = prompt('Edit Nama Customer:', customer.name);
+      if (newName) {
+        customer.name = newName;
+        renderTopCustomersManagement();
+        renderTopCustomers();
+        updateLastUpdated();
+      }
+    };
+
+    window.deleteCustomer = function(index) {
+      if (confirm('Hapus customer ini?')) {
+        topCustomers.splice(index, 1);
+        // Re-rank
+        topCustomers.forEach((c, i) => c.rank = i + 1);
+        renderTopCustomersManagement();
+        renderTopCustomers();
+        updateLastUpdated();
+      }
+    };
+
+    // Add Customer
+    addCustomerBtn.addEventListener('click', () => {
+      const newCustomer = {
+        rank: topCustomers.length + 1,
+        name: 'Customer Baru',
+        school: 'SMA NEGERI 1 MALANG',
+        transactions: 0,
+        totalSpent: 0
+      };
+      topCustomers.push(newCustomer);
+      renderTopCustomersManagement();
+      renderTopCustomers();
+    });
+
+    // Save Competitor Data
+    saveCompetitor.addEventListener('click', () => {
+      // Update market share
+      competitorData.marketShare.forEach((item, index) => {
+        const input = document.getElementById(`market-share-${index}`);
+        if (input) {
+          item.share = Number(input.value) || 0;
+        }
+      });
+
+      // Update growth
+      competitorData.performance.forEach((item, index) => {
+        const input = document.getElementById(`growth-${index}`);
+        if (input) {
+          item.growth = Number(input.value) || 0;
+        }
+      });
+
+      renderCompetitorAnalysis();
+      updateLastUpdated();
+      alert('Data kompetitor berhasil disimpan!');
+    });
 
     // Close Modal
     closeModal.addEventListener('click', () => {
@@ -702,7 +1314,10 @@
         dashboardTab.classList.remove('bg-gradient-to-r', 'from-[#EC0000]', 'to-[#FF4D4D]', 'text-white', 'shadow-lg', 'shadow-red-500/30');
         dashboardTab.classList.add('text-slate-500', 'hover:text-white', 'hover:bg-white/5');
         
+        // Render management views
         renderSchoolsManagement();
+        renderTopCustomersManagement();
+        renderCompetitorManagement();
       }
     }
 
@@ -719,7 +1334,7 @@
     // Refresh AI
     refreshAI.addEventListener('click', loadInsights);
 
-    // Sync Button
+    // Sync Button (simulasi)
     syncButton.addEventListener('click', async () => {
       const url = sheetUrl.value.trim();
       if (!url) {
@@ -740,6 +1355,8 @@
         // Update UI
         renderPodium();
         renderLeaderboard();
+        renderTopCustomers();
+        renderCompetitorAnalysis();
       }, 2000);
     });
 
@@ -757,14 +1374,11 @@
       alert('Header labels berhasil disimpan!');
     });
 
-    // Edit School (placeholder)
-    window.editSchool = function(schoolId) {
-      alert(`Edit school ${schoolId} - Fitur akan segera tersedia`);
-    };
-
     // Initial Render
     renderPodium();
     renderLeaderboard();
+    renderTopCustomers();
+    renderCompetitorAnalysis();
     updateLastUpdated();
 
     // Auto-refresh every 5 minutes
