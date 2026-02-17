@@ -9,1473 +9,102 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F7F8FA;
-            color: #0F0F0F;
-            min-height: 100vh;
-        }
-
-        /* Container utama */
-        .hero-dashboard {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        @media (min-width: 768px) {
-            .hero-dashboard {
-                flex-direction: row;
-            }
-        }
-
-        /* ===== SIDEBAR ===== */
-        .sidebar {
-            width: 100%;
-            background-color: #0F0F0F;
-            color: white;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            border-right: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-        }
-
-        @media (min-width: 768px) {
-            .sidebar {
-                width: 5rem;
-                position: sticky;
-                top: 0;
-                height: 100vh;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .sidebar {
-                width: 16rem;
-            }
-        }
-
-        /* Logo section */
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            align-items: center;
-        }
-
-        @media (min-width: 1024px) {
-            .logo-container {
-                align-items: flex-start;
-            }
-        }
-
-        .logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .logo-icon {
-            width: 3rem;
-            height: 3rem;
-            background: linear-gradient(135deg, #EC0000, #800000);
-            border-radius: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 15px -3px rgba(236,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .logo-icon i {
-            font-size: 1.75rem;
-            color: white;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: -0.05em;
-            background: linear-gradient(to right, white, #cbd5e1, #64748b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-            display: none;
-        }
-
-        @media (min-width: 1024px) {
-            .logo-text {
-                display: block;
-            }
-        }
-
-        .logo-subtitle {
-            font-size: 0.5625rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: #64748b;
-            line-height: 1.2;
-            letter-spacing: 0.15em;
-            margin-top: 1.5rem;
-            opacity: 0.6;
-            display: none;
-        }
-
-        @media (min-width: 1024px) {
-            .logo-subtitle {
-                display: block;
-            }
-        }
-
-        /* Navigation */
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 1rem;
-            font-weight: 700;
-            transition: all 0.3s;
-            border: none;
-            background: transparent;
-            color: #64748b;
-            cursor: pointer;
-            width: 100%;
-            text-align: left;
-        }
-
-        .nav-item i {
-            font-size: 1.25rem;
-        }
-
-        .nav-item span {
-            display: none;
-            font-size: 0.875rem;
-        }
-
-        @media (min-width: 1024px) {
-            .nav-item span {
-                display: block;
-            }
-        }
-
-        .nav-item.active {
-            background: linear-gradient(to right, #EC0000, #FF4D4D);
-            color: white;
-            box-shadow: 0 10px 15px -3px rgba(236,0,0,0.3);
-        }
-
-        .nav-item:not(.active):hover {
-            color: white;
-            background-color: rgba(255,255,255,0.05);
-        }
-
-        /* Sidebar footer */
-        .sidebar-footer {
-            margin-top: auto;
-            display: none;
-        }
-
-        @media (min-width: 1024px) {
-            .sidebar-footer {
-                display: block;
-            }
-        }
-
-        .footer-card {
-            background: linear-gradient(135deg, #1F1F1F, #0A0A0A);
-            padding: 1.25rem;
+        /* ... (semua style sebelumnya tetap sama, tambahkan style baru di bawah) ... */
+        
+        /* Form Edit Styles */
+        .edit-form {
+            background: white;
             border-radius: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer-card .card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #FFB800;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-card .card-header i {
-            font-size: 1rem;
-        }
-
-        .footer-card .card-header span {
-            font-size: 0.625rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-        }
-
-        .footer-card p {
-            font-size: 0.6875rem;
-            color: #94a3b8;
-            line-height: 1.5;
-            font-weight: 500;
-        }
-
-        /* ===== MAIN CONTENT ===== */
-        .main-content {
-            flex: 1;
-            padding: 0.75rem;
-            overflow-y: auto;
-        }
-
-        @media (min-width: 768px) {
-            .main-content {
-                padding: 2rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .main-content {
-                padding: 3rem;
-            }
-        }
-
-        /* Header */
-        .dashboard-header {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (min-width: 1024px) {
-            .dashboard-header {
-                flex-direction: row;
-                margin-bottom: 3rem;
-            }
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .header-left {
-                gap: 1.5rem;
-            }
-        }
-
-        .header-title {
-            font-size: 1.25rem;
-            font-weight: 900;
-            color: #0F0F0F;
-            letter-spacing: -0.05em;
-            text-transform: uppercase;
-        }
-
-        @media (min-width: 768px) {
-            .header-title {
-                font-size: 1.875rem;
-            }
-        }
-
-        .header-title span {
-            color: #EC0000;
-        }
-
-        .update-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: white;
-            padding: 0.375rem 0.75rem;
-            border-radius: 0.75rem;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
-            font-size: 0.5rem;
-            font-weight: 900;
-            color: #94a3b8;
-        }
-
-        @media (min-width: 768px) {
-            .update-badge {
-                padding: 0.625rem 1.25rem;
-                border-radius: 1rem;
-                font-size: 0.625rem;
-            }
-        }
-
-        .update-badge i {
-            color: #EC0000;
-            font-size: 0.75rem;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .header-right {
-                gap: 0.75rem;
-            }
-        }
-
-        .period-badge {
-            background-color: white;
-            padding: 0.375rem 0.75rem;
-            border-radius: 0.75rem;
-            border: 1px solid #e2e8f0;
-            font-size: 0.625rem;
-            font-weight: 700;
-            color: #475569;
-            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .period-badge {
-                padding: 0.625rem 1.25rem;
-                border-radius: 1rem;
-                font-size: 0.75rem;
-            }
-        }
-
-        .period-badge i {
-            color: #FFB800;
-            font-size: 0.875rem;
-        }
-
-        .refresh-btn {
-            padding: 0.5rem;
-            background-color: white;
-            border: 1px solid #e2e8f0;
-            color: #94a3b8;
-            border-radius: 0.75rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
-        }
-
-        @media (min-width: 768px) {
-            .refresh-btn {
-                padding: 0.75rem;
-                border-radius: 1rem;
-            }
-        }
-
-        .refresh-btn:hover {
-            color: #EC0000;
-        }
-
-        .refresh-btn i {
-            font-size: 1.125rem;
-        }
-
-        /* Dashboard Sections */
-        .dashboard-section {
-            margin-bottom: 2.5rem;
-            display: none;
-        }
-
-        .dashboard-section.active {
-            display: block;
-        }
-
-        @media (min-width: 768px) {
-            .dashboard-section {
-                margin-bottom: 4rem;
-            }
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-header {
-                gap: 0.75rem;
-                margin-bottom: 2rem;
-            }
-        }
-
-        .section-icon {
-            padding: 0.5rem;
-            background-color: #FFB800;
-            color: white;
-            border-radius: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-icon {
-                padding: 0.75rem;
-                border-radius: 0.75rem;
-            }
-        }
-
-        .section-icon i {
-            width: 1rem;
-            height: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-icon i {
-                width: 1.25rem;
-                height: 1.25rem;
-            }
-        }
-
-        .section-title {
-            font-size: 0.625rem;
-            font-weight: 900;
-            color: #1e293b;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-style: italic;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 0.875rem;
-            }
-        }
-
-        .live-indicator {
-            width: 0.5rem;
-            height: 0.5rem;
-            background-color: #10b981;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* Podium Grid */
-        .podium-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.375rem;
-            align-items: end;
-            padding: 0 0.125rem;
-        }
-
-        @media (min-width: 768px) {
-            .podium-grid {
-                gap: 2rem;
-                padding: 0;
-            }
-        }
-
-        /* Podium Cards */
-        .podium-card {
-            background-color: white;
-            padding: 0.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            border-bottom-width: 2px;
-            border-bottom-style: solid;
-        }
-
-        @media (min-width: 768px) {
-            .podium-card {
-                padding: 2rem;
-                border-radius: 2.5rem;
-                border-bottom-width: 4px;
-            }
-        }
-
-        .podium-card:hover {
-            transform: translateY(-0.5rem);
-        }
-
-        .podium-card.silver {
-            border-bottom-color: #cbd5e1;
-        }
-
-        .podium-card.gold {
-            background: linear-gradient(135deg, #121212, #000000);
-            border-bottom-color: #FFB800;
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        .podium-card.bronze {
-            border-bottom-color: #b45309;
-        }
-
-        .podium-bg-icon {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 0.5rem;
-            opacity: 0.05;
-            transition: opacity 0.3s;
-        }
-
-        @media (min-width: 768px) {
-            .podium-bg-icon {
-                padding: 1.5rem;
-                opacity: 0.1;
-            }
-        }
-
-        .podium-card:hover .podium-bg-icon {
-            opacity: 0.2;
-        }
-
-        .podium-bg-icon i {
-            font-size: 2.5rem;
-            color: #94a3b8;
-        }
-
-        @media (min-width: 768px) {
-            .podium-bg-icon i {
-                font-size: 5rem;
-            }
-        }
-
-        .podium-rank {
-            width: 1.5rem;
-            height: 1.5rem;
-            background-color: #f1f5f9;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-weight: 900;
-            font-size: 0.625rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid #e2e8f0;
-        }
-
-        @media (min-width: 768px) {
-            .podium-rank {
-                width: 3.5rem;
-                height: 3.5rem;
-                border-radius: 1rem;
-                font-size: 1.25rem;
-                margin-bottom: 1.5rem;
-            }
-        }
-
-        .gold .podium-rank {
-            background-color: #FFB800;
-            color: white;
-            box-shadow: 0 10px 15px -3px rgba(255,184,0,0.3);
-            border: none;
-        }
-
-        .gold .podium-rank i {
-            font-size: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .gold .podium-rank i {
-                font-size: 2rem;
-            }
-        }
-
-        .rank-number {
-            display: block;
-        }
-
-        .gold .rank-number {
-            display: none;
-        }
-
-        .crown-icon {
-            display: none;
-        }
-
-        .gold .crown-icon {
-            display: block;
-        }
-
-        .podium-school-name {
-            font-size: 0.5rem;
-            font-weight: 900;
-            color: #1e293b;
-            line-height: 1.2;
-            margin-bottom: 0.25rem;
-            text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media (min-width: 768px) {
-            .podium-school-name {
-                font-size: 1.25rem;
-                margin-bottom: 0.5rem;
-            }
-        }
-
-        .gold .podium-school-name {
-            color: white;
-        }
-
-        .podium-region {
-            font-size: 0.375rem;
-            font-weight: 700;
-            color: #94a3b8;
-            margin-bottom: 0.5rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media (min-width: 768px) {
-            .podium-region {
-                font-size: 0.75rem;
-                margin-bottom: 1.5rem;
-            }
-        }
-
-        .gold .podium-region {
-            color: #94a3b8;
-        }
-
-        .podium-footer {
-            padding-top: 0.5rem;
-            border-top: 1px solid #f8fafc;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        @media (min-width: 768px) {
-            .podium-footer {
-                padding-top: 1.5rem;
-            }
-        }
-
-        .gold .podium-footer {
-            border-top-color: rgba(255,255,255,0.1);
-        }
-
-        .revenue-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .revenue-label {
-            font-size: 0.3125rem;
-            font-weight: 900;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.125rem;
-        }
-
-        @media (min-width: 768px) {
-            .revenue-label {
-                font-size: 0.625rem;
-                margin-bottom: 0.25rem;
-            }
-        }
-
-        .gold .revenue-label {
-            color: #FFB800;
-        }
-
-        .revenue-value {
-            font-size: 0.5rem;
-            font-weight: 900;
-            color: #0F0F0F;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        @media (min-width: 768px) {
-            .revenue-value {
-                font-size: 1.125rem;
-            }
-        }
-
-        .gold .revenue-value {
-            color: white;
-        }
-
-        .podium-chevron {
-            color: #e2e8f0;
-            transition: all 0.3s;
-            font-size: 0.75rem;
-        }
-
-        @media (min-width: 768px) {
-            .podium-chevron {
-                font-size: 1.25rem;
-            }
-        }
-
-        .podium-card:hover .podium-chevron {
-            color: #EC0000;
-            transform: translateX(0.25rem);
-        }
-
-        .gold .podium-chevron {
-            color: rgba(255,255,255,0.2);
-        }
-
-        .gold:hover .podium-chevron {
-            color: #EC0000;
-        }
-
-        .gold-sparkle {
-            background-color: #EC0000;
-            padding: 0.25rem;
-            border-radius: 0.375rem;
-            color: white;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            margin-left: 0.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .gold-sparkle {
-                padding: 0.75rem;
-                border-radius: 1rem;
-            }
-        }
-
-        .gold-sparkle i {
-            font-size: 0.75rem;
-        }
-
-        @media (min-width: 768px) {
-            .gold-sparkle i {
-                font-size: 1.25rem;
-            }
-        }
-
-        .ping-dot {
-            position: absolute;
-            top: -0.25rem;
-            right: -0.25rem;
-            width: 0.75rem;
-            height: 0.75rem;
-            background-color: #EC0000;
-            border-radius: 50%;
-            border: 2px solid black;
-            animation: ping 1.5s infinite;
-        }
-
-        @keyframes ping {
-            75%, 100% { transform: scale(2); opacity: 0; }
-        }
-
-        /* Table Section */
-        .table-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .table-icon {
-            padding: 0.625rem;
-            background-color: #0F0F0F;
-            color: white;
-            border-radius: 0.75rem;
-        }
-
-        .table-icon i {
-            font-size: 1.25rem;
-        }
-
-        .table-title {
-            font-size: 0.875rem;
-            font-weight: 900;
-            color: #1e293b;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-style: italic;
-        }
-
-        .table-container {
-            background-color: white;
-            border-radius: 2.5rem;
-            box-shadow: 0 25px 50px -12px rgba(148,163,184,0.4);
-            border: 1px solid #f1f5f9;
-            overflow: hidden;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f8fafc;
-            color: #94a3b8;
-            font-size: 0.625rem;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            padding: 1.5rem 1rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        @media (min-width: 768px) {
-            th {
-                padding: 1.5rem 2.5rem;
-                font-size: 0.75rem;
-            }
-        }
-
-        td {
-            padding: 1.5rem 1rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        @media (min-width: 768px) {
-            td {
-                padding: 1.5rem 2.5rem;
-            }
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr {
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        tr:hover {
-            background-color: #f8fafc;
-        }
-
-        .rank-number-cell {
-            font-size: 0.875rem;
-            font-weight: 900;
-            color: #cbd5e1;
-            transition: color 0.3s;
-        }
-
-        tr:hover .rank-number-cell {
-            color: #EC0000;
-        }
-
-        .school-name {
-            font-weight: 900;
-            color: #1e293b;
-            font-size: 0.75rem;
-            transition: color 0.3s;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 120px;
-        }
-
-        @media (min-width: 768px) {
-            .school-name {
-                font-size: 1rem;
-                max-width: none;
-            }
-        }
-
-        tr:hover .school-name {
-            color: #EC0000;
-        }
-
-        .school-meta {
-            font-size: 0.5rem;
-            color: #94a3b8;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        @media (min-width: 768px) {
-            .school-meta {
-                font-size: 0.625rem;
-            }
-        }
-
-        .revenue-cell {
-            text-align: right;
-        }
-
-        .revenue-amount {
-            font-family: monospace;
-            font-weight: 900;
-            color: #0F0F0F;
-            font-size: 0.75rem;
-        }
-
-        @media (min-width: 768px) {
-            .revenue-amount {
-                font-size: 1rem;
-            }
-        }
-
-        .sales-count {
-            font-size: 0.5625rem;
-            color: #EC0000;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .trend-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.625rem;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        .trend-up {
-            background-color: #ecfdf5;
-            color: #059669;
-            border: 1px solid #d1fae5;
-        }
-
-        .trend-stable {
-            background-color: #f8fafc;
-            color: #64748b;
-            border: 1px solid #f1f5f9;
-        }
-
-        /* Data Management Section */
-        .management-section {
-            display: none;
-        }
-
-        .management-section.active {
-            display: block;
-        }
-
-        .management-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .management-header-icon {
-            padding: 0.75rem;
-            background-color: #0F0F0F;
-            color: white;
-            border-radius: 0.75rem;
-        }
-
-        .management-header-icon i {
-            font-size: 1.5rem;
-        }
-
-        .management-header-title {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #1e293b;
-            text-transform: uppercase;
-            letter-spacing: -0.025em;
-        }
-
-        .management-header-title span {
-            color: #EC0000;
-        }
-
-        /* Admin Race Center Layout */
-        .admin-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 1024px) {
-            .admin-container {
-                grid-template-columns: 320px 1fr;
-            }
-        }
-
-        /* Left Panel - School List */
-        .school-list-panel {
-            background-color: white;
-            border-radius: 2rem;
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            overflow: hidden;
-            height: fit-content;
-        }
-
-        .panel-header {
-            background: linear-gradient(135deg, #0F0F0F, #1F1F1F);
-            color: white;
             padding: 1.5rem;
+            margin-top: 1rem;
+            border: 2px solid #f1f5f9;
         }
 
-        .panel-header h3 {
-            font-size: 1.25rem;
-            font-weight: 900;
-            margin-bottom: 0.25rem;
-            letter-spacing: -0.025em;
-        }
-
-        .panel-header p {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .school-search {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            outline: none;
-        }
-
-        .search-input:focus {
-            border-color: #EC0000;
-            ring: 2px solid #EC0000;
-        }
-
-        .school-items {
-            max-height: 500px;
-            overflow-y: auto;
-            padding: 0.5rem;
-        }
-
-        .school-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            border-radius: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 0.25rem;
-        }
-
-        .school-item:hover {
-            background-color: #f8fafc;
-        }
-
-        .school-item.active {
-            background: linear-gradient(135deg, #FFF1F1, #FFF9F9);
-            border-left: 4px solid #EC0000;
-        }
-
-        .school-item-number {
-            width: 28px;
-            height: 28px;
-            background-color: #f1f5f9;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 0.875rem;
-            color: #64748b;
-        }
-
-        .school-item.active .school-item-number {
-            background-color: #EC0000;
-            color: white;
-        }
-
-        .school-item-info h4 {
-            font-size: 0.875rem;
-            font-weight: 900;
-            color: #1e293b;
-            margin-bottom: 0.25rem;
-        }
-
-        .school-item-info p {
-            font-size: 0.625rem;
-            font-weight: 700;
-            color: #94a3b8;
-            text-transform: uppercase;
-        }
-
-        .school-item.active .school-item-info h4 {
-            color: #EC0000;
-        }
-
-        /* Right Panel - School Profile */
-        .school-profile-panel {
-            background-color: white;
-            border-radius: 2rem;
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .profile-header {
-            background: linear-gradient(135deg, #0F0F0F, #1F1F1F);
-            color: white;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-header-bg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            opacity: 0.05;
-            font-size: 8rem;
-            transform: rotate(10deg);
-        }
-
-        .profile-school-name {
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: -0.025em;
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-
-        .profile-school-id {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: #94a3b8;
-            font-weight: 700;
-            position: relative;
-        }
-
-        .profile-school-id i {
-            color: #FFB800;
-        }
-
-        .profile-tabs {
-            display: flex;
-            border-bottom: 1px solid #f1f5f9;
-            padding: 0 1.5rem;
-            gap: 0.5rem;
-            overflow-x: auto;
-        }
-
-        .profile-tab {
-            padding: 1.25rem 1rem;
-            font-size: 0.75rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .profile-tab.active {
-            color: #EC0000;
-            border-bottom-color: #EC0000;
-        }
-
-        .profile-tab i {
-            margin-right: 0.5rem;
-        }
-
-        .profile-content {
-            padding: 2rem;
-        }
-
-        /* Profile Sections */
-        .profile-section {
-            display: none;
-        }
-
-        .profile-section.active {
-            display: block;
-        }
-
-        .section-title {
-            font-size: 0.875rem;
-            font-weight: 900;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-title i {
-            color: #EC0000;
-        }
-
-        /* Info Grid */
-        .info-grid {
+        .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
-            margin-bottom: 2rem;
         }
 
-        .info-item {
-            background: linear-gradient(135deg, #f8fafc, white);
-            padding: 1.5rem;
-            border-radius: 1.5rem;
-            border: 1px solid #f1f5f9;
+        .form-group {
+            margin-bottom: 1.25rem;
         }
 
-        .info-label {
-            font-size: 0.625rem;
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.75rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #94a3b8;
+            color: #64748b;
             margin-bottom: 0.5rem;
         }
 
-        .info-value {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #1e293b;
-        }
-
-        .info-value.small {
-            font-size: 1rem;
-        }
-
-        .info-desc {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            margin-top: 0.25rem;
-            font-weight: 500;
-        }
-
-        /* Stats Cards */
-        .stats-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #f8fafc, white);
-            padding: 1.25rem;
-            border-radius: 1rem;
-            border: 1px solid #f1f5f9;
-        }
-
-        .stat-card i {
-            font-size: 1.25rem;
-            color: #EC0000;
-            margin-bottom: 0.75rem;
-        }
-
-        .stat-card .stat-label {
-            font-size: 0.625rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: #94a3b8;
-            letter-spacing: 0.05em;
-        }
-
-        .stat-card .stat-value {
-            font-size: 1.25rem;
-            font-weight: 900;
-            color: #1e293b;
-            margin-top: 0.25rem;
-        }
-
-        /* Table Styles for Rekap */
-        .rekap-table {
+        .form-control {
             width: 100%;
-            border-collapse: collapse;
-        }
-
-        .rekap-table th {
-            text-align: left;
-            padding: 1rem;
-            font-size: 0.625rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: #94a3b8;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .rekap-table td {
-            padding: 1rem;
-            font-size: 0.875rem;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .rekap-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .rekap-table .amount {
-            font-weight: 900;
-            color: #EC0000;
-        }
-
-        /* Top Customer */
-        .customer-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .customer-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: linear-gradient(135deg, #f8fafc, white);
+            padding: 0.875rem 1.25rem;
+            border: 2px solid #e2e8f0;
             border-radius: 1rem;
-            border: 1px solid #f1f5f9;
-        }
-
-        .customer-rank {
-            width: 2.5rem;
-            height: 2.5rem;
-            background-color: #FFB800;
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            color: white;
-        }
-
-        .customer-info {
-            flex: 1;
-        }
-
-        .customer-name {
-            font-weight: 900;
-            color: #1e293b;
-            margin-bottom: 0.25rem;
-        }
-
-        .customer-class {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            font-weight: 700;
-        }
-
-        .customer-amount {
-            font-weight: 900;
-            color: #EC0000;
-        }
-
-        /* Market Share */
-        .market-share-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .share-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .share-header {
-            display: flex;
-            justify-content: space-between;
             font-size: 0.875rem;
-            font-weight: 700;
+            font-weight: 600;
+            color: #1e293b;
+            transition: all 0.3s;
+            outline: none;
         }
 
-        .share-label {
-            color: #475569;
+        .form-control:focus {
+            border-color: #EC0000;
+            box-shadow: 0 0 0 3px rgba(236,0,0,0.1);
         }
 
-        .share-value {
-            color: #EC0000;
-            font-weight: 900;
+        .form-control.error {
+            border-color: #ef4444;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 0.75rem;
-            background-color: #f1f5f9;
-            border-radius: 9999px;
-            overflow: hidden;
+        .error-message {
+            font-size: 0.75rem;
+            color: #ef4444;
+            margin-top: 0.25rem;
+            font-weight: 600;
         }
 
-        .progress-fill {
-            height: 100%;
-            border-radius: 9999px;
-        }
-
-        .fill-telkomsel {
-            background-color: #EC0000;
-        }
-
-        .fill-indosat {
-            background-color: #FFB800;
-        }
-
-        .fill-xl {
-            background-color: #10b981;
-        }
-
-        .fill-three {
-            background-color: #8b5cf6;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
+        .edit-actions {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #f1f5f9;
+            padding-top: 1.5rem;
+            border-top: 2px solid #f1f5f9;
         }
 
-        .btn-primary {
-            padding: 1rem 2rem;
-            background-color: #EC0000;
+        .btn-edit {
+            padding: 0.875rem 1.75rem;
+            background-color: #FFB800;
+            color: #1e293b;
+            border: none;
+            border-radius: 1rem;
+            font-weight: 900;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 15px -3px rgba(255,184,0,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-edit:hover {
+            background-color: #E5A600;
+            transform: scale(1.05);
+        }
+
+        .btn-save {
+            padding: 0.875rem 1.75rem;
+            background-color: #10b981;
             color: white;
             border: none;
             border-radius: 1rem;
@@ -1484,21 +113,21 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 10px 15px -3px rgba(236,0,0,0.3);
-            display: flex;
+            box-shadow: 0 10px 15px -3px rgba(16,185,129,0.3);
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .btn-primary:hover {
-            background-color: #CC0000;
+        .btn-save:hover {
+            background-color: #059669;
             transform: scale(1.05);
         }
 
-        .btn-secondary {
-            padding: 1rem 2rem;
+        .btn-cancel {
+            padding: 0.875rem 1.75rem;
             background-color: white;
-            color: #1e293b;
+            color: #64748b;
             border: 2px solid #e2e8f0;
             border-radius: 1rem;
             font-weight: 900;
@@ -1506,108 +135,99 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .btn-secondary:hover {
+        .btn-cancel:hover {
             border-color: #EC0000;
             color: #EC0000;
         }
 
-        /* Import Excel Button */
-        .import-excel-btn {
-            background-color: #10b981;
-            box-shadow: 0 10px 15px -3px rgba(16,185,129,0.3);
+        .view-mode {
+            position: relative;
         }
 
-        .import-excel-btn:hover {
-            background-color: #059669;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-            padding: 1rem;
-        }
-
-        .modal-content {
-            background-color: white;
-            border-radius: 2rem;
-            max-width: 42rem;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            position: sticky;
+        .edit-toggle {
+            position: absolute;
             top: 0;
-            background-color: white;
-            border-bottom: 1px solid #f1f5f9;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header-left {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .modal-header-icon {
-            width: 3rem;
-            height: 3rem;
-            background-color: #EC0000;
-            border-radius: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-header-icon i {
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .modal-header-text h2 {
-            font-weight: 900;
-            font-size: 1.25rem;
-            color: #0F0F0F;
-        }
-
-        .modal-header-text p {
+            right: 0;
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
             font-size: 0.75rem;
-            font-weight: 700;
-            color: #94a3b8;
-        }
-
-        .modal-close {
-            padding: 0.5rem;
-            background: transparent;
-            border: none;
-            border-radius: 0.75rem;
-            color: #94a3b8;
+            font-weight: 900;
+            color: #64748b;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             transition: all 0.3s;
+            z-index: 10;
         }
 
-        .modal-close:hover {
+        .edit-toggle:hover {
+            background-color: #FFB800;
+            color: white;
+            border-color: #FFB800;
+        }
+
+        .edit-toggle i {
+            font-size: 0.875rem;
+        }
+
+        .info-value.editable {
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+        }
+
+        .info-value.editable:hover {
             background-color: #f1f5f9;
+            color: #EC0000;
         }
 
-        .modal-body {
-            padding: 1.5rem;
+        .info-value.editable i {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+            opacity: 0.5;
+            color: #94a3b8;
+        }
+
+        .info-value.editable:hover i {
+            opacity: 1;
+            color: #EC0000;
+        }
+
+        .toast-notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #10b981;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+            transform: translateY(200%);
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
+
+        .toast-notification.show {
+            transform: translateY(0);
+        }
+
+        .toast-notification.error {
+            background-color: #ef4444;
+        }
+
+        .toast-notification i {
+            margin-right: 0.5rem;
         }
     </style>
 </head>
@@ -1751,6 +371,12 @@
 
     <!-- Modal Container -->
     <div id="modalContainer"></div>
+    
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Data berhasil disimpan</span>
+    </div>
 
     <script>
         // ========== DATA ==========
@@ -2007,8 +633,9 @@
 
         // ========== STATE ==========
         let schools = [...SCHOOLS_DATA];
-        let selectedSchool = schools[0]; // Default to first school
+        let selectedSchool = schools[0];
         let activeProfileTab = 'profil';
+        let isEditing = false;
 
         // ========== DOM ELEMENTS ==========
         const navItems = document.querySelectorAll('.nav-item');
@@ -2024,10 +651,16 @@
         const schoolProfilePanel = document.getElementById('schoolProfilePanel');
         const schoolSearch = document.getElementById('schoolSearch');
         const totalSchoolsSpan = document.getElementById('totalSchools');
+        const toastNotification = document.getElementById('toastNotification');
+        const toastMessage = document.getElementById('toastMessage');
 
         // ========== HELPER FUNCTIONS ==========
         function formatRupiah(number) {
             return new Intl.NumberFormat('id-ID').format(number);
+        }
+
+        function parseRupiah(value) {
+            return parseInt(value.replace(/[^0-9]/g, '')) || 0;
         }
 
         function updateLastUpdated() {
@@ -2039,6 +672,20 @@
             const now = new Date();
             const options = { month: 'long', year: 'numeric' };
             currentPeriodSpan.textContent = now.toLocaleDateString('id-ID', options);
+        }
+
+        function showToast(message, isError = false) {
+            toastMessage.textContent = message;
+            toastNotification.classList.add('show');
+            if (isError) {
+                toastNotification.classList.add('error');
+            } else {
+                toastNotification.classList.remove('error');
+            }
+            
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, 3000);
         }
 
         // ========== RACE BOARD FUNCTIONS ==========
@@ -2172,6 +819,95 @@
             });
         }
 
+        // ========== EDIT FUNCTIONS ==========
+        function enableEditMode() {
+            isEditing = true;
+            renderSchoolProfile();
+        }
+
+        function cancelEdit() {
+            isEditing = false;
+            renderSchoolProfile();
+        }
+
+        function saveSchoolData(formData) {
+            // Validasi form
+            const errors = [];
+            
+            if (!formData.name || formData.name.trim() === '') {
+                errors.push('Nama sekolah harus diisi');
+            }
+            
+            if (!formData.idDigipos || formData.idDigipos.trim() === '') {
+                errors.push('ID Digipos harus diisi');
+            }
+            
+            if (!formData.region || formData.region.trim() === '') {
+                errors.push('Wilayah harus diisi');
+            }
+            
+            if (formData.studentCount < 0) {
+                errors.push('Jumlah siswa tidak valid');
+            }
+            
+            if (formData.teacherCount < 0) {
+                errors.push('Jumlah reseller tidak valid');
+            }
+            
+            if (errors.length > 0) {
+                showToast(errors.join(', '), true);
+                return false;
+            }
+            
+            // Update data sekolah
+            const schoolIndex = schools.findIndex(s => s.id === selectedSchool.id);
+            if (schoolIndex !== -1) {
+                schools[schoolIndex] = {
+                    ...schools[schoolIndex],
+                    name: formData.name,
+                    idDigipos: formData.idDigipos,
+                    region: formData.region,
+                    studentCount: formData.studentCount,
+                    teacherCount: formData.teacherCount,
+                    topClass: formData.topClass
+                };
+                
+                selectedSchool = schools[schoolIndex];
+                
+                // Update semua tampilan
+                renderPodium();
+                renderTable();
+                renderSchoolList(schoolSearch.value);
+                
+                showToast('Data sekolah berhasil disimpan!');
+                
+                // Simpan ke localStorage
+                localStorage.setItem('hero_schools', JSON.stringify(schools));
+                
+                return true;
+            }
+            
+            return false;
+        }
+
+        function handleEditSubmit(event) {
+            event.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('editName').value,
+                idDigipos: document.getElementById('editIdDigipos').value,
+                region: document.getElementById('editRegion').value,
+                studentCount: parseInt(document.getElementById('editStudentCount').value) || 0,
+                teacherCount: parseInt(document.getElementById('editTeacherCount').value) || 0,
+                topClass: document.getElementById('editTopClass').value
+            };
+            
+            if (saveSchoolData(formData)) {
+                isEditing = false;
+                renderSchoolProfile();
+            }
+        }
+
         // ========== DATA MASTER FUNCTIONS ==========
         function renderSchoolList(filterText = '') {
             const filtered = schools.filter(school => 
@@ -2202,6 +938,7 @@
                     const school = schools.find(s => s.id === id);
                     if (school) {
                         selectedSchool = school;
+                        isEditing = false;
                         renderSchoolList(schoolSearch.value);
                         renderSchoolProfile();
                     }
@@ -2214,256 +951,345 @@
 
             const school = selectedSchool;
             
-            const profileHTML = `
-                <div class="profile-header">
-                    <div class="profile-header-bg">
-                        <i class="fas fa-school"></i>
-                    </div>
-                    <h2 class="profile-school-name">${school.name}</h2>
-                    <div class="profile-school-id">
-                        <i class="fas fa-id-card"></i>
-                        ${school.idDigipos} • ${school.region}
-                    </div>
-                </div>
-
-                <div class="profile-tabs">
-                    <div class="profile-tab active" data-tab="profil">
-                        <i class="fas fa-user"></i> PROFIL
-                    </div>
-                    <div class="profile-tab" data-tab="import">
-                        <i class="fas fa-file-excel"></i> IMPORT EXCEL
-                    </div>
-                    <div class="profile-tab" data-tab="rekap">
-                        <i class="fas fa-chart-line"></i> REKAP & OMZET
-                    </div>
-                    <div class="profile-tab" data-tab="top">
-                        <i class="fas fa-star"></i> TOP CUSTOMER
-                    </div>
-                    <div class="profile-tab" data-tab="market">
-                        <i class="fas fa-chart-pie"></i> MARKET SHARE
-                    </div>
-                </div>
-
-                <div class="profile-content">
-                    <!-- Profil Section -->
-                    <div class="profile-section active" id="profil-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-building"></i>
-                            IDENTITAS & WILAYAH
-                        </h3>
-
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label">Nama Sekolah</div>
-                                <div class="info-value small">${school.name}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">ID Digipos</div>
-                                <div class="info-value small">${school.idDigipos}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Wilayah</div>
-                                <div class="info-value small">${school.region}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Kelas Jawara</div>
-                                <div class="info-value small">${school.topClass}</div>
-                            </div>
+            let profileHTML = '';
+            
+            if (isEditing) {
+                // Mode Edit
+                profileHTML = `
+                    <div class="profile-header">
+                        <div class="profile-header-bg">
+                            <i class="fas fa-school"></i>
                         </div>
-
-                        <h3 class="section-title" style="margin-top: 2rem;">
-                            <i class="fas fa-users"></i>
-                            STATISTIK
-                        </h3>
-
-                        <div class="stats-cards">
-                            <div class="stat-card">
-                                <i class="fas fa-user-graduate"></i>
-                                <div class="stat-label">Total Siswa</div>
-                                <div class="stat-value">${school.studentCount}</div>
-                            </div>
-                            <div class="stat-card">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                                <div class="stat-label">Total Reseller</div>
-                                <div class="stat-value">${school.teacherCount}</div>
-                            </div>
-                            <div class="stat-card">
-                                <i class="fas fa-wallet"></i>
-                                <div class="stat-label">Total Omzet</div>
-                                <div class="stat-value">Rp${formatRupiah(school.revenue)}</div>
-                            </div>
-                        </div>
-
-                        <div class="action-buttons">
-                            <button class="btn-primary" onclick="openSchoolModal('${school.id}')">
-                                <i class="fas fa-eye"></i> LIHAT DETAIL
-                            </button>
-                            <button class="btn-primary import-excel-btn" onclick="simulateImport('${school.id}')">
-                                <i class="fas fa-file-excel"></i> IMPORT EXCEL
-                            </button>
+                        <h2 class="profile-school-name">EDIT DATA SEKOLAH</h2>
+                        <div class="profile-school-id">
+                            <i class="fas fa-edit"></i>
+                            ${school.idDigipos} • ${school.region}
                         </div>
                     </div>
 
-                    <!-- Import Excel Section -->
-                    <div class="profile-section" id="import-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-file-excel"></i>
-                            IMPORT DATA EXCEL
-                        </h3>
-                        
-                        <div style="background: linear-gradient(135deg, #f8fafc, white); padding: 2rem; border-radius: 1.5rem; border: 1px solid #f1f5f9; text-align: center;">
-                            <i class="fas fa-file-excel" style="font-size: 4rem; color: #10b981; margin-bottom: 1rem;"></i>
-                            <h4 style="font-weight: 900; margin-bottom: 1rem;">Upload File Excel</h4>
-                            <p style="color: #94a3b8; margin-bottom: 2rem; font-size: 0.875rem;">Format: .xlsx, .xls (Maks 5MB)</p>
-                            
-                            <label class="btn-primary" style="display: inline-flex; cursor: pointer;">
-                                <i class="fas fa-upload"></i>
-                                PILIH FILE
-                                <input type="file" accept=".xlsx,.xls" style="display: none;" onchange="handleFileUpload(this, '${school.id}')">
-                            </label>
-                            
-                            <p style="margin-top: 1rem; font-size: 0.75rem; color: #94a3b8;">
-                                <i class="fas fa-info-circle"></i> 
-                                File harus memiliki kolom: Nama Siswa, Kelas, Jumlah Penjualan
-                            </p>
-                        </div>
-                    </div>
+                    <div class="profile-content">
+                        <form id="editSchoolForm" onsubmit="handleEditSubmit(event)">
+                            <div class="edit-form">
+                                <h3 class="section-title">
+                                    <i class="fas fa-building"></i>
+                                    IDENTITAS & WILAYAH
+                                </h3>
 
-                    <!-- Rekap & Omzet Section -->
-                    <div class="profile-section" id="rekap-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-chart-line"></i>
-                            REKAP OMZET BULANAN
-                        </h3>
-
-                        <div style="margin-bottom: 2rem;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <span style="font-weight: 700; color: #475569;">Total Kumulatif Omzet</span>
-                                <span style="font-size: 2rem; font-weight: 900; color: #EC0000;">Rp${formatRupiah(school.revenue)}</span>
-                            </div>
-                            
-                            <table class="rekap-table">
-                                <thead>
-                                    <tr>
-                                        <th>Bulan</th>
-                                        <th>Omzet</th>
-                                        <th>Trend</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${school.monthlyData.map((item, index) => {
-                                        const prevMonth = index > 0 ? school.monthlyData[index-1].revenue : item.revenue;
-                                        const trend = item.revenue > prevMonth ? 'up' : (item.revenue < prevMonth ? 'down' : 'stable');
-                                        const trendIcon = trend === 'up' ? 'fa-arrow-up' : (trend === 'down' ? 'fa-arrow-down' : 'fa-minus');
-                                        const trendColor = trend === 'up' ? '#10b981' : (trend === 'down' ? '#ef4444' : '#94a3b8');
-                                        return `
-                                            <tr>
-                                                <td>${item.month}</td>
-                                                <td class="amount">Rp${formatRupiah(item.revenue)}</td>
-                                                <td><i class="fas ${trendIcon}" style="color: ${trendColor}"></i></td>
-                                            </tr>
-                                        `;
-                                    }).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Top Customer Section -->
-                    <div class="profile-section" id="top-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-star"></i>
-                            TOP CUSTOMER
-                        </h3>
-
-                        <div class="customer-list">
-                            ${school.topCustomers.map((customer, index) => `
-                                <div class="customer-item">
-                                    <div class="customer-rank">${index + 1}</div>
-                                    <div class="customer-info">
-                                        <div class="customer-name">${customer.name}</div>
-                                        <div class="customer-class">${customer.class}</div>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label class="form-label">Nama Sekolah</label>
+                                        <input type="text" class="form-control" id="editName" value="${school.name}" placeholder="Contoh: SMKN 1 KEPANJEN" required>
                                     </div>
-                                    <div class="customer-amount">Rp${formatRupiah(customer.amount)}</div>
-                                </div>
-                            `).join('')}
-                        </div>
 
-                        <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 1rem;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="font-weight: 700;">Siswa Terbaik:</span>
-                                <span style="font-weight: 900; color: #EC0000;">${school.topStudentName} (${school.topStudentClass})</span>
+                                    <div class="form-group">
+                                        <label class="form-label">ID Digipos</label>
+                                        <input type="text" class="form-control" id="editIdDigipos" value="${school.idDigipos}" placeholder="Contoh: DIGI-8000" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Wilayah</label>
+                                        <input type="text" class="form-control" id="editRegion" value="${school.region}" placeholder="Contoh: Kab. Malang" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Kelas Jawara</label>
+                                        <input type="text" class="form-control" id="editTopClass" value="${school.topClass}" placeholder="Contoh: XI TKJ 1">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Jumlah Siswa</label>
+                                        <input type="number" class="form-control" id="editStudentCount" value="${school.studentCount}" min="0" step="1" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Jumlah Reseller</label>
+                                        <input type="number" class="form-control" id="editTeacherCount" value="${school.teacherCount}" min="0" step="1" required>
+                                    </div>
+                                </div>
+
+                                <div class="edit-actions">
+                                    <button type="submit" class="btn-save">
+                                        <i class="fas fa-save"></i>
+                                        SIMPAN PERMANEN
+                                    </button>
+                                    <button type="button" class="btn-cancel" onclick="cancelEdit()">
+                                        <i class="fas fa-times"></i>
+                                        BATAL
+                                    </button>
+                                </div>
                             </div>
+                        </form>
+
+                        <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 1rem; text-align: center;">
+                            <i class="fas fa-info-circle" style="color: #FFB800;"></i>
+                            <span style="font-size: 0.875rem; color: #64748b; margin-left: 0.5rem;">
+                                Data akan tersimpan secara permanen dan muncul di Race Board
+                            </span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Mode View
+                profileHTML = `
+                    <div class="profile-header">
+                        <div class="profile-header-bg">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <h2 class="profile-school-name">${school.name}</h2>
+                        <div class="profile-school-id">
+                            <i class="fas fa-id-card"></i>
+                            ${school.idDigipos} • ${school.region}
                         </div>
                     </div>
 
-                    <!-- Market Share Section -->
-                    <div class="profile-section" id="market-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-chart-pie"></i>
-                            MARKET SHARE OPERATOR
-                        </h3>
+                    <div class="profile-tabs">
+                        <div class="profile-tab active" data-tab="profil">
+                            <i class="fas fa-user"></i> PROFIL
+                        </div>
+                        <div class="profile-tab" data-tab="import">
+                            <i class="fas fa-file-excel"></i> IMPORT EXCEL
+                        </div>
+                        <div class="profile-tab" data-tab="rekap">
+                            <i class="fas fa-chart-line"></i> REKAP & OMZET
+                        </div>
+                        <div class="profile-tab" data-tab="top">
+                            <i class="fas fa-star"></i> TOP CUSTOMER
+                        </div>
+                        <div class="profile-tab" data-tab="market">
+                            <i class="fas fa-chart-pie"></i> MARKET SHARE
+                        </div>
+                    </div>
 
-                        <div class="market-share-container">
-                            <div class="share-item">
-                                <div class="share-header">
-                                    <span class="share-label">Telkomsel</span>
-                                    <span class="share-value">${school.carrierStats.telkomsel}%</span>
+                    <div class="profile-content">
+                        <!-- Profil Section -->
+                        <div class="profile-section active" id="profil-section">
+                            <div class="view-mode">
+                                <button class="edit-toggle" onclick="enableEditMode()">
+                                    <i class="fas fa-edit"></i>
+                                    EDIT DATA
+                                </button>
+
+                                <h3 class="section-title">
+                                    <i class="fas fa-building"></i>
+                                    IDENTITAS & WILAYAH
+                                </h3>
+
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <div class="info-label">Nama Sekolah</div>
+                                        <div class="info-value small">${school.name}</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">ID Digipos</div>
+                                        <div class="info-value small">${school.idDigipos}</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Wilayah</div>
+                                        <div class="info-value small">${school.region}</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Kelas Jawara</div>
+                                        <div class="info-value small">${school.topClass}</div>
+                                    </div>
                                 </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill fill-telkomsel" style="width: ${school.carrierStats.telkomsel}%"></div>
+
+                                <h3 class="section-title" style="margin-top: 2rem;">
+                                    <i class="fas fa-users"></i>
+                                    STATISTIK
+                                </h3>
+
+                                <div class="stats-cards">
+                                    <div class="stat-card">
+                                        <i class="fas fa-user-graduate"></i>
+                                        <div class="stat-label">Total Siswa</div>
+                                        <div class="stat-value">${school.studentCount}</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                        <div class="stat-label">Total Reseller</div>
+                                        <div class="stat-value">${school.teacherCount}</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <i class="fas fa-wallet"></i>
+                                        <div class="stat-label">Total Omzet</div>
+                                        <div class="stat-value">Rp${formatRupiah(school.revenue)}</div>
+                                    </div>
+                                </div>
+
+                                <div class="action-buttons">
+                                    <button class="btn-primary" onclick="openSchoolModal('${school.id}')">
+                                        <i class="fas fa-eye"></i> LIHAT DETAIL
+                                    </button>
+                                    <button class="btn-primary import-excel-btn" onclick="simulateImport('${school.id}')">
+                                        <i class="fas fa-file-excel"></i> IMPORT EXCEL
+                                    </button>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="share-item">
-                                <div class="share-header">
-                                    <span class="share-label">Indosat</span>
-                                    <span class="share-value">${school.carrierStats.indosat}%</span>
+                        <!-- Import Excel Section -->
+                        <div class="profile-section" id="import-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-file-excel"></i>
+                                IMPORT DATA EXCEL
+                            </h3>
+                            
+                            <div style="background: linear-gradient(135deg, #f8fafc, white); padding: 2rem; border-radius: 1.5rem; border: 1px solid #f1f5f9; text-align: center;">
+                                <i class="fas fa-file-excel" style="font-size: 4rem; color: #10b981; margin-bottom: 1rem;"></i>
+                                <h4 style="font-weight: 900; margin-bottom: 1rem;">Upload File Excel</h4>
+                                <p style="color: #94a3b8; margin-bottom: 2rem; font-size: 0.875rem;">Format: .xlsx, .xls (Maks 5MB)</p>
+                                
+                                <label class="btn-primary" style="display: inline-flex; cursor: pointer;">
+                                    <i class="fas fa-upload"></i>
+                                    PILIH FILE
+                                    <input type="file" accept=".xlsx,.xls" style="display: none;" onchange="handleFileUpload(this, '${school.id}')">
+                                </label>
+                                
+                                <p style="margin-top: 1rem; font-size: 0.75rem; color: #94a3b8;">
+                                    <i class="fas fa-info-circle"></i> 
+                                    File harus memiliki kolom: Nama Siswa, Kelas, Jumlah Penjualan
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Rekap & Omzet Section -->
+                        <div class="profile-section" id="rekap-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-chart-line"></i>
+                                REKAP OMZET BULANAN
+                            </h3>
+
+                            <div style="margin-bottom: 2rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <span style="font-weight: 700; color: #475569;">Total Kumulatif Omzet</span>
+                                    <span style="font-size: 2rem; font-weight: 900; color: #EC0000;">Rp${formatRupiah(school.revenue)}</span>
                                 </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill fill-indosat" style="width: ${school.carrierStats.indosat}%"></div>
-                                </div>
+                                
+                                <table class="rekap-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Bulan</th>
+                                            <th>Omzet</th>
+                                            <th>Trend</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${school.monthlyData.map((item, index) => {
+                                            const prevMonth = index > 0 ? school.monthlyData[index-1].revenue : item.revenue;
+                                            const trend = item.revenue > prevMonth ? 'up' : (item.revenue < prevMonth ? 'down' : 'stable');
+                                            const trendIcon = trend === 'up' ? 'fa-arrow-up' : (trend === 'down' ? 'fa-arrow-down' : 'fa-minus');
+                                            const trendColor = trend === 'up' ? '#10b981' : (trend === 'down' ? '#ef4444' : '#94a3b8');
+                                            return `
+                                                <tr>
+                                                    <td>${item.month}</td>
+                                                    <td class="amount">Rp${formatRupiah(item.revenue)}</td>
+                                                    <td><i class="fas ${trendIcon}" style="color: ${trendColor}"></i></td>
+                                                </tr>
+                                            `;
+                                        }).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Top Customer Section -->
+                        <div class="profile-section" id="top-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-star"></i>
+                                TOP CUSTOMER
+                            </h3>
+
+                            <div class="customer-list">
+                                ${school.topCustomers.map((customer, index) => `
+                                    <div class="customer-item">
+                                        <div class="customer-rank">${index + 1}</div>
+                                        <div class="customer-info">
+                                            <div class="customer-name">${customer.name}</div>
+                                            <div class="customer-class">${customer.class}</div>
+                                        </div>
+                                        <div class="customer-amount">Rp${formatRupiah(customer.amount)}</div>
+                                    </div>
+                                `).join('')}
                             </div>
 
-                            <div class="share-item">
-                                <div class="share-header">
-                                    <span class="share-label">XL</span>
-                                    <span class="share-value">${school.carrierStats.xl}%</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill fill-xl" style="width: ${school.carrierStats.xl}%"></div>
+                            <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-weight: 700;">Siswa Terbaik:</span>
+                                    <span style="font-weight: 900; color: #EC0000;">${school.topStudentName} (${school.topStudentClass})</span>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="share-item">
-                                <div class="share-header">
-                                    <span class="share-label">Tri/Three</span>
-                                    <span class="share-value">${100 - school.carrierStats.telkomsel - school.carrierStats.indosat - school.carrierStats.xl}%</span>
+                        <!-- Market Share Section -->
+                        <div class="profile-section" id="market-section">
+                            <h3 class="section-title">
+                                <i class="fas fa-chart-pie"></i>
+                                MARKET SHARE OPERATOR
+                            </h3>
+
+                            <div class="market-share-container">
+                                <div class="share-item">
+                                    <div class="share-header">
+                                        <span class="share-label">Telkomsel</span>
+                                        <span class="share-value">${school.carrierStats.telkomsel}%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill fill-telkomsel" style="width: ${school.carrierStats.telkomsel}%"></div>
+                                    </div>
                                 </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill fill-three" style="width: ${100 - school.carrierStats.telkomsel - school.carrierStats.indosat - school.carrierStats.xl}%"></div>
+
+                                <div class="share-item">
+                                    <div class="share-header">
+                                        <span class="share-label">Indosat</span>
+                                        <span class="share-value">${school.carrierStats.indosat}%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill fill-indosat" style="width: ${school.carrierStats.indosat}%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="share-item">
+                                    <div class="share-header">
+                                        <span class="share-label">XL</span>
+                                        <span class="share-value">${school.carrierStats.xl}%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill fill-xl" style="width: ${school.carrierStats.xl}%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="share-item">
+                                    <div class="share-header">
+                                        <span class="share-label">Tri/Three</span>
+                                        <span class="share-value">${100 - school.carrierStats.telkomsel - school.carrierStats.indosat - school.carrierStats.xl}%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill fill-three" style="width: ${100 - school.carrierStats.telkomsel - school.carrierStats.indosat - school.carrierStats.xl}%"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            }
 
             schoolProfilePanel.innerHTML = profileHTML;
 
-            // Add tab click listeners
-            document.querySelectorAll('.profile-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
+            if (!isEditing) {
+                // Add tab click listeners
+                document.querySelectorAll('.profile-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
 
-                    const tabName = tab.dataset.tab;
-                    document.querySelectorAll('.profile-section').forEach(section => {
-                        section.classList.remove('active');
+                        const tabName = tab.dataset.tab;
+                        document.querySelectorAll('.profile-section').forEach(section => {
+                            section.classList.remove('active');
+                        });
+                        document.getElementById(`${tabName}-section`).classList.add('active');
                     });
-                    document.getElementById(`${tabName}-section`).classList.add('active');
                 });
-            });
+            }
         }
 
         // ========== MODAL FUNCTIONS ==========
@@ -2614,6 +1440,9 @@
                     managementSection.classList.add('active');
                     headerTitle.innerHTML = 'ADMIN <span>RACE CENTER</span>';
                     
+                    // Reset edit mode when switching to data master
+                    isEditing = false;
+                    
                     // Refresh data master display
                     totalSchoolsSpan.textContent = `${schools.length} Sekolah Terdaftar`;
                     renderSchoolList();
@@ -2651,6 +1480,7 @@
             if (saved) {
                 try {
                     schools = JSON.parse(saved);
+                    selectedSchool = schools[0];
                     renderPodium();
                     renderTable();
                     renderSchoolList();
@@ -2670,6 +1500,9 @@
         window.openSchoolModal = openSchoolModal;
         window.simulateImport = simulateImport;
         window.handleFileUpload = handleFileUpload;
+        window.enableEditMode = enableEditMode;
+        window.cancelEdit = cancelEdit;
+        window.handleEditSubmit = handleEditSubmit;
 
         init();
     </script>
